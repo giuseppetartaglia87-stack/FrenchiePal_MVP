@@ -14,7 +14,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- CODICE HTML COMPLETO (SITO + SIMULATORE) ---
+# --- CODICE HTML COMPLETO ---
 landing_page_html = """
 <!DOCTYPE html>
 <html lang="it" class="scroll-smooth">
@@ -57,151 +57,205 @@ landing_page_html = """
         </div>
     </nav>
 
-    <section class="pt-32 pb-20 px-6 relative overflow-hidden flex flex-col lg:flex-row items-center justify-center gap-12 max-w-7xl mx-auto">
-        
+    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
         <div class="absolute top-20 left-0 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px] -z-10"></div>
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-teal-600/20 rounded-full blur-[120px] -z-10"></div>
 
-        <div class="lg:w-1/2 z-10 text-center lg:text-left">
-            <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-slate-800 border border-slate-700 text-sm font-medium text-indigo-300">
-                🚀 Startup in sviluppo
-            </div>
-            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-white">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-8 text-white">
                 Il tuo Frenchie è unico. <br>
                 <span class="gradient-text">Anche i suoi rischi lo sono.</span>
             </h1>
-            
-            <div class="bg-slate-800/40 border border-slate-700 p-6 rounded-2xl mb-8 backdrop-blur-md">
-                <p class="text-lg text-slate-300 leading-relaxed">
-                    <strong class="text-white">Siamo una Startup</strong> che sta creando il primo <strong>Consulente Digitale</strong> per il Bulldog Francese. 
-                    <br><br>
-                    Gestiamo proattivamente i rischi di <span class="text-indigo-400 font-bold">IVDD</span> (schiena), 
-                    <span class="text-teal-400 font-bold">BAOS</span> (respiro) e <span class="text-pink-400 font-bold">Dermatiti</span>.
-                </p>
-            </div>
-            
-            <p class="text-slate-400 text-sm mb-8 font-semibold">
-                Provalo subito qui a destra 👉 <br>Guarda come l'AI protegge il tuo cane in tempo reale.
+            <p class="text-xl md:text-2xl text-slate-300 font-medium mb-2">
+                Proteggi la sua schiena, il suo respiro e la sua pelle.
+            </p>
+            <p class="text-lg text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                FrenchiePal è il primo assistente intelligente dedicato esclusivamente alla gestione proattiva dei rischi IVDD, BAOS e delle dermatiti.
             </p>
 
-            <a href="#waitlist" class="gradient-btn inline-flex items-center px-8 py-4 rounded-full text-lg font-bold text-white transition-all transform hover:scale-105">
-                Tienimi aggiornato
+            <a href="#waitlist" class="gradient-btn inline-flex items-center px-8 py-4 rounded-full text-lg font-bold text-white transition-all transform hover:scale-105 hover:shadow-xl">
+                Unisciti alla Lista d'Attesa
                 <i class="fas fa-arrow-right ml-3"></i>
             </a>
-        </div>
-
-        <div class="lg:w-1/2 flex justify-center relative scale-90 lg:scale-100">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-indigo-600 rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
-
-            <div class="relative w-[340px] h-[720px] bg-white rounded-[45px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col z-20">
-                
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-xl z-30"></div>
-
-                <div class="bg-slate-50 pt-12 pb-4 px-6 flex justify-between items-center border-b border-gray-100">
-                    <div>
-                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Status</div>
-                        <div id="status-text" class="text-lg font-extrabold text-gray-800">In Attesa...</div>
-                    </div>
-                    <div id="score-circle" class="w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center font-bold text-gray-400">--</div>
-                </div>
-
-                <div class="p-4 bg-slate-50">
-                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-2 pl-1">Prova la Demo (Tocca un'icona):</p>
-                    <div class="grid grid-cols-3 gap-2">
-                        <button onclick="setScenario('wellness')" class="p-2 rounded-xl bg-white border border-gray-100 shadow-sm hover:border-emerald-400 hover:bg-emerald-50 transition flex flex-col items-center group">
-                            <span class="text-2xl mb-1 group-hover:scale-110 transition">💤</span>
-                            <span class="text-[9px] font-bold text-gray-500">Wellness</span>
-                        </button>
-                        <button onclick="setScenario('derma')" class="p-2 rounded-xl bg-white border border-gray-100 shadow-sm hover:border-pink-400 hover:bg-pink-50 transition flex flex-col items-center group">
-                            <span class="text-2xl mb-1 group-hover:scale-110 transition">🐾</span>
-                            <span class="text-[9px] font-bold text-gray-500">Dermatiti</span>
-                        </button>
-                        <button onclick="setScenario('danger')" class="p-2 rounded-xl bg-white border border-red-100 shadow-sm hover:bg-red-50 transition text-red-500 flex flex-col items-center group">
-                            <span class="text-2xl mb-1 group-hover:scale-110 transition">🚨</span>
-                            <span class="text-[9px] font-bold">Pericolo</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div id="chat-box" class="flex-1 bg-white p-4 overflow-y-auto no-scrollbar space-y-3">
-                    <div class="flex items-start gap-2">
-                        <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-sm">🤖</div>
-                        <div class="bg-gray-100 p-3 rounded-2xl rounded-tl-none text-sm text-gray-600">
-                            Ciao! Tocca uno dei pulsanti sopra per simulare una situazione reale.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-4 bg-gray-50 border-t border-gray-100">
-                    <div class="flex gap-2">
-                        <input type="text" placeholder="Chiedi al coach..." disabled class="flex-1 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm outline-none text-gray-400 cursor-not-allowed">
-                        <button class="w-10 h-10 bg-indigo-600 rounded-full text-white flex items-center justify-center shadow-md opacity-50 cursor-not-allowed">
-                            <i class="fas fa-paper-plane text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <section class="py-20 px-6 bg-slate-900/50">
-        <div class="max-w-6xl mx-auto relative">
+        <div class="max-w-7xl mx-auto relative">
              <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Amare un Frenchie significa gestirne le fragilità.</h2>
-                <p class="text-slate-400 max-w-xl mx-auto">La genetica nasconde tre nemici silenziosi.</p>
+                <p class="text-slate-400 max-w-xl mx-auto">La genetica nasconde tre nemici silenziosi che ogni proprietario deve conoscere.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-red-500 relative group hover:bg-slate-800/60 transition">
-                    <div class="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center text-red-400 text-2xl mb-6"><i class="fas fa-bone"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">IVDD (Schiena)</h3>
-                    <p class="text-slate-400 text-sm mb-4">I dischi spinali invecchiano precocemente. Un salto sbagliato può trasformarsi in un trauma improvviso.</p>
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-red-500 hover:border-red-500/40 transition relative group">
+                    <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400 text-2xl mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-bone"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Il Nemico della Schiena (IVDD)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        I dischi spinali invecchiano precocemente. Un salto sbagliato dal divano può trasformarsi in un trauma improvviso con conseguenze gravi.
+                    </p>
+                    <div class="inline-block px-3 py-1 rounded-lg bg-red-500/10 text-red-300 text-xs font-bold uppercase tracking-wider">Rischio Paralisi</div>
                 </div>
-                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-teal-500 relative group hover:bg-slate-800/60 transition">
-                    <div class="w-12 h-12 bg-teal-500/10 rounded-xl flex items-center justify-center text-teal-400 text-2xl mb-6"><i class="fas fa-lungs"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">BAOS (Respiro)</h3>
-                    <p class="text-slate-400 text-sm mb-4">Il caldo e l'esercizio eccessivo possono diventare letali in pochi minuti per un cane che fatica a raffreddarsi.</p>
+
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-teal-500 hover:border-teal-500/40 transition relative group">
+                    <div class="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-400 text-2xl mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-lungs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Il Nemico del Respiro (BAOS)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        "Russare forte" è fatica respiratoria. Il caldo e l'esercizio eccessivo possono diventare letali per un cane che fatica a raffreddarsi.
+                    </p>
+                    <div class="inline-block px-3 py-1 rounded-lg bg-teal-500/10 text-teal-300 text-xs font-bold uppercase tracking-wider">Rischio Colpo di Calore</div>
                 </div>
-                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-pink-500 relative group hover:bg-slate-800/60 transition">
-                    <div class="w-12 h-12 bg-pink-500/10 rounded-xl flex items-center justify-center text-pink-400 text-2xl mb-6"><i class="fas fa-paw"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Dermatiti</h3>
-                    <p class="text-slate-400 text-sm mb-4">Pelle delicata e pieghe sono terreno per infezioni. Un prurito ignorato diventa un problema cronico.</p>
+
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-pink-500 hover:border-pink-500/40 transition relative group">
+                    <div class="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-400 text-2xl mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Il Nemico della Pelle</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        La cute delicata e le pieghe sono terreno ideale per infezioni. Un prurito ignorato diventa un'otite cronica dolorosa.
+                    </p>
+                    <div class="inline-block px-3 py-1 rounded-lg bg-pink-500/10 text-pink-300 text-xs font-bold uppercase tracking-wider">Infezioni & Allergie</div>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="py-24 px-6 relative overflow-hidden">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[150px] -z-10"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/10 rounded-full blur-[150px] -z-10"></div>
+
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-6 text-white">
+                    Non un semplice monitoraggio. <br>
+                    Un <span class="gradient-text">Consulente Proattivo.</span>
+                </h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    Le soluzioni generiche ti dicono <em>quanto</em> si è mosso. Noi ti diciamo <em>come</em> si è mosso, se è al sicuro e come sta davvero.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl text-center group hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-20 h-20 mx-auto bg-indigo-500/20 rounded-3xl flex items-center justify-center text-indigo-400 text-3xl mb-8 group-hover:scale-110 transition">
+                        <i class="fas fa-shield-dog"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-white">1. IVDD Shield</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Analizziamo la <strong>qualità</strong> del movimento. Monitoriamo l'impatto dei salti verticali per preservare la sua colonna vertebrale negli anni.
+                    </p>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl text-center group hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-20 h-20 mx-auto bg-teal-500/20 rounded-3xl flex items-center justify-center text-teal-400 text-3xl mb-8 group-hover:scale-110 transition">
+                        <i class="fas fa-temperature-arrow-up"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-white">2. Airway Guard</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Incrociamo temperatura esterna e attività. Ti avvisiamo quando l'ambiente diventa rischioso per un brachicefalo prima che vada in affanno.
+                    </p>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl text-center group hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-20 h-20 mx-auto bg-purple-500/20 rounded-3xl flex items-center justify-center text-purple-400 text-3xl mb-8 group-hover:scale-110 transition">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-white">3. Daily Wellness & Derma</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Monitoriamo l'insorgere di pruriti, ti ricordiamo la pulizia delle pieghe e l'alimentazione ideale. Un coach per la gestione quotidiana.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 bg-slate-900/50 border-y border-slate-800/50">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6 text-white">Non un semplice tracker GPS.</h2>
-            <p class="text-lg text-slate-300 leading-relaxed mb-10">
-                Offriamo un <strong>Sistema di Allerta Precoce</strong>.
-                <br>FrenchiePal unisce dati biometrici e intelligenza artificiale per darti consigli proattivi.
+            <h2 class="text-3xl font-bold mb-6 text-white">Perché un'app solo per i Bulldog Francesi?</h2>
+            <p class="text-lg text-slate-300 leading-relaxed mb-8">
+                Perché un Pastore Tedesco non rischia la paralisi saltando giù dal letto e non soffre se non gli pulisci le pieghe del muso. Il tuo Frenchie sì.
+                <br>Noi crediamo che una razza speciale meriti una protezione specializzata.
             </p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700"><div class="text-2xl mb-2">🛡️</div><div class="text-xs font-bold text-slate-400">Prevenzione</div></div>
-                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700"><div class="text-2xl mb-2">🧠</div><div class="text-xs font-bold text-slate-400">AI Coach</div></div>
-                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700"><div class="text-2xl mb-2">📊</div><div class="text-xs font-bold text-slate-400">Dati Reali</div></div>
-                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700"><div class="text-2xl mb-2">❤️</div><div class="text-xs font-bold text-slate-400">Longevità</div></div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 relative flex flex-col items-center justify-center">
+        <div class="text-center mb-16">
+            <div class="inline-block px-4 py-1.5 mb-4 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-sm font-bold">
+                📱 LIVE DEMO
+            </div>
+            <h2 class="text-4xl font-extrabold text-white mb-4">Provalo ora in tempo reale.</h2>
+            <p class="text-slate-400">Tocca i pulsanti sullo schermo del telefono per simulare gli eventi.</p>
+        </div>
+
+        <div class="relative w-[340px] h-[720px] bg-white rounded-[45px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col z-20">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-600 rounded-full blur-[120px] opacity-20 -z-10 pointer-events-none"></div>
+            
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-xl z-30"></div>
+
+            <div class="bg-slate-50 pt-12 pb-4 px-6 flex justify-between items-center border-b border-gray-100">
+                <div>
+                    <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Status</div>
+                    <div id="status-text" class="text-lg font-extrabold text-gray-800">In Attesa...</div>
+                </div>
+                <div id="score-circle" class="w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center font-bold text-gray-400">--</div>
+            </div>
+
+            <div class="p-4 bg-slate-50">
+                <p class="text-[10px] text-gray-400 font-bold uppercase mb-2 pl-1">Simula un evento:</p>
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="setScenario('wellness')" class="p-2 rounded-xl bg-white border border-gray-100 shadow-sm hover:border-emerald-400 hover:bg-emerald-50 transition flex flex-col items-center group">
+                        <span class="text-2xl mb-1 group-hover:scale-110 transition">💤</span>
+                        <span class="text-[9px] font-bold text-gray-500">Wellness</span>
+                    </button>
+                    <button onclick="setScenario('derma')" class="p-2 rounded-xl bg-white border border-gray-100 shadow-sm hover:border-pink-400 hover:bg-pink-50 transition flex flex-col items-center group">
+                        <span class="text-2xl mb-1 group-hover:scale-110 transition">🐾</span>
+                        <span class="text-[9px] font-bold text-gray-500">Dermatiti</span>
+                    </button>
+                    <button onclick="setScenario('danger')" class="p-2 rounded-xl bg-white border border-red-100 shadow-sm hover:bg-red-50 transition text-red-500 flex flex-col items-center group">
+                        <span class="text-2xl mb-1 group-hover:scale-110 transition">🚨</span>
+                        <span class="text-[9px] font-bold">Pericolo</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="chat-box" class="flex-1 bg-white p-4 overflow-y-auto no-scrollbar space-y-3">
+                <div class="flex items-start gap-2">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-sm">🤖</div>
+                    <div class="bg-gray-100 p-3 rounded-2xl rounded-tl-none text-sm text-gray-600">
+                        Ciao! Sono FrenchiePal. Tocca un pulsante sopra per vedere come ti proteggo.
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-gray-50 border-t border-gray-100">
+                <div class="flex gap-2">
+                    <input type="text" placeholder="Chiedi al coach..." disabled class="flex-1 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm outline-none text-gray-400 cursor-not-allowed">
+                    <button class="w-10 h-10 bg-indigo-600 rounded-full text-white flex items-center justify-center shadow-md opacity-50 cursor-not-allowed">
+                        <i class="fas fa-paper-plane text-xs"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="waitlist" class="py-24 px-6 relative">
         <div class="max-w-3xl mx-auto text-center glass-card p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-700">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">Costruiamo insieme il futuro.</h2>
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">Stiamo costruendo il futuro del benessere per i Frenchie.</h2>
             <p class="text-slate-400 text-lg mb-8">
-                Siamo in fase di sviluppo attivo. Lasciaci la tua email per ricevere aggiornamenti sul lancio della Beta.
+                Siamo una startup in fase di sviluppo. Se vuoi seguire il nostro viaggio, darci feedback e essere tra i primi a provare FrenchiePal quando sarà pronto, lasciaci la tua email.
             </p>
 
             <form class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
                 <input type="email" placeholder="La tua email migliore..." class="flex-1 bg-slate-900 border border-slate-700 rounded-full px-6 py-4 text-white placeholder-slate-500 outline-none focus:border-indigo-500 transition w-full shadow-inner">
-                <button type="submit" class="gradient-btn px-8 py-4 rounded-full font-bold text-white shrink-0 transition-all hover:shadow-lg hover:scale-105">
+                <button type="button" class="gradient-btn px-8 py-4 rounded-full font-bold text-white shrink-0 transition-all hover:shadow-lg hover:scale-105">
                     Tienimi aggiornato
                 </button>
             </form>
-            <p class="text-slate-500 text-sm mt-6">Zero spam. Solo aggiornamenti importanti.</p>
+            <p class="text-slate-500 text-sm mt-6">Nessuno spam. Solo aggiornamenti reali.</p>
         </div>
     </section>
 
@@ -216,21 +270,21 @@ landing_page_html = """
                 color: 'text-emerald-500', 
                 border: 'border-emerald-500', 
                 score: 98, 
-                msg: "Tutto perfetto! Stitch riposa e i parametri sono nella norma. 🟢" 
+                msg: "Tutto perfetto! Stitch riposa. Ricordati di pulire le pieghe del muso stasera. 🟢" 
             },
             derma: { 
                 text: 'Allerta Pelle', 
                 color: 'text-pink-400', 
                 border: 'border-pink-400', 
                 score: 72, 
-                msg: "⚠️ Rilevato grattamento frequente all'orecchio destro. Controlla possibili arrossamenti." 
+                msg: "⚠️ Rilevato grattamento frequente all'orecchio destro. Controlla possibili arrossamenti o cattivo odore." 
             },
             danger: { 
                 text: 'CRITICO', 
                 color: 'text-red-600', 
                 border: 'border-red-600', 
                 score: 45, 
-                msg: "🚨 STOP IMMEDIATO! Rilevati salti eccessivi e temperatura alta. Rischio IVDD." 
+                msg: "🚨 STOP IMMEDIATO! Rilevati salti eccessivi e temperatura alta. Rischio IVDD e Colpo di Calore." 
             }
         };
 
@@ -273,4 +327,4 @@ landing_page_html = """
 """
 
 # Renderizza l'HTML a tutta pagina
-components.html(landing_page_html, height=2200, scrolling=True)
+components.html(landing_page_html, height=3500, scrolling=True)
