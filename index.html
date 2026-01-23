@@ -82,14 +82,16 @@
             70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
             100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
-        /* NUOVA ANIMAZIONE GIALLA */
+        @keyframes pulse-orange {
+            0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(249, 115, 22, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+        }
         @keyframes pulse-yellow {
             0% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(234, 179, 8, 0); }
             100% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0); }
         }
-        
-        .pulse-danger { animation: pulse-red 2s infinite; border-color: #EF4444 !important; }
         
         /* LOGICA SCHERMI TELEFONO */
         .phone-screen { display: none; height: 100%; flex-direction: column; }
@@ -97,7 +99,8 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
         /* CLASSI ALERT DINAMICHE */
-        .alert-mode { animation: pulse-red 1.5s infinite; border-color: #EF4444 !important; }
+        .alert-mode-red { animation: pulse-red 1.5s infinite; border-color: #EF4444 !important; }
+        .alert-mode-orange { animation: pulse-orange 1.5s infinite; border-color: #F97316 !important; }
         .alert-mode-yellow { animation: pulse-yellow 1.5s infinite; border-color: #EAB308 !important; }
 
         /* UTILITY */
@@ -269,14 +272,12 @@
                             </div>
                             <div class="font-bold text-white text-sm">Rischio IVDD</div>
                         </button>
-                        
                         <button onclick="triggerAlert('baos')" class="glass-card p-4 rounded-xl text-left hover:bg-teal-500/10 group transition-all cursor-pointer">
                             <div class="text-teal-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
                                 <i class="fas fa-lungs"></i>
                             </div>
                             <div class="font-bold text-white text-sm">Rischio Calore</div>
                         </button>
-                        
                         <button onclick="triggerAlert('derma')" class="glass-card p-4 rounded-xl text-left hover:bg-pink-500/10 group transition-all cursor-pointer">
                             <div class="text-pink-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
                                 <i class="fas fa-paw"></i>
@@ -322,7 +323,9 @@
                                 <span id="alert-icon" class="text-6xl">🐶</span>
                             </div>
                             <h3 id="alert-title" class="text-lg font-bold text-slate-800 mb-2">Tutto Tranquillo</h3>
-                            <p id="alert-desc" class="text-sm text-slate-500 leading-relaxed">Stitch sta riposando. Nessun rischio rilevato al momento.</p>
+                            <div id="alert-desc" class="text-sm text-slate-500 leading-relaxed">
+                                Stich sta riposando. Nessun rischio rilevato al momento.
+                            </div>
                         </div>
                         <div class="h-16 bg-white border-t flex justify-around items-center text-slate-300 text-xl">
                             <i class="fas fa-home text-indigo-600"></i>
@@ -342,7 +345,7 @@
                         <div id="phone-chat-log" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50">
                             <div class="flex items-start gap-2">
                                 <div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">
-                                    Ciao! Sono qui per aiutarti con la gestione quotidiana di Stitch. Dimmi pure! 🐾
+                                    Ciao! Sono qui per aiutarti con la gestione quotidiana di Stich. Dimmi pure! 🐾
                                 </div>
                             </div>
                         </div>
@@ -425,52 +428,53 @@
 
         function triggerAlert(type) {
             screenDash.style.display = 'flex'; screenChat.style.display = 'none';
-            phoneFrame.classList.remove('alert-mode');
+            phoneFrame.classList.remove('alert-mode-red');
+            phoneFrame.classList.remove('alert-mode-orange');
             phoneFrame.classList.remove('alert-mode-yellow');
             void phoneFrame.offsetWidth;
 
             if(type === 'ivdd') {
-                phoneFrame.classList.add('alert-mode');
+                phoneFrame.classList.add('alert-mode-red'); // ROSSO
                 statusText.innerText = "CRITICO"; statusText.className = "text-2xl font-black text-red-500 leading-none";
                 
                 // Icona Osso Rossa
                 alertIcon.innerHTML = '<i class="fas fa-bone text-red-500"></i>';
                 alertIconContainer.className = "w-32 h-32 bg-red-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
                 
-                alertTitle.innerText = "ALLARME IVDD";
-                // Contromisure Dettagliate
+                alertTitle.innerText = "ALLARME SCHIENA";
+                // Contromisure Chirurgiche
                 alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
-                    <li>🛑 <strong>1. STOP ATTIVITÀ:</strong> Immobilizza subito il cane.</li>
-                    <li>🛏️ <strong>2. RIPOSO:</strong> Mettilo in gabbia/kennel.</li>
-                    <li>🚑 <strong>3. VETERINARIO:</strong> Se trascina le zampe, vai subito.</li>
+                    <li>📉 <strong>1. ATTIVITÀ ECCESSIVA:</strong> Rilevato carico anomalo sulla schiena.</li>
+                    <li>⛔ <strong>2. RIPOSO ASSOLUTO:</strong> Tieni Stich fermo per il resto della giornata.</li>
+                    <li>🚑 <strong>3. VETERINARIO:</strong> Se trascina le zampe o guaisce in braccio, corri subito.</li>
                 </ul>`;
             } 
             else if(type === 'baos') {
-                phoneFrame.classList.add('alert-mode');
-                statusText.innerText = "ALLERTA"; statusText.className = "text-2xl font-black text-teal-500 leading-none";
+                phoneFrame.classList.add('alert-mode-orange'); // ARANCIONE
+                statusText.innerText = "ALLERTA"; statusText.className = "text-2xl font-black text-orange-500 leading-none";
                 
-                // Icona Polmoni Verde Acqua
+                // Icona Polmoni (Teal icona, ma sfondo arancione per allerta)
                 alertIcon.innerHTML = '<i class="fas fa-lungs text-teal-500"></i>';
-                alertIconContainer.className = "w-32 h-32 bg-teal-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
+                alertIconContainer.className = "w-32 h-32 bg-orange-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
                 
                 alertTitle.innerText = "RISCHIO BAOS";
-                // Contromisure Dettagliate
+                // Contromisure
                 alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
-                    <li>🌡️ <strong>1. CALORE ECCESSIVO:</strong> Vai all'ombra.</li>
+                    <li>🌡️ <strong>1. CALORE ECCESSIVO:</strong> Vai subito all'ombra.</li>
                     <li>💧 <strong>2. RAFFREDDA:</strong> Acqua su zampe e pancia.</li>
-                    <li>🌬️ <strong>3. RESPIRA:</strong> Calma il cane per abbassare l'affanno.</li>
+                    <li>🌬️ <strong>3. RESPIRA:</strong> Calma Stich per abbassare l'affanno.</li>
                 </ul>`;
             } 
             else if(type === 'derma') {
-                phoneFrame.classList.add('alert-mode-yellow'); // Giallo
+                phoneFrame.classList.add('alert-mode-yellow'); // GIALLO
                 statusText.innerText = "ATTENZIONE"; statusText.className = "text-2xl font-black text-pink-500 leading-none";
                 
-                // Icona Zampa Rosa
+                // Icona Zampa
                 alertIcon.innerHTML = '<i class="fas fa-paw text-pink-500"></i>';
                 alertIconContainer.className = "w-32 h-32 bg-pink-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500";
                 
                 alertTitle.innerText = "ALERT DERMATITE";
-                // Contromisure Dettagliate
+                // Contromisure
                 alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
                     <li>👂 <strong>1. PRURITO ORECCHIO DX:</strong> Frequenza anomala.</li>
                     <li>🔍 <strong>2. ISPEZIONA:</strong> Cerca rossori o cattivo odore.</li>
@@ -483,7 +487,8 @@
             const userMsg = chatInputWeb.value;
             if(!userMsg) return;
             screenDash.style.display = 'none'; screenChat.style.display = 'flex';
-            phoneFrame.classList.remove('alert-mode');
+            phoneFrame.classList.remove('alert-mode-red');
+            phoneFrame.classList.remove('alert-mode-orange');
             phoneFrame.classList.remove('alert-mode-yellow');
             addChatBubble(userMsg, 'user');
             chatInputWeb.value = '';
@@ -491,9 +496,9 @@
             setTimeout(() => {
                 let botReply = "Capisco. Per la gestione specifica di questo aspetto, ti consiglio di consultare il veterinario, ma ecco cosa so...";
                 if(userMsg.toLowerCase().includes('calori') || userMsg.toLowerCase().includes('mangia')) {
-                    botReply = "Per un Frenchie adulto, controlla sempre il peso per evitare stress sulla schiena. Circa 25-30 calorie per libbra.";
+                    botReply = "Per Stich, controlla sempre il peso per evitare stress sulla schiena. Circa 25-30 calorie per libbra.";
                 } else if (userMsg.toLowerCase().includes('piegh') || userMsg.toLowerCase().includes('puli')) {
-                    botReply = "Le pieghe vanno pulite ogni giorno e asciugate bene per evitare funghi. Vuoi un promemoria?";
+                    botReply = "Le pieghe vanno pulite ogni giorno e asciugate bene per evitare funghi. Vuoi un promemoria per stasera?";
                 } else if (userMsg.toLowerCase().includes('russa')) {
                     botReply = "Se russa molto anche da sveglio, attenzione. Potrebbe essere un segno di BAOS.";
                 }
