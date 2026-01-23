@@ -4,7 +4,7 @@ import streamlit.components.v1 as components
 # --- CONFIGURAZIONE ---
 st.set_page_config(page_title="FrenchiePal - Startup", page_icon="🐾", layout="wide")
 
-# CSS per nascondere l'interfaccia standard di Streamlit
+# CSS per pulire l'interfaccia di Streamlit
 st.markdown("""
 <style>
     #MainMenu {visibility: hidden;}
