@@ -21,9 +21,10 @@
 
         /* EFFETTI GRAFICI */
         .glass-nav { 
-            background: rgba(15, 23, 42, 0.85); 
+            background: rgba(15, 23, 42, 0.90); /* Leggermente più scuro per leggibilità */
             backdrop-filter: blur(12px); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+            transition: all 0.3s ease;
         }
         .glass-card { 
             background: rgba(255, 255, 255, 0.03); 
@@ -37,12 +38,53 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
+        /* NAVIGATION ACTIVE STATE */
+        .nav-link {
+            position: relative;
+            color: #94A3B8; /* Slate 400 */
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: white;
+        }
+        /* Classe applicata via JS quando la sezione è visibile */
+        .nav-link.active {
+            color: white;
+            font-weight: 700;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -28px; /* Posizione sotto la navbar */
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #6366F1, #2DD4BF);
+            border-radius: 2px 2px 0 0;
+        }
+
         /* TESTI E GRADIENTI */
         .gradient-text { 
             background: linear-gradient(135deg, #A78BFA 0%, #2DD4BF 100%); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
         }
+        .section-title {
+            /* Classe standard per i titoli delle sezioni */
+            font-size: 2.25rem; /* text-4xl */
+            line-height: 2.5rem;
+            font-weight: 800; /* font-extrabold */
+            color: white;
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 3rem; /* md:text-5xl */
+                line-height: 1;
+            }
+        }
+
+        /* BOTTONI */
         .btn-primary {
             background: linear-gradient(135deg, #6366F1 0%, #0F766E 100%);
             transition: all 0.3s ease;
@@ -77,20 +119,21 @@
 </head>
 <body class="antialiased">
 
-    <nav class="fixed top-0 w-full z-50 glass-nav">
+    <nav class="fixed top-0 w-full z-50 glass-nav shadow-lg">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
                 <span class="text-3xl">🐾</span>
                 <span class="text-xl font-bold text-white tracking-tight">FrenchiePal</span>
             </div>
 
-            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-400">
-                <a href="#home" class="hover:text-white transition">Home</a>
-                <a href="#problem" class="hover:text-white transition">I Rischi</a>
-                <a href="#solution" class="hover:text-white transition">Soluzione</a>
-                <a href="#howitworks" class="hover:text-white transition">Come Funziona</a>
-                <a href="#demo" class="hover:text-white transition">Live Demo</a>
-                <a href="#mission" class="hover:text-white transition">Mission</a> </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#problem" class="nav-link">I Rischi</a>
+                <a href="#solution" class="nav-link">Soluzione</a>
+                <a href="#howitworks" class="nav-link">Come Funziona</a>
+                <a href="#demo" class="nav-link">Live Demo</a>
+                <a href="#mission" class="nav-link">Mission</a>
+            </div>
 
             <a href="#waitlist" class="hidden md:block bg-white text-slate-900 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition shadow-lg">
                 Unisciti
@@ -130,7 +173,7 @@
     <section id="problem" class="py-24 px-6 bg-slate-800/30">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 max-w-3xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Perché amare un Frenchie significa gestirne le fragilità.</h2>
+                <h2 class="section-title">Perché amare un Frenchie significa gestirne le fragilità.</h2>
                 <p class="text-lg text-slate-400">Il Bulldog Francese è un compagno straordinario, ma la sua genetica nasconde <strong>tre nemici silenziosi</strong> che ogni proprietario deve conoscere.</p>
             </div>
 
@@ -176,7 +219,7 @@
 
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20 max-w-3xl mx-auto">
-                <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6">
+                <h2 class="section-title">
                     Non un semplice monitoraggio. <br>
                     Un <span class="gradient-text">Consulente Proattivo.</span>
                 </h2>
@@ -232,7 +275,7 @@
     <section id="howitworks" class="py-24 px-6 bg-slate-900/50 border-t border-slate-800">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Dalla preoccupazione all'azione in 3 step.</h2>
+                <h2 class="section-title">Dalla preoccupazione all'azione in 3 step.</h2>
                 <p class="text-slate-400">Semplifichiamo la tecnologia.</p>
             </div>
 
@@ -264,7 +307,7 @@
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600 rounded-full blur-[150px] opacity-10 -z-10"></div>
 
         <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Provalo ora in tempo reale.</h2>
+            <h2 class="section-title">Provalo ora in tempo reale.</h2>
             <p class="text-slate-400 mb-8">Vedi come l'Assistente reagisce agli eventi. Clicca i bottoni qui sotto.</p>
             <button onclick="document.getElementById('sim-frame').scrollIntoView({behavior: 'smooth'})" class="btn-primary px-8 py-3 rounded-full text-white font-bold">
                 Avvia Simulazione
@@ -317,7 +360,7 @@
 
     <section id="mission" class="py-20 px-6 bg-slate-800/20">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold text-white mb-6">Perché un'app solo per i Bulldog Francesi?</h2>
+            <h2 class="section-title">Perché un'app solo per i Bulldog Francesi?</h2>
             <p class="text-lg text-slate-300 leading-relaxed mb-8">
                 Perché un Pastore Tedesco non rischia la paralisi saltando giù dal letto e non soffre se non gli pulisci le pieghe del muso. <strong class="text-white">Il tuo Frenchie sì.</strong>
                 <br><br>
@@ -349,7 +392,30 @@
     </footer>
 
     <script>
-        // Dati Scenari
+        /* 1. SCROLLSPY NAVIGAZIONE */
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+        });
+
+        /* 2. SIMULATORE IPHONE */
         const scenarios = {
             wellness: { 
                 text: 'Ottima Salute', 
@@ -374,23 +440,20 @@
             }
         };
 
-        // Funzione cambio scenario
         function setScenario(type) {
             const data = scenarios[type];
-            
-            // Elementi DOM
             const statusText = document.getElementById('status-text');
             const circle = document.getElementById('score-circle');
             
-            // Aggiorna Testi
+            // Aggiorna testo e colore
             statusText.innerText = data.text;
             statusText.className = `text-lg font-extrabold ${data.color}`;
             
-            // Aggiorna Cerchio Score
+            // Aggiorna cerchio
             circle.innerText = data.score;
             circle.className = `w-12 h-12 rounded-full border-4 flex items-center justify-center font-bold ${data.color} ${data.border} bg-white transition-all duration-300`;
 
-            // Effetto Pulsazione Pericolo
+            // Effetto pulsante pericolo
             const phoneFrame = circle.closest('.relative');
             
             if(type === 'danger') {
@@ -403,7 +466,6 @@
             addMessage(data.msg);
         }
 
-        // Funzione aggiunta messaggio
         function addMessage(text) {
             const box = document.getElementById('chat-box');
             
