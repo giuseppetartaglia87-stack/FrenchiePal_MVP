@@ -4,13 +4,22 @@ import streamlit.components.v1 as components
 # --- CONFIGURAZIONE ---
 st.set_page_config(page_title="FrenchiePal - Startup", page_icon="🐾", layout="wide")
 
-# CSS per pulire l'interfaccia di Streamlit
+# CSS per pulire l'interfaccia di Streamlit e rimuovere le barre di scorrimento doppie
 st.markdown("""
 <style>
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
-    .block-container {padding: 0 !important; max-width: 100% !important;}
+    /* Togliamo il padding e blocchiamo lo scroll di Streamlit */
+    .block-container {
+        padding: 0 !important; 
+        max-width: 100% !important; 
+        overflow: hidden;
+    }
+    /* Nascondiamo la scrollbar di Streamlit */
+    section.main {
+        overflow: hidden !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -27,13 +36,22 @@ landing_page_html = """
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0F172A; color: #E2E8F0; overflow-x: hidden; }
+        /* MODIFICA FONDAMENTALE: Gestione Scroll Interno */
+        html, body {
+            height: 100vh; /* Occupa tutta l'altezza disponibile */
+            margin: 0;
+            overflow-y: auto; /* Abilita lo scroll QUI, non fuori */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0F172A;
+            color: #E2E8F0;
+        }
+
         .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
         .gradient-text { background: linear-gradient(135deg, #818CF8 0%, #2DD4BF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
         .gradient-btn { background: linear-gradient(135deg, #6366F1 0%, #14B8A6 100%); }
         .gradient-btn:hover { background: linear-gradient(135deg, #4F46E5 0%, #0D9488 100%); box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4); }
         
-        /* Animazione pulsante pericolo nel simulatore */
+        /* Animazione pulsante pericolo */
         @keyframes pulse-red {
             0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
@@ -45,18 +63,18 @@ landing_page_html = """
 </head>
 <body>
 
-    <nav class="fixed top-0 left-0 right-0 z-50 glass-card border-t-0 border-r-0 border-l-0 px-6 py-4">
+    <nav class="sticky top-0 z-50 glass-card border-t-0 border-r-0 border-l-0 px-6 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="document.getElementById('home').scrollIntoView({behavior: 'smooth'})">
                 <span class="text-3xl">🐾</span>
                 <span class="text-xl font-bold tracking-tight text-white">FrenchiePal</span>
             </div>
 
             <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
-                <a href="#home" class="hover:text-white hover:text-indigo-400 transition cursor-pointer">Home</a>
-                <a href="#rischi" class="hover:text-white hover:text-indigo-400 transition cursor-pointer">I Rischi</a>
-                <a href="#soluzione" class="hover:text-white hover:text-indigo-400 transition cursor-pointer">Soluzione</a>
-                <a href="#demo" class="hover:text-white hover:text-indigo-400 transition cursor-pointer">Live Demo</a>
+                <a href="#home" class="hover:text-white hover:text-indigo-400 transition">Home</a>
+                <a href="#rischi" class="hover:text-white hover:text-indigo-400 transition">I Rischi</a>
+                <a href="#soluzione" class="hover:text-white hover:text-indigo-400 transition">Soluzione</a>
+                <a href="#demo" class="hover:text-white hover:text-indigo-400 transition">Live Demo</a>
             </div>
 
             <a href="#waitlist" class="hidden md:inline-block px-6 py-2.5 text-sm font-bold bg-white text-slate-900 rounded-full hover:bg-slate-200 transition shadow-lg">
@@ -65,7 +83,7 @@ landing_page_html = """
         </div>
     </nav>
 
-    <section id="home" class="pt-32 pb-20 px-6 relative overflow-hidden">
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 pb-20 px-6 relative overflow-hidden">
         <div class="absolute top-20 left-0 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px] -z-10"></div>
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-teal-600/20 rounded-full blur-[120px] -z-10"></div>
 
@@ -88,7 +106,7 @@ landing_page_html = """
         </div>
     </section>
 
-    <section id="rischi" class="py-20 px-6 bg-slate-900/50">
+    <section id="rischi" class="py-24 px-6 bg-slate-900/50">
         <div class="max-w-7xl mx-auto relative">
              <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Amare un Frenchie significa gestirne le fragilità.</h2>
@@ -102,7 +120,7 @@ landing_page_html = """
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-white">Il Nemico della Schiena (IVDD)</h3>
                     <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                        I dischi spinali invecchiano precocemente. Un salto sbagliato dal divano può trasformarsi in un trauma improvviso con conseguenze gravi.
+                        I dischi spinali invecchiano precocemente. Un salto sbagliato può trasformarsi in un trauma improvviso.
                     </p>
                     <div class="inline-block px-3 py-1 rounded-lg bg-red-500/10 text-red-300 text-xs font-bold uppercase tracking-wider">Rischio Paralisi</div>
                 </div>
@@ -113,7 +131,7 @@ landing_page_html = """
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-white">Il Nemico del Respiro (BAOS)</h3>
                     <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                        "Russare forte" è fatica respiratoria. Il caldo e l'esercizio eccessivo possono diventare letali per un cane che fatica a raffreddarsi.
+                        "Russare forte" è fatica respiratoria. Il caldo eccessivo può diventare letale per un cane che fatica a raffreddarsi.
                     </p>
                     <div class="inline-block px-3 py-1 rounded-lg bg-teal-500/10 text-teal-300 text-xs font-bold uppercase tracking-wider">Rischio Colpo di Calore</div>
                 </div>
@@ -124,7 +142,7 @@ landing_page_html = """
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-white">Il Nemico della Pelle</h3>
                     <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                        La cute delicata e le pieghe sono terreno ideale per infezioni. Un prurito ignorato diventa un'otite cronica dolorosa.
+                        La cute delicata e le pieghe sono terreno ideale per infezioni. Un prurito ignorato diventa un'otite dolorosa.
                     </p>
                     <div class="inline-block px-3 py-1 rounded-lg bg-pink-500/10 text-pink-300 text-xs font-bold uppercase tracking-wider">Infezioni & Allergie</div>
                 </div>
@@ -153,7 +171,7 @@ landing_page_html = """
                     </div>
                     <h3 class="text-xl font-bold mb-4 text-white">1. IVDD Shield</h3>
                     <p class="text-slate-400 leading-relaxed">
-                        Analizziamo la <strong>qualità</strong> del movimento. Monitoriamo l'impatto dei salti verticali per preservare la sua colonna vertebrale negli anni.
+                        Analizziamo la <strong>qualità</strong> del movimento. Monitoriamo l'impatto dei salti verticali per preservare la colonna.
                     </p>
                 </div>
 
@@ -163,7 +181,7 @@ landing_page_html = """
                     </div>
                     <h3 class="text-xl font-bold mb-4 text-white">2. Airway Guard</h3>
                     <p class="text-slate-400 leading-relaxed">
-                        Incrociamo temperatura esterna e attività. Ti avvisiamo quando l'ambiente diventa rischioso per un brachicefalo prima che vada in affanno.
+                        Incrociamo temperatura esterna e attività. Ti avvisiamo quando l'ambiente diventa rischioso per un brachicefalo.
                     </p>
                 </div>
 
@@ -171,9 +189,9 @@ landing_page_html = """
                     <div class="w-20 h-20 mx-auto bg-purple-500/20 rounded-3xl flex items-center justify-center text-purple-400 text-3xl mb-8 group-hover:scale-110 transition">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 text-white">3. Daily Wellness & Derma</h3>
+                    <h3 class="text-xl font-bold mb-4 text-white">3. Daily Wellness</h3>
                     <p class="text-slate-400 leading-relaxed">
-                        Monitoriamo l'insorgere di pruriti, ti ricordiamo la pulizia delle pieghe e l'alimentazione ideale. Un coach per la gestione quotidiana.
+                        Ti ricordiamo la pulizia delle pieghe e l'alimentazione ideale. Un coach per la gestione quotidiana e delle dermatiti.
                     </p>
                 </div>
             </div>
@@ -184,8 +202,8 @@ landing_page_html = """
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-3xl font-bold mb-6 text-white">Perché un'app solo per i Bulldog Francesi?</h2>
             <p class="text-lg text-slate-300 leading-relaxed mb-8">
-                Perché un Pastore Tedesco non rischia la paralisi saltando giù dal letto e non soffre se non gli pulisci le pieghe del muso. Il tuo Frenchie sì.
-                <br>Noi crediamo che una razza speciale meriti una protezione specializzata.
+                Perché un Pastore Tedesco non rischia la paralisi saltando giù dal letto. Il tuo Frenchie sì.
+                <br>Una razza speciale merita una protezione specializzata.
             </p>
         </div>
     </section>
@@ -252,9 +270,9 @@ landing_page_html = """
 
     <section id="waitlist" class="py-24 px-6 relative">
         <div class="max-w-3xl mx-auto text-center glass-card p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-700">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">Stiamo costruendo il futuro del benessere per i Frenchie.</h2>
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">Costruiamo insieme il futuro.</h2>
             <p class="text-slate-400 text-lg mb-8">
-                Siamo una startup in fase di sviluppo. Se vuoi seguire il nostro viaggio, darci feedback e essere tra i primi a provare FrenchiePal quando sarà pronto, lasciaci la tua email.
+                Siamo in fase di sviluppo attivo. Lasciaci la tua email per ricevere aggiornamenti sul lancio della Beta.
             </p>
 
             <form class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
@@ -263,7 +281,7 @@ landing_page_html = """
                     Tienimi aggiornato
                 </button>
             </form>
-            <p class="text-slate-500 text-sm mt-6">Nessuno spam. Solo aggiornamenti reali.</p>
+            <p class="text-slate-500 text-sm mt-6">Nessuno spam. Solo aggiornamenti importanti.</p>
         </div>
     </section>
 
@@ -298,25 +316,13 @@ landing_page_html = """
 
         function setScenario(type) {
             const data = scenarios[type];
-            
-            // Aggiorna Testi e Colori
-            const statusText = document.getElementById('status-text');
-            statusText.innerText = data.text;
-            statusText.className = `text-lg font-extrabold ${data.color}`;
-            
+            document.getElementById('status-text').innerText = data.text;
+            document.getElementById('status-text').className = `text-lg font-extrabold ${data.color}`;
             const circle = document.getElementById('score-circle');
             circle.innerText = data.score;
             circle.className = `w-12 h-12 rounded-full border-4 flex items-center justify-center font-bold ${data.color} ${data.border} bg-white transition-all duration-300`;
-
-            // Effetto Pulsazione per Pericolo
             const frame = document.querySelector('.relative.w-\\\\[340px\\\\]');
-            if(type === 'danger') {
-                frame.classList.add('pulse-danger');
-            } else {
-                frame.classList.remove('pulse-danger');
-            }
-            
-            // Aggiungi messaggio chat simulato
+            if(type === 'danger') { frame.classList.add('pulse-danger'); } else { frame.classList.remove('pulse-danger'); }
             addMessage(data.msg);
         }
 
@@ -334,5 +340,6 @@ landing_page_html = """
 </html>
 """
 
-# Renderizza l'HTML a tutta pagina
-components.html(landing_page_html, height=3500, scrolling=True)
+# Renderizza il componente in un'altezza compatibile con schermi Desktop (finestra fissa)
+# Usiamo 1000px per sicurezza su schermi HD, ma lo scroll interno gestisce il resto.
+components.html(landing_page_html, height=1000, scrolling=False)
