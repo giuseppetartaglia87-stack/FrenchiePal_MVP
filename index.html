@@ -157,24 +157,24 @@
                 <p class="text-lg text-slate-400">Il Bulldog Francese è un compagno straordinario, ma la sua genetica nasconde <strong>tre nemici silenziosi</strong> che ogni proprietario deve conoscere.</p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-red-500">
-                    <div class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400 text-3xl mb-6"><i class="fas fa-bone"></i></div>
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-red-500 text-center">
+                    <div class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400 text-3xl mb-6 mx-auto"><i class="fas fa-bone"></i></div>
                     <h3 class="text-xl font-bold text-white mb-2">Il Nemico della Schiena (IVDD)</h3>
                     <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">Cos'è:</p>
                     <p class="text-slate-300 mb-4 text-sm leading-relaxed">L'Ernia del Disco Intervertebrale (IVDD) è la prima causa di paralisi nei Frenchie. I loro dischi spinali invecchiano precocemente, indurendosi.</p>
                     <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">L'Impatto:</p>
                     <p class="text-slate-300 text-sm leading-relaxed">Un salto sbagliato dal divano o scale fatte di corsa possono trasformarsi in un trauma improvviso, portando a dolore acuto, costi chirurgici elevati e lunghe riabilitazioni.</p>
                 </div>
-                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-teal-500">
-                    <div class="w-16 h-16 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-400 text-3xl mb-6"><i class="fas fa-lungs"></i></div>
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-teal-500 text-center">
+                    <div class="w-16 h-16 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-400 text-3xl mb-6 mx-auto"><i class="fas fa-lungs"></i></div>
                     <h3 class="text-xl font-bold text-white mb-2">Il Nemico del Respiro (BAOS)</h3>
                     <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">Cos'è:</p>
                     <p class="text-slate-300 mb-4 text-sm leading-relaxed">La Sindrome Ostruttiva delle Vie Aeree Brachicefale (BAOS) non è solo "russare forte". È una costante fatica respiratoria.</p>
                     <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">L'Impatto:</p>
                     <p class="text-slate-300 text-sm leading-relaxed">Il caldo e l'esercizio eccessivo possono diventare letali in pochi minuti. Un cane che fatica a raffreddarsi è un cane costantemente sotto stress.</p>
                 </div>
-                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-pink-500">
-                    <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-400 text-3xl mb-6"><i class="fas fa-paw"></i></div>
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-pink-500 text-center">
+                    <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-400 text-3xl mb-6 mx-auto"><i class="fas fa-paw"></i></div>
                     <h3 class="text-xl font-bold text-white mb-2">Il Nemico della Pelle</h3>
                     <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">Cos'è:</p>
                     <p class="text-slate-300 mb-4 text-sm leading-relaxed">La cute delicata e le pieghe caratteristiche sono il terreno ideale per infezioni, funghi e allergie alimentari o ambientali.</p>
@@ -266,19 +266,19 @@
                         <i class="fas fa-bell"></i> 1. Simula Allarmi Biometrici
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <button onclick="triggerAlert('ivdd')" class="glass-card p-4 rounded-xl text-left hover:bg-red-500/10 group transition-all cursor-pointer">
+                        <button onclick="triggerAlert('ivdd')" class="glass-card p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-red-500/10 group transition-all cursor-pointer">
                             <div class="text-red-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
                                 <i class="fas fa-bone"></i>
                             </div>
                             <div class="font-bold text-white text-sm">Rischio IVDD</div>
                         </button>
-                        <button onclick="triggerAlert('baos')" class="glass-card p-4 rounded-xl text-left hover:bg-teal-500/10 group transition-all cursor-pointer">
+                        <button onclick="triggerAlert('baos')" class="glass-card p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-teal-500/10 group transition-all cursor-pointer">
                             <div class="text-teal-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
                                 <i class="fas fa-lungs"></i>
                             </div>
                             <div class="font-bold text-white text-sm">Rischio Calore</div>
                         </button>
-                        <button onclick="triggerAlert('derma')" class="glass-card p-4 rounded-xl text-left hover:bg-pink-500/10 group transition-all cursor-pointer">
+                        <button onclick="triggerAlert('derma')" class="glass-card p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-pink-500/10 group transition-all cursor-pointer">
                             <div class="text-pink-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
                                 <i class="fas fa-paw"></i>
                             </div>
@@ -307,90 +307,85 @@
                 </div>
             </div>
 
-            <div class="order-1 lg:order-2 flex justify-center">
-                <div id="phone-frame" class="relative w-[320px] h-[680px] bg-white rounded-[45px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-b-xl z-20"></div>
+            <div class="order-1 lg:order-2 flex justify-center w-full">
+                <div id="phone-frame" class="relative w-[280px] h-[580px] bg-white rounded-[40px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-xl z-20"></div>
                     
-                    <div id="screen-dashboard" class="phone-screen active bg-slate-50 flex-1 relative flex flex-col">
-                        <div class="pt-10 pb-4 px-6 flex justify-between items-end">
+                    <div id="screen-dashboard" class="phone-screen active bg-slate-50 flex-1 relative">
+                        <div class="pt-8 pb-4 px-5 flex justify-between items-end">
                             <div>
                                 <div class="text-[10px] font-bold text-slate-400 uppercase">Status Attuale</div>
-                                <div id="phone-status-text" class="text-2xl font-black text-emerald-500 leading-none">OTTIMO</div>
+                                <div id="phone-status-text" class="text-xl font-black text-emerald-500 leading-none">OTTIMO</div>
                             </div>
                         </div>
-                        
-                        <div class="flex-1 px-6 py-4 flex flex-col">
-                            <div class="flex justify-center mb-6">
-                                <div id="alert-icon-container" class="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center border-4 border-white shadow-sm transition-all duration-500">
-                                    <span id="alert-icon" class="text-4xl">🐶</span>
+                        <div class="flex-1 flex flex-col items-center justify-center p-4 text-center">
+                            <div id="alert-icon-container" class="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 transition-all duration-500">
+                                <span id="alert-icon" class="text-5xl">🐶</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2 w-full mb-4">
+                                <div class="bg-white rounded-lg p-1.5 border border-slate-100 shadow-sm">
+                                    <div class="text-[8px] text-slate-400 uppercase font-bold">BPM</div>
+                                    <div id="val-heart" class="text-sm font-bold text-slate-700">75</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-1.5 border border-slate-100 shadow-sm">
+                                    <div class="text-[8px] text-slate-400 uppercase font-bold">TEMP</div>
+                                    <div id="val-temp" class="text-sm font-bold text-slate-700">38.1°</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-1.5 border border-slate-100 shadow-sm">
+                                    <div class="text-[8px] text-slate-400 uppercase font-bold">ATTIV</div>
+                                    <div id="val-act" class="text-sm font-bold text-slate-700">Bassa</div>
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-2 mb-6">
-                                <div class="bg-white rounded-xl p-2 text-center border border-slate-100 shadow-sm">
-                                    <div class="text-[10px] text-slate-400 uppercase font-bold">Battito</div>
-                                    <div id="val-heart" class="text-lg font-bold text-slate-700">75 <span class="text-[10px] font-normal">bpm</span></div>
-                                </div>
-                                <div class="bg-white rounded-xl p-2 text-center border border-slate-100 shadow-sm">
-                                    <div class="text-[10px] text-slate-400 uppercase font-bold">Temp</div>
-                                    <div id="val-temp" class="text-lg font-bold text-slate-700">38.1 <span class="text-[10px] font-normal">°C</span></div>
-                                </div>
-                                <div class="bg-white rounded-xl p-2 text-center border border-slate-100 shadow-sm">
-                                    <div class="text-[10px] text-slate-400 uppercase font-bold">Attività</div>
-                                    <div id="val-act" class="text-lg font-bold text-slate-700">Bassa</div>
-                                </div>
-                            </div>
-
-                            <div class="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex-1">
-                                <h3 id="alert-title" class="text-sm font-bold text-slate-800 mb-2">Tutto Tranquillo</h3>
-                                <div id="alert-desc" class="text-xs text-slate-500 leading-relaxed space-y-2">
-                                    Stitch sta riposando. I parametri biometrici sono nella norma. Nessun rischio rilevato al momento.
+                            <div class="bg-white rounded-xl p-3 border border-slate-100 shadow-sm flex-1 w-full text-left">
+                                <h3 id="alert-title" class="text-sm font-bold text-slate-800 mb-1">Tutto Tranquillo</h3>
+                                <div id="alert-desc" class="text-xs text-slate-500 leading-relaxed">
+                                    Stitch sta riposando. Nessun rischio rilevato al momento.
                                 </div>
                             </div>
                         </div>
-
-                        <div class="h-16 bg-white border-t flex justify-around items-center z-30">
+                        <div class="h-14 bg-white border-t flex justify-around items-center z-30">
                             <button onclick="switchTab('dash')" id="tab-dash" class="flex flex-col items-center text-indigo-600 transition">
-                                <i class="fas fa-heart-pulse text-xl mb-1"></i>
-                                <span class="text-[10px] font-bold">Salute</span>
+                                <i class="fas fa-heart-pulse text-lg mb-0.5"></i>
+                                <span class="text-[9px] font-bold">Salute</span>
                             </button>
                             <button onclick="switchTab('chat')" id="tab-chat" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
-                                <i class="fas fa-comments text-xl mb-1"></i>
-                                <span class="text-[10px] font-bold">Coach</span>
+                                <i class="fas fa-comments text-lg mb-0.5"></i>
+                                <span class="text-[9px] font-bold">Coach</span>
                             </button>
                         </div>
                     </div>
 
-                    <div id="screen-chat" class="phone-screen bg-slate-50 flex-1 relative hidden flex-col">
-                        <div class="pt-10 pb-3 px-4 bg-white border-b flex items-center gap-3">
-                            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-xs">🐶</div>
+                    <div id="screen-chat" class="phone-screen bg-slate-50 flex-1 relative hidden">
+                        <div class="pt-8 pb-3 px-4 bg-white border-b flex items-center gap-2">
+                            <div class="w-7 h-7 bg-indigo-100 rounded-full flex items-center justify-center text-[10px]">🐶</div>
                             <div>
-                                <div class="text-sm font-bold text-slate-800">Frenchie Coach</div>
-                                <div class="text-[10px] text-emerald-500 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> Online</div>
+                                <div class="text-xs font-bold text-slate-800">Frenchie Coach</div>
+                                <div class="text-[8px] text-emerald-500 flex items-center gap-1"><span class="w-1 h-1 bg-emerald-500 rounded-full"></span> Online</div>
                             </div>
                         </div>
-                        <div id="phone-chat-log" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50">
+                        <div id="phone-chat-log" class="flex-1 p-3 overflow-y-auto space-y-2 bg-slate-50">
                             <div class="flex items-start gap-2">
-                                <div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">
-                                    Ciao! Sono qui per aiutarti con la gestione quotidiana di Stich. Dimmi pure! 🐾
+                                <div class="bg-white p-2.5 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[90%]">
+                                    Ciao! Sono qui per aiutarti con la gestione quotidiana di Stitch. Dimmi pure! 🐾
                                 </div>
                             </div>
                         </div>
-                        <div class="p-3 bg-white border-t flex gap-2">
-                            <input type="text" id="phone-chat-input" placeholder="Scrivi a FrenchiePal..." class="flex-1 bg-slate-100 rounded-full px-3 text-xs outline-none text-slate-600">
-                            <button onclick="triggerChat('phone')" class="w-8 h-8 bg-indigo-600 hover:bg-indigo-700 rounded-full text-white flex items-center justify-center shadow-sm transition">
+                        <div class="p-2 bg-white border-t flex gap-2">
+                            <input type="text" id="phone-chat-input" placeholder="Scrivi..." class="flex-1 bg-slate-100 rounded-full px-3 py-1.5 text-xs outline-none text-slate-600">
+                            <button onclick="triggerChat('phone')" class="w-7 h-7 bg-indigo-600 hover:bg-indigo-700 rounded-full text-white flex items-center justify-center shadow-sm transition">
                                 <i class="fas fa-paper-plane text-[10px]"></i>
                             </button>
                         </div>
                         
-                        <div class="h-16 bg-white border-t flex justify-around items-center z-30">
+                        <div class="h-14 bg-white border-t flex justify-around items-center z-30">
                             <button onclick="switchTab('dash')" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
-                                <i class="fas fa-heart-pulse text-xl mb-1"></i>
-                                <span class="text-[10px] font-bold">Salute</span>
+                                <i class="fas fa-heart-pulse text-lg mb-0.5"></i>
+                                <span class="text-[9px] font-bold">Salute</span>
                             </button>
                             <button onclick="switchTab('chat')" class="flex flex-col items-center text-indigo-600 transition">
-                                <i class="fas fa-comments text-xl mb-1"></i>
-                                <span class="text-[10px] font-bold">Coach</span>
+                                <i class="fas fa-comments text-lg mb-0.5"></i>
+                                <span class="text-[9px] font-bold">Assistente</span>
                             </button>
                         </div>
                     </div>
@@ -511,59 +506,59 @@
 
             if(type === 'ivdd') {
                 phoneFrame.classList.add('alert-mode-red');
-                statusText.innerText = "CRITICO"; statusText.className = "text-2xl font-black text-red-500 leading-none";
+                statusText.innerText = "CRITICO"; statusText.className = "text-xl font-black text-red-500 leading-none";
                 
                 alertIcon.innerHTML = '<i class="fas fa-bone text-red-500"></i>';
-                alertIconContainer.className = "w-24 h-24 bg-red-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
+                alertIconContainer.className = "w-24 h-24 bg-red-100 rounded-full flex items-center justify-center shadow-sm mb-4 transition-all duration-500 scale-110";
                 
                 // Biometrics Update
-                valHeart.innerHTML = '140 <span class="text-[10px] font-normal">bpm</span>';
-                valTemp.innerHTML = '38.5 <span class="text-[10px] font-normal">°C</span>';
+                valHeart.innerHTML = '140 <span class="text-[8px] font-normal">bpm</span>';
+                valTemp.innerHTML = '38.5 <span class="text-[8px] font-normal">°</span>';
                 valAct.innerHTML = '<span class="text-red-500">Picchi</span>';
 
                 alertTitle.innerText = "ALLARME SCHIENA";
-                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2 bg-red-50 p-3 rounded-lg border border-red-100 text-red-800">
-                    <li>📉 <strong>1. ATTIVITÀ ECCESSIVA:</strong> Rilevato carico anomalo sulla schiena.</li>
-                    <li>⛔ <strong>2. RIPOSO ASSOLUTO:</strong> Tieni Stich fermo per il resto della giornata.</li>
-                    <li>🚑 <strong>3. VETERINARIO:</strong> Se trascina le zampe o guaisce in braccio, corri subito.</li>
+                alertDesc.innerHTML = `<ul class="text-left space-y-1 mt-1 bg-red-50 p-2 rounded-lg border border-red-100 text-red-800">
+                    <li>📉 <strong>1. ATTIVITÀ ECCESSIVA:</strong> Carico anomalo.</li>
+                    <li>⛔ <strong>2. RIPOSO ASSOLUTO:</strong> Tieni Stich fermo.</li>
+                    <li>🚑 <strong>3. VETERINARIO:</strong> Se trascina zampe/guaisce.</li>
                 </ul>`;
             } 
             else if(type === 'baos') {
                 phoneFrame.classList.add('alert-mode-orange');
-                statusText.innerText = "ALLERTA"; statusText.className = "text-2xl font-black text-orange-500 leading-none";
+                statusText.innerText = "ALLERTA"; statusText.className = "text-xl font-black text-orange-500 leading-none";
                 
                 alertIcon.innerHTML = '<i class="fas fa-lungs text-teal-500"></i>';
-                alertIconContainer.className = "w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
+                alertIconContainer.className = "w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center shadow-sm mb-4 transition-all duration-500 scale-110";
                 
                 // Biometrics Update
-                valHeart.innerHTML = '160 <span class="text-[10px] font-normal">bpm</span>';
-                valTemp.innerHTML = '39.8 <span class="text-[10px] font-normal text-red-500">°C</span>';
+                valHeart.innerHTML = '160 <span class="text-[8px] font-normal">bpm</span>';
+                valTemp.innerHTML = '39.8 <span class="text-[8px] font-normal text-red-500">°</span>';
                 valAct.innerHTML = 'Alta';
 
                 alertTitle.innerText = "RISCHIO BAOS";
-                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2 bg-orange-50 p-3 rounded-lg border border-orange-100 text-orange-900">
-                    <li>🌡️ <strong>1. CALORE ECCESSIVO:</strong> Vai subito all'ombra.</li>
-                    <li>💧 <strong>2. RAFFREDDA:</strong> Acqua su zampe e pancia.</li>
-                    <li>🌬️ <strong>3. RESPIRA:</strong> Calma Stich per abbassare l'affanno.</li>
+                alertDesc.innerHTML = `<ul class="text-left space-y-1 mt-1 bg-orange-50 p-2 rounded-lg border border-orange-100 text-orange-900">
+                    <li>🌡️ <strong>1. CALORE:</strong> Vai subito all'ombra.</li>
+                    <li>💧 <strong>2. RAFFREDDA:</strong> Acqua su zampe/pancia.</li>
+                    <li>🌬️ <strong>3. CALMA:</strong> Abbassa l'affanno.</li>
                 </ul>`;
             } 
             else if(type === 'derma') {
                 phoneFrame.classList.add('alert-mode-yellow');
-                statusText.innerText = "ATTENZIONE"; statusText.className = "text-2xl font-black text-pink-500 leading-none";
+                statusText.innerText = "ATTENZIONE"; statusText.className = "text-xl font-black text-pink-500 leading-none";
                 
                 alertIcon.innerHTML = '<i class="fas fa-paw text-pink-500"></i>';
-                alertIconContainer.className = "w-24 h-24 bg-pink-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500";
+                alertIconContainer.className = "w-24 h-24 bg-pink-100 rounded-full flex items-center justify-center shadow-sm mb-4 transition-all duration-500";
                 
                 // Biometrics Update
-                valHeart.innerHTML = '80 <span class="text-[10px] font-normal">bpm</span>';
-                valTemp.innerHTML = '38.2 <span class="text-[10px] font-normal">°C</span>';
+                valHeart.innerHTML = '80 <span class="text-[8px] font-normal">bpm</span>';
+                valTemp.innerHTML = '38.2 <span class="text-[8px] font-normal">°</span>';
                 valAct.innerHTML = 'Normale';
 
                 alertTitle.innerText = "ALERT DERMATITE";
-                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2 bg-pink-50 p-3 rounded-lg border border-pink-100 text-pink-900">
-                    <li>👂 <strong>1. PRURITO ORECCHIO DX:</strong> Frequenza anomala.</li>
-                    <li>🔍 <strong>2. ISPEZIONA:</strong> Cerca rossori o cattivo odore.</li>
-                    <li>🧴 <strong>3. AZIONE:</strong> Pulisci con soluzione otologica.</li>
+                alertDesc.innerHTML = `<ul class="text-left space-y-1 mt-1 bg-pink-50 p-2 rounded-lg border border-pink-100 text-pink-900">
+                    <li>👂 <strong>1. PRURITO ORECCHIO:</strong> Frequente.</li>
+                    <li>🔍 <strong>2. ISPEZIONA:</strong> Cerca rossori/odore.</li>
+                    <li>🧴 <strong>3. AZIONE:</strong> Pulisci con prodotto specifico.</li>
                 </ul>`;
             }
         }
@@ -603,10 +598,10 @@
             const div = document.createElement('div');
             if(sender === 'user') {
                 div.className = "flex items-center justify-end gap-2";
-                div.innerHTML = `<div class="bg-indigo-600 p-3 rounded-2xl rounded-tr-none text-xs text-white shadow-md max-w-[85%]">${text}</div>`;
+                div.innerHTML = `<div class="bg-indigo-600 p-2.5 rounded-2xl rounded-tr-none text-xs text-white shadow-md max-w-[85%]">${text}</div>`;
             } else {
                 div.className = "flex items-start gap-2 animate-fade-in";
-                div.innerHTML = `<div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-sm flex-shrink-0">🐶</div><div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">${text}</div>`;
+                div.innerHTML = `<div class="w-7 h-7 bg-indigo-100 rounded-full flex items-center justify-center text-[10px] flex-shrink-0">🐶</div><div class="bg-white p-2.5 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">${text}</div>`;
             }
             chatLog.appendChild(div);
             chatLog.scrollTop = chatLog.scrollHeight;
