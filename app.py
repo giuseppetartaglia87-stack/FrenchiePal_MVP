@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# --- CONFIGURAZIONE PAGINA STREAMLIT ---
+# --- CONFIGURAZIONE ---
 st.set_page_config(page_title="FrenchiePal - Startup", page_icon="🐾", layout="wide")
 
 # CSS per nascondere l'interfaccia standard di Streamlit
@@ -14,7 +14,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- CODICE HTML/JS/TAILWIND ---
+# --- CODICE HTML COMPLETO (SITO + SIMULATORE) ---
 landing_page_html = """
 <!DOCTYPE html>
 <html lang="it" class="scroll-smooth">
@@ -73,11 +73,16 @@ landing_page_html = """
             
             <div class="bg-slate-800/40 border border-slate-700 p-6 rounded-2xl mb-8 backdrop-blur-md">
                 <p class="text-lg text-slate-300 leading-relaxed">
-                    Siamo una Startup che sta creando il primo <strong>Consulente Digitale</strong> per il Bulldog Francese. 
+                    <strong class="text-white">Siamo una Startup</strong> che sta creando il primo <strong>Consulente Digitale</strong> per il Bulldog Francese. 
+                    <br><br>
                     Gestiamo proattivamente i rischi di <span class="text-indigo-400 font-bold">IVDD</span> (schiena), 
                     <span class="text-teal-400 font-bold">BAOS</span> (respiro) e <span class="text-pink-400 font-bold">Dermatiti</span>.
                 </p>
             </div>
+            
+            <p class="text-slate-400 text-sm mb-8 font-semibold">
+                Provalo subito qui a destra 👉 <br>Guarda come l'AI protegge il tuo cane in tempo reale.
+            </p>
 
             <a href="#waitlist" class="gradient-btn inline-flex items-center px-8 py-4 rounded-full text-lg font-bold text-white transition-all transform hover:scale-105">
                 Tienimi aggiornato
@@ -88,7 +93,7 @@ landing_page_html = """
         <div class="lg:w-1/2 flex justify-center relative scale-90 lg:scale-100">
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-indigo-600 rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
 
-            <div class="relative w-[340px] h-[700px] bg-white rounded-[45px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col z-20">
+            <div class="relative w-[340px] h-[720px] bg-white rounded-[45px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col z-20">
                 
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-xl z-30"></div>
 
@@ -101,18 +106,18 @@ landing_page_html = """
                 </div>
 
                 <div class="p-4 bg-slate-50">
-                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-2 pl-1">Prova la Demo:</p>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-2 pl-1">Prova la Demo (Tocca un'icona):</p>
                     <div class="grid grid-cols-3 gap-2">
-                        <button onclick="setScenario('wellness')" class="p-2 rounded-xl bg-white border border-gray-100 shadow-sm hover:border-emerald-400 hover:bg-emerald-50 transition flex flex-col items-center">
-                            <span class="text-2xl mb-1">💤</span>
+                        <button onclick="setScenario('wellness')" class="p-2 rounded-xl bg-white border border-gray-100 shadow-sm hover:border-emerald-400 hover:bg-emerald-50 transition flex flex-col items-center group">
+                            <span class="text-2xl mb-1 group-hover:scale-110 transition">💤</span>
                             <span class="text-[9px] font-bold text-gray-500">Wellness</span>
                         </button>
-                        <button onclick="setScenario('derma')" class="p-2 rounded-xl bg-white border border-gray-100 shadow-sm hover:border-pink-400 hover:bg-pink-50 transition flex flex-col items-center">
-                            <span class="text-2xl mb-1">🐾</span>
+                        <button onclick="setScenario('derma')" class="p-2 rounded-xl bg-white border border-gray-100 shadow-sm hover:border-pink-400 hover:bg-pink-50 transition flex flex-col items-center group">
+                            <span class="text-2xl mb-1 group-hover:scale-110 transition">🐾</span>
                             <span class="text-[9px] font-bold text-gray-500">Dermatiti</span>
                         </button>
-                        <button onclick="setScenario('danger')" class="p-2 rounded-xl bg-white border border-red-100 shadow-sm hover:bg-red-50 transition text-red-500 flex flex-col items-center">
-                            <span class="text-2xl mb-1">🚨</span>
+                        <button onclick="setScenario('danger')" class="p-2 rounded-xl bg-white border border-red-100 shadow-sm hover:bg-red-50 transition text-red-500 flex flex-col items-center group">
+                            <span class="text-2xl mb-1 group-hover:scale-110 transition">🚨</span>
                             <span class="text-[9px] font-bold">Pericolo</span>
                         </button>
                     </div>
@@ -122,7 +127,7 @@ landing_page_html = """
                     <div class="flex items-start gap-2">
                         <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-sm">🤖</div>
                         <div class="bg-gray-100 p-3 rounded-2xl rounded-tl-none text-sm text-gray-600">
-                            Ciao! Tocca uno dei pulsanti sopra per vedere come proteggo il tuo Frenchie in tempo reale.
+                            Ciao! Tocca uno dei pulsanti sopra per simulare una situazione reale.
                         </div>
                     </div>
                 </div>
@@ -166,29 +171,67 @@ landing_page_html = """
         </div>
     </section>
 
-    <section id="waitlist" class="py-24 px-6 relative">
-        <div class="max-w-3xl mx-auto text-center glass-card p-10 md:p-16 rounded-[3rem]">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">Stiamo costruendo il futuro del benessere per i Frenchie.</h2>
-            <p class="text-slate-400 text-lg mb-10">
-                Siamo una startup in fase di sviluppo. Lasciaci la tua email per seguire il viaggio.
+    <section class="py-24 px-6 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[150px] -z-10"></div>
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6 text-white">Non un semplice tracker GPS.</h2>
+            <p class="text-lg text-slate-300 leading-relaxed mb-10">
+                Offriamo un <strong>Sistema di Allerta Precoce</strong>.
+                <br>FrenchiePal unisce dati biometrici e intelligenza artificiale per darti consigli proattivi.
             </p>
-            <form class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
-                <input type="email" placeholder="La tua email migliore..." class="flex-1 bg-slate-800 border border-slate-700 rounded-full px-6 py-4 text-white placeholder-slate-500 outline-none focus:border-indigo-500 transition w-full">
-                <button type="button" class="gradient-btn px-8 py-4 rounded-full font-bold text-white shrink-0 transition-all hover:shadow-lg hover:scale-105">Tienimi aggiornato</button>
-            </form>
-            <p class="text-slate-500 text-sm mt-6">Unendoti accetti di ricevere aggiornamenti sullo sviluppo.</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700"><div class="text-2xl mb-2">🛡️</div><div class="text-xs font-bold text-slate-400">Prevenzione</div></div>
+                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700"><div class="text-2xl mb-2">🧠</div><div class="text-xs font-bold text-slate-400">AI Coach</div></div>
+                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700"><div class="text-2xl mb-2">📊</div><div class="text-xs font-bold text-slate-400">Dati Reali</div></div>
+                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700"><div class="text-2xl mb-2">❤️</div><div class="text-xs font-bold text-slate-400">Longevità</div></div>
+            </div>
         </div>
     </section>
 
-    <footer class="py-8 text-center text-slate-500 text-sm">
+    <section id="waitlist" class="py-24 px-6 relative">
+        <div class="max-w-3xl mx-auto text-center glass-card p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-700">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">Costruiamo insieme il futuro.</h2>
+            <p class="text-slate-400 text-lg mb-8">
+                Siamo in fase di sviluppo attivo. Lasciaci la tua email per ricevere aggiornamenti sul lancio della Beta.
+            </p>
+
+            <form class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
+                <input type="email" placeholder="La tua email migliore..." class="flex-1 bg-slate-900 border border-slate-700 rounded-full px-6 py-4 text-white placeholder-slate-500 outline-none focus:border-indigo-500 transition w-full shadow-inner">
+                <button type="submit" class="gradient-btn px-8 py-4 rounded-full font-bold text-white shrink-0 transition-all hover:shadow-lg hover:scale-105">
+                    Tienimi aggiornato
+                </button>
+            </form>
+            <p class="text-slate-500 text-sm mt-6">Zero spam. Solo aggiornamenti importanti.</p>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-slate-600 text-sm border-t border-slate-800/50">
         <p>© 2026 FrenchiePal Startup. Tutti i diritti riservati.</p>
     </footer>
 
     <script>
         const scenarios = {
-            wellness: { text: 'Ottima Salute', color: 'text-emerald-500', border: 'border-emerald-500', score: 98, msg: "Tutto perfetto! Stitch riposa. 🟢" },
-            derma: { text: 'Allerta Pelle', color: 'text-pink-500', border: 'border-pink-500', score: 72, msg: "⚠️ Noto che si gratta spesso l'orecchio destro. Controlla rossori." },
-            danger: { text: 'CRITICO', color: 'text-red-600', border: 'border-red-600', score: 45, msg: "🚨 STOP IMMEDIATO! Rilevati salti eccessivi e temperatura alta." }
+            wellness: { 
+                text: 'Ottima Salute', 
+                color: 'text-emerald-500', 
+                border: 'border-emerald-500', 
+                score: 98, 
+                msg: "Tutto perfetto! Stitch riposa e i parametri sono nella norma. 🟢" 
+            },
+            derma: { 
+                text: 'Allerta Pelle', 
+                color: 'text-pink-400', 
+                border: 'border-pink-400', 
+                score: 72, 
+                msg: "⚠️ Rilevato grattamento frequente all'orecchio destro. Controlla possibili arrossamenti." 
+            },
+            danger: { 
+                text: 'CRITICO', 
+                color: 'text-red-600', 
+                border: 'border-red-600', 
+                score: 45, 
+                msg: "🚨 STOP IMMEDIATO! Rilevati salti eccessivi e temperatura alta. Rischio IVDD." 
+            }
         };
 
         function setScenario(type) {
@@ -203,7 +246,7 @@ landing_page_html = """
             circle.innerText = data.score;
             circle.className = `w-12 h-12 rounded-full border-4 flex items-center justify-center font-bold ${data.color} ${data.border} bg-white transition-all duration-300`;
 
-            // Effetto Pericolo
+            // Effetto Pulsazione per Pericolo
             const frame = document.querySelector('.relative.w-\\\\[340px\\\\]');
             if(type === 'danger') {
                 frame.classList.add('pulse-danger');
@@ -218,7 +261,7 @@ landing_page_html = """
         function addMessage(text) {
             const box = document.getElementById('chat-box');
             const div = document.createElement('div');
-            div.className = "flex items-start gap-2";
+            div.className = "flex items-start gap-2 animate-fade-in";
             div.innerHTML = `<div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-sm">🤖</div><div class="bg-gray-100 p-3 rounded-2xl rounded-tl-none text-sm text-gray-600">${text}</div>`;
             box.appendChild(div);
             box.scrollTop = box.scrollHeight;
