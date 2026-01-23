@@ -292,10 +292,10 @@
                         <i class="fas fa-comments"></i> 2. Parla con l'Assistente
                     </h3>
                     <div class="glass-card p-6 rounded-2xl">
-                        <p class="text-slate-400 text-sm mb-4">Fai una domanda sulla gestione quotidiana:</p>
-                        <div class="flex gap-2">
+                        <p class="text-slate-400 text-sm mb-4">Fai una domanda o interagisci direttamente dal telefono:</p>
+                        <div class="flex gap-2 mb-2">
                             <input type="text" id="web-chat-input" placeholder="Es: Quante calorie deve mangiare?" class="flex-1 bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-indigo-500 transition">
-                            <button onclick="triggerChat()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 rounded-lg transition">
+                            <button onclick="triggerChat('web')" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 rounded-lg transition">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
@@ -311,59 +311,27 @@
                 <div id="phone-frame" class="relative w-[320px] h-[680px] bg-white rounded-[45px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-b-xl z-20"></div>
                     
-                    <div id="screen-dashboard" class="phone-screen active bg-slate-50 flex-1 relative flex flex-col">
+                    <div id="screen-dashboard" class="phone-screen active bg-slate-50 flex-1 relative">
                         <div class="pt-10 pb-4 px-6 flex justify-between items-end">
                             <div>
                                 <div class="text-[10px] font-bold text-slate-400 uppercase">Status Attuale</div>
                                 <div id="phone-status-text" class="text-2xl font-black text-emerald-500 leading-none">OTTIMO</div>
                             </div>
                         </div>
-                        
-                        <div class="flex-1 px-6 py-4 flex flex-col">
-                            <div class="flex justify-center mb-6">
-                                <div id="alert-icon-container" class="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center border-4 border-white shadow-sm transition-all duration-500">
-                                    <span id="alert-icon" class="text-4xl">🐶</span>
-                                </div>
+                        <div class="flex-1 flex flex-col items-center justify-center p-6 text-center">
+                            <div id="alert-icon-container" class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500">
+                                <span id="alert-icon" class="text-6xl">🐶</span>
                             </div>
-
-                            <div class="grid grid-cols-3 gap-2 mb-6">
-                                <div class="bg-white rounded-xl p-2 text-center border border-slate-100 shadow-sm">
-                                    <div class="text-[10px] text-slate-400 uppercase font-bold">Battito</div>
-                                    <div id="val-heart" class="text-lg font-bold text-slate-700">75 <span class="text-[10px] font-normal">bpm</span></div>
-                                </div>
-                                <div class="bg-white rounded-xl p-2 text-center border border-slate-100 shadow-sm">
-                                    <div class="text-[10px] text-slate-400 uppercase font-bold">Temp</div>
-                                    <div id="val-temp" class="text-lg font-bold text-slate-700">38.1 <span class="text-[10px] font-normal">°C</span></div>
-                                </div>
-                                <div class="bg-white rounded-xl p-2 text-center border border-slate-100 shadow-sm">
-                                    <div class="text-[10px] text-slate-400 uppercase font-bold">Attività</div>
-                                    <div id="val-act" class="text-lg font-bold text-slate-700">Bassa</div>
-                                </div>
+                            <h3 id="alert-title" class="text-lg font-bold text-slate-800 mb-2">Tutto Tranquillo</h3>
+                            <div id="alert-desc" class="text-sm text-slate-500 leading-relaxed">
+                                Stich sta riposando. Nessun rischio rilevato al momento.
                             </div>
-
-                            <div class="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex-1">
-                                <h3 id="alert-title" class="text-sm font-bold text-slate-800 mb-2">Tutto Tranquillo</h3>
-                                <div id="alert-desc" class="text-xs text-slate-500 leading-relaxed space-y-2">
-                                    Stitch sta riposando. I parametri biometrici sono nella norma. Nessun rischio rilevato al momento.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="h-16 bg-white border-t flex justify-around items-center z-30">
-                            <button onclick="switchTab('dash')" id="tab-dash" class="flex flex-col items-center text-indigo-600 transition">
-                                <i class="fas fa-heart-pulse text-xl mb-1"></i>
-                                <span class="text-[10px] font-bold">Salute</span>
-                            </button>
-                            <button onclick="switchTab('chat')" id="tab-chat" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
-                                <i class="fas fa-comments text-xl mb-1"></i>
-                                <span class="text-[10px] font-bold">Coach</span>
-                            </button>
                         </div>
                     </div>
 
-                    <div id="screen-chat" class="phone-screen bg-slate-50 flex-1 relative hidden flex-col">
+                    <div id="screen-chat" class="phone-screen bg-slate-50 flex-1 relative hidden">
                         <div class="pt-10 pb-3 px-4 bg-white border-b flex items-center gap-3">
-                            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-xs">🤖</div>
+                            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-xs">🐶</div>
                             <div>
                                 <div class="text-sm font-bold text-slate-800">Frenchie Coach</div>
                                 <div class="text-[10px] text-emerald-500 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> Online</div>
@@ -372,25 +340,30 @@
                         <div id="phone-chat-log" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50">
                             <div class="flex items-start gap-2">
                                 <div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">
-                                    Ciao! Sono qui per aiutarti con la gestione quotidiana di Stitch. Dimmi pure! 🐾
+                                    Ciao! Sono qui per aiutarti con la gestione quotidiana di Stich. Dimmi pure! 🐾
                                 </div>
                             </div>
                         </div>
-                        <div class="p-3 bg-white border-t">
-                            <div class="h-8 bg-slate-100 rounded-full px-3 flex items-center text-xs text-slate-400">Scrivi un messaggio...</div>
-                        </div>
                         
-                        <div class="h-16 bg-white border-t flex justify-around items-center z-30">
-                            <button onclick="switchTab('dash')" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
-                                <i class="fas fa-heart-pulse text-xl mb-1"></i>
-                                <span class="text-[10px] font-bold">Salute</span>
-                            </button>
-                            <button onclick="switchTab('chat')" class="flex flex-col items-center text-indigo-600 transition">
-                                <i class="fas fa-comments text-xl mb-1"></i>
-                                <span class="text-[10px] font-bold">Coach</span>
+                        <div class="p-3 bg-white border-t flex gap-2">
+                            <input type="text" id="phone-chat-input" placeholder="Scrivi a FrenchiePal..." class="flex-1 bg-slate-100 rounded-full px-3 text-xs outline-none text-slate-600">
+                            <button onclick="triggerChat('phone')" class="w-8 h-8 bg-indigo-600 hover:bg-indigo-700 rounded-full text-white flex items-center justify-center shadow-sm transition">
+                                <i class="fas fa-paper-plane text-[10px]"></i>
                             </button>
                         </div>
                     </div>
+
+                    <div class="h-16 bg-white border-t flex justify-around items-center z-30">
+                        <button onclick="switchTab('dash')" id="tab-dash" class="flex flex-col items-center text-indigo-600 transition">
+                            <i class="fas fa-heart-pulse text-xl mb-1"></i>
+                            <span class="text-[10px] font-bold">Salute</span>
+                        </button>
+                        <button onclick="switchTab('chat')" id="tab-chat" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+                            <i class="fas fa-comments text-xl mb-1"></i>
+                            <span class="text-[10px] font-bold">Coach</span>
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -466,13 +439,9 @@
         const alertTitle = document.getElementById('alert-title');
         const alertDesc = document.getElementById('alert-desc');
         
-        // Biometrics
-        const valHeart = document.getElementById('val-heart');
-        const valTemp = document.getElementById('val-temp');
-        const valAct = document.getElementById('val-act');
-        
         // Chat Elements
         const chatInputWeb = document.getElementById('web-chat-input');
+        const chatInputPhone = document.getElementById('phone-chat-input'); // Nuovo input telefono
         const chatLog = document.getElementById('phone-chat-log');
 
         // SWITCH TABS
@@ -480,11 +449,22 @@
             if(tab === 'dash') {
                 screenDash.style.display = 'flex';
                 screenChat.style.display = 'none';
+                
+                // Style Tabs
+                tabDash.classList.add('text-indigo-600');
+                tabDash.classList.remove('text-slate-400');
+                tabChat.classList.add('text-slate-400');
+                tabChat.classList.remove('text-indigo-600');
             } else {
                 screenDash.style.display = 'none';
                 screenChat.style.display = 'flex';
-                // Reset alert styling when switching to chat
                 phoneFrame.classList.remove('alert-mode-red', 'alert-mode-orange', 'alert-mode-yellow'); 
+                
+                // Style Tabs
+                tabChat.classList.add('text-indigo-600');
+                tabChat.classList.remove('text-slate-400');
+                tabDash.classList.add('text-slate-400');
+                tabDash.classList.remove('text-indigo-600');
             }
         }
 
@@ -497,17 +477,10 @@
             if(type === 'ivdd') {
                 phoneFrame.classList.add('alert-mode-red');
                 statusText.innerText = "CRITICO"; statusText.className = "text-2xl font-black text-red-500 leading-none";
-                
                 alertIcon.innerHTML = '<i class="fas fa-bone text-red-500"></i>';
                 alertIconContainer.className = "w-24 h-24 bg-red-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
-                
-                // Biometrics Update
-                valHeart.innerHTML = '140 <span class="text-[10px] font-normal">bpm</span>';
-                valTemp.innerHTML = '38.5 <span class="text-[10px] font-normal">°C</span>';
-                valAct.innerHTML = '<span class="text-red-500">Picchi</span>';
-
                 alertTitle.innerText = "ALLARME SCHIENA";
-                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2 bg-red-50 p-3 rounded-lg border border-red-100 text-red-800">
+                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
                     <li>📉 <strong>1. ATTIVITÀ ECCESSIVA:</strong> Rilevato carico anomalo sulla schiena.</li>
                     <li>⛔ <strong>2. RIPOSO ASSOLUTO:</strong> Tieni Stich fermo per il resto della giornata.</li>
                     <li>🚑 <strong>3. VETERINARIO:</strong> Se trascina le zampe o guaisce in braccio, corri subito.</li>
@@ -516,17 +489,10 @@
             else if(type === 'baos') {
                 phoneFrame.classList.add('alert-mode-orange');
                 statusText.innerText = "ALLERTA"; statusText.className = "text-2xl font-black text-orange-500 leading-none";
-                
                 alertIcon.innerHTML = '<i class="fas fa-lungs text-teal-500"></i>';
                 alertIconContainer.className = "w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
-                
-                // Biometrics Update
-                valHeart.innerHTML = '160 <span class="text-[10px] font-normal">bpm</span>';
-                valTemp.innerHTML = '39.8 <span class="text-[10px] font-normal text-red-500">°C</span>';
-                valAct.innerHTML = 'Alta';
-
                 alertTitle.innerText = "RISCHIO BAOS";
-                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2 bg-orange-50 p-3 rounded-lg border border-orange-100 text-orange-900">
+                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
                     <li>🌡️ <strong>1. CALORE ECCESSIVO:</strong> Vai subito all'ombra.</li>
                     <li>💧 <strong>2. RAFFREDDA:</strong> Acqua su zampe e pancia.</li>
                     <li>🌬️ <strong>3. RESPIRA:</strong> Calma Stich per abbassare l'affanno.</li>
@@ -535,17 +501,10 @@
             else if(type === 'derma') {
                 phoneFrame.classList.add('alert-mode-yellow');
                 statusText.innerText = "ATTENZIONE"; statusText.className = "text-2xl font-black text-pink-500 leading-none";
-                
                 alertIcon.innerHTML = '<i class="fas fa-paw text-pink-500"></i>';
                 alertIconContainer.className = "w-24 h-24 bg-pink-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500";
-                
-                // Biometrics Update
-                valHeart.innerHTML = '80 <span class="text-[10px] font-normal">bpm</span>';
-                valTemp.innerHTML = '38.2 <span class="text-[10px] font-normal">°C</span>';
-                valAct.innerHTML = 'Normale';
-
                 alertTitle.innerText = "ALERT DERMATITE";
-                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2 bg-pink-50 p-3 rounded-lg border border-pink-100 text-pink-900">
+                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
                     <li>👂 <strong>1. PRURITO ORECCHIO DX:</strong> Frequenza anomala.</li>
                     <li>🔍 <strong>2. ISPEZIONA:</strong> Cerca rossori o cattivo odore.</li>
                     <li>🧴 <strong>3. AZIONE:</strong> Pulisci con soluzione otologica.</li>
@@ -553,14 +512,25 @@
             }
         }
 
-        // TRIGGER CHAT
-        function triggerChat() {
-            const userMsg = chatInputWeb.value;
+        // TRIGGER CHAT (UNIFICATO)
+        function triggerChat(source) {
+            let userMsg = "";
+            
+            // Determina la fonte del messaggio
+            if(source === 'phone') {
+                userMsg = chatInputPhone.value;
+                chatInputPhone.value = '';
+            } else {
+                userMsg = chatInputWeb.value;
+                chatInputWeb.value = '';
+            }
+
             if(!userMsg) return;
-            switchTab('chat'); 
+            
+            // Se invio dal web, forza il cambio tab. Se dal telefono, sono già lì.
+            if(source !== 'phone') switchTab('chat'); 
             
             addChatBubble(userMsg, 'user');
-            chatInputWeb.value = '';
             
             setTimeout(() => {
                 let botReply = "Capisco. Per la gestione specifica di Stich, ti consiglio di consultare il veterinario, ma ecco cosa so...";
@@ -582,7 +552,7 @@
                 div.innerHTML = `<div class="bg-indigo-600 p-3 rounded-2xl rounded-tr-none text-xs text-white shadow-md max-w-[85%]">${text}</div>`;
             } else {
                 div.className = "flex items-start gap-2 animate-fade-in";
-                div.innerHTML = `<div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">${text}</div>`;
+                div.innerHTML = `<div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-sm flex-shrink-0">🐶</div><div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">${text}</div>`;
             }
             chatLog.appendChild(div);
             chatLog.scrollTop = chatLog.scrollHeight;
