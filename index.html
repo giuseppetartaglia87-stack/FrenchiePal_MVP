@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FrenchiePal | Il Guardian Angel del tuo Frenchie</title>
-    <meta name="description" content="L'app per la prevenzione IVDD, BAOS e dermatiti nel Bulldog Francese.">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,7 +20,7 @@
 
         /* EFFETTI GRAFICI */
         .glass-nav { 
-            background: rgba(15, 23, 42, 0.90); /* Leggermente più scuro per leggibilità */
+            background: rgba(15, 23, 42, 0.90); 
             backdrop-filter: blur(12px); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
             transition: all 0.3s ease;
@@ -41,21 +40,15 @@
         /* NAVIGATION ACTIVE STATE */
         .nav-link {
             position: relative;
-            color: #94A3B8; /* Slate 400 */
+            color: #94A3B8; 
             transition: color 0.3s ease;
         }
-        .nav-link:hover {
-            color: white;
-        }
-        /* Classe applicata via JS quando la sezione è visibile */
-        .nav-link.active {
-            color: white;
-            font-weight: 700;
-        }
+        .nav-link:hover { color: white; }
+        .nav-link.active { color: white; font-weight: 700; }
         .nav-link.active::after {
             content: '';
             position: absolute;
-            bottom: -28px; /* Posizione sotto la navbar */
+            bottom: -28px; 
             left: 0;
             width: 100%;
             height: 3px;
@@ -70,39 +63,18 @@
             -webkit-text-fill-color: transparent; 
         }
         .section-title {
-            /* Classe standard per i titoli delle sezioni */
-            font-size: 2.25rem; /* text-4xl */
-            line-height: 2.5rem;
-            font-weight: 800; /* font-extrabold */
-            color: white;
-            margin-bottom: 1.5rem; /* mb-6 */
+            font-size: 2.25rem; font-weight: 800; color: white; margin-bottom: 1.5rem; line-height: 1.2;
         }
-        @media (min-width: 768px) {
-            .section-title {
-                font-size: 3rem; /* md:text-5xl */
-                line-height: 1;
-            }
-        }
+        @media (min-width: 768px) { .section-title { font-size: 3rem; } }
 
         /* BOTTONI */
         .btn-primary {
             background: linear-gradient(135deg, #6366F1 0%, #0F766E 100%);
             transition: all 0.3s ease;
         }
-        .btn-primary:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
-        }
-        .btn-secondary {
-            border: 1px solid #475569;
-            color: #CBD5E1;
-            transition: all 0.3s ease;
-        }
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.05);
-            border-color: #94A3B8;
-            color: white;
-        }
+        .btn-primary:hover { opacity: 0.9; box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); }
+        .btn-secondary { border: 1px solid #475569; color: #CBD5E1; transition: all 0.3s ease; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: #94A3B8; color: white; }
 
         /* ANIMAZIONI SIMULATORE */
         @keyframes pulse-red {
@@ -110,17 +82,26 @@
             70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
             100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
+        /* NUOVA ANIMAZIONE GIALLA */
+        @keyframes pulse-yellow {
+            0% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(234, 179, 8, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0); }
+        }
+        
         .pulse-danger { animation: pulse-red 2s infinite; border-color: #EF4444 !important; }
         
         /* LOGICA SCHERMI TELEFONO */
         .phone-screen { display: none; height: 100%; flex-direction: column; }
         .phone-screen.active { display: flex; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        /* CLASSI ALERT DINAMICHE */
         .alert-mode { animation: pulse-red 1.5s infinite; border-color: #EF4444 !important; }
+        .alert-mode-yellow { animation: pulse-yellow 1.5s infinite; border-color: #EAB308 !important; }
 
         /* UTILITY */
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="antialiased">
@@ -131,7 +112,6 @@
                 <span class="text-3xl">🐾</span>
                 <span class="text-xl font-bold text-white tracking-tight">FrenchiePal</span>
             </div>
-
             <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#problem" class="nav-link">I Rischi</a>
@@ -140,10 +120,7 @@
                 <a href="#demo" class="nav-link">Live Demo</a>
                 <a href="#mission" class="nav-link">Mission</a>
             </div>
-
-            <a href="#waitlist" class="hidden md:block bg-white text-slate-900 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition shadow-lg">
-                Unisciti
-            </a>
+            <a href="#waitlist" class="hidden md:block bg-white text-slate-900 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition shadow-lg">Unisciti</a>
         </div>
     </nav>
 
@@ -152,7 +129,6 @@
             <div class="absolute top-20 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px]"></div>
             <div class="absolute bottom-20 right-1/4 w-96 h-96 bg-teal-600/20 rounded-full blur-[120px]"></div>
         </div>
-
         <div class="max-w-4xl mx-auto text-center z-10">
             <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-white mb-8">
                 Il tuo Frenchie è unico. <br>
@@ -164,14 +140,9 @@
             <p class="text-lg text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
                 FrenchiePal è il primo assistente intelligente dedicato alla <strong>gestione quotidiana</strong> e alla prevenzione proattiva dei rischi <strong>IVDD</strong>, <strong>BAOS</strong> e delle <strong>Dermatiti</strong>. <br>Non aspettare l'emergenza: impara a prevenirla ogni giorno.
             </p>
-            
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#waitlist" class="btn-primary px-8 py-4 rounded-full text-white font-bold text-lg shadow-xl">
-                    Unisciti alla Lista d'Attesa
-                </a>
-                <a href="#demo" class="btn-secondary px-8 py-4 rounded-full font-bold text-lg">
-                    Prova la Demo 👇
-                </a>
+                <a href="#waitlist" class="btn-primary px-8 py-4 rounded-full text-white font-bold text-lg shadow-xl">Unisciti alla Lista d'Attesa</a>
+                <a href="#demo" class="btn-secondary px-8 py-4 rounded-full font-bold text-lg">Prova la Demo 👇</a>
             </div>
         </div>
     </section>
@@ -182,34 +153,25 @@
                 <h2 class="section-title">Perché amare un Frenchie significa gestirne le fragilità.</h2>
                 <p class="text-lg text-slate-400">Il Bulldog Francese è un compagno straordinario, ma la sua genetica nasconde <strong>tre nemici silenziosi</strong> che ogni proprietario deve conoscere.</p>
             </div>
-
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="glass-card p-8 rounded-3xl border-t-4 border-t-red-500">
-                    <div class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400 text-3xl mb-6">
-                        <i class="fas fa-bone"></i>
-                    </div>
+                    <div class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400 text-3xl mb-6"><i class="fas fa-bone"></i></div>
                     <h3 class="text-xl font-bold text-white mb-2">Il Nemico della Schiena (IVDD)</h3>
                     <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">Cos'è:</p>
                     <p class="text-slate-300 mb-4 text-sm leading-relaxed">L'Ernia del Disco Intervertebrale (IVDD) è la prima causa di paralisi nei Frenchie. I loro dischi spinali invecchiano precocemente, indurendosi.</p>
                     <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">L'Impatto:</p>
                     <p class="text-slate-300 text-sm leading-relaxed">Un salto sbagliato dal divano o scale fatte di corsa possono trasformarsi in un trauma improvviso, portando a dolore acuto, costi chirurgici elevati e lunghe riabilitazioni.</p>
                 </div>
-
                 <div class="glass-card p-8 rounded-3xl border-t-4 border-t-teal-500">
-                    <div class="w-16 h-16 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-400 text-3xl mb-6">
-                        <i class="fas fa-lungs"></i>
-                    </div>
+                    <div class="w-16 h-16 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-400 text-3xl mb-6"><i class="fas fa-lungs"></i></div>
                     <h3 class="text-xl font-bold text-white mb-2">Il Nemico del Respiro (BAOS)</h3>
                     <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">Cos'è:</p>
                     <p class="text-slate-300 mb-4 text-sm leading-relaxed">La Sindrome Ostruttiva delle Vie Aeree Brachicefale (BAOS) non è solo "russare forte". È una costante fatica respiratoria.</p>
                     <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">L'Impatto:</p>
                     <p class="text-slate-300 text-sm leading-relaxed">Il caldo e l'esercizio eccessivo possono diventare letali in pochi minuti. Un cane che fatica a raffreddarsi è un cane costantemente sotto stress.</p>
                 </div>
-
                 <div class="glass-card p-8 rounded-3xl border-t-4 border-t-pink-500">
-                    <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-400 text-3xl mb-6">
-                        <i class="fas fa-paw"></i>
-                    </div>
+                    <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-400 text-3xl mb-6"><i class="fas fa-paw"></i></div>
                     <h3 class="text-xl font-bold text-white mb-2">Il Nemico della Pelle</h3>
                     <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">Cos'è:</p>
                     <p class="text-slate-300 mb-4 text-sm leading-relaxed">La cute delicata e le pieghe caratteristiche sono il terreno ideale per infezioni, funghi e allergie alimentari o ambientali.</p>
@@ -222,7 +184,6 @@
 
     <section id="solution" class="py-24 px-6 relative overflow-hidden">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[150px] -z-10"></div>
-
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20 max-w-3xl mx-auto">
                 <h2 class="section-title">
@@ -233,46 +194,26 @@
                     Le soluzioni generiche ti dicono <em>quanto</em> si è mosso il tuo cane. FrenchiePal ti dice <em>come</em> si è mosso, se è al sicuro e come sta davvero. <br>Abbiamo unito tecnologia e scienza veterinaria per darti il controllo che ti mancava.
                 </p>
             </div>
-
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="glass-card p-6 rounded-3xl text-center">
-                    <div class="w-16 h-16 mx-auto bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 text-2xl mb-4">
-                        <i class="fas fa-shield-dog"></i>
-                    </div>
+                    <div class="w-16 h-16 mx-auto bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 text-2xl mb-4"><i class="fas fa-shield-dog"></i></div>
                     <h3 class="text-lg font-bold text-white mb-2">1. IVDD Shield</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Analizziamo la qualità del movimento, non solo la quantità. Monitoriamo i salti pericolosi per preservare la colonna vertebrale.
-                    </p>
+                    <p class="text-sm text-slate-400 leading-relaxed">Analizziamo la qualità del movimento, non solo la quantità. Monitoriamo i salti pericolosi per preservare la colonna vertebrale.</p>
                 </div>
-
                 <div class="glass-card p-6 rounded-3xl text-center">
-                    <div class="w-16 h-16 mx-auto bg-teal-500/20 rounded-full flex items-center justify-center text-teal-400 text-2xl mb-4">
-                        <i class="fas fa-temperature-arrow-up"></i>
-                    </div>
+                    <div class="w-16 h-16 mx-auto bg-teal-500/20 rounded-full flex items-center justify-center text-teal-400 text-2xl mb-4"><i class="fas fa-temperature-arrow-up"></i></div>
                     <h3 class="text-lg font-bold text-white mb-2">2. Airway Guard</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Incrociamo temperatura e attività. Ti avvisiamo quando l'ambiente diventa rischioso per un brachicefalo prima dell'affanno.
-                    </p>
+                    <p class="text-sm text-slate-400 leading-relaxed">Incrociamo temperatura e attività. Ti avvisiamo quando l'ambiente diventa rischioso per un brachicefalo prima dell'affanno.</p>
                 </div>
-
                 <div class="glass-card p-6 rounded-3xl text-center">
-                    <div class="w-16 h-16 mx-auto bg-pink-500/20 rounded-full flex items-center justify-center text-pink-400 text-2xl mb-4">
-                        <i class="fas fa-hand-dots"></i>
-                    </div>
+                    <div class="w-16 h-16 mx-auto bg-pink-500/20 rounded-full flex items-center justify-center text-pink-400 text-2xl mb-4"><i class="fas fa-hand-dots"></i></div>
                     <h3 class="text-lg font-bold text-white mb-2">3. Derma Care</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Monitoraggio mirato per pruriti e arrossamenti. Prevenzione attiva per evitare che un fastidio diventi un'otite o dermatite cronica.
-                    </p>
+                    <p class="text-sm text-slate-400 leading-relaxed">Monitoraggio mirato per pruriti e arrossamenti. Prevenzione attiva per evitare che un fastidio diventi un'otite o dermatite cronica.</p>
                 </div>
-
                 <div class="glass-card p-6 rounded-3xl text-center border-t border-indigo-500/30">
-                    <div class="w-16 h-16 mx-auto bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400 text-2xl mb-4">
-                        <i class="fas fa-wand-magic-sparkles"></i>
-                    </div>
+                    <div class="w-16 h-16 mx-auto bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400 text-2xl mb-4"><i class="fas fa-wand-magic-sparkles"></i></div>
                     <h3 class="text-lg font-bold text-white mb-2">4. Smart Assistant</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Un assistente smart ed empatico che impara dal tuo Bullo specifico. Risponde a ogni domanda, dalla dieta alla gestione dello stress.
-                    </p>
+                    <p class="text-sm text-slate-400 leading-relaxed">Un assistente smart ed empatico che impara dal tuo Bullo specifico. Risponde a ogni domanda, dalla dieta alla gestione dello stress.</p>
                 </div>
             </div>
         </div>
@@ -284,7 +225,6 @@
                 <h2 class="section-title">Dalla preoccupazione all'azione in 3 step.</h2>
                 <p class="text-slate-400">Semplifichiamo la tecnologia.</p>
             </div>
-
             <div class="grid md:grid-cols-3 gap-8 text-center">
                 <div class="relative">
                     <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-6 z-10 relative">1</div>
@@ -292,14 +232,12 @@
                     <h3 class="text-xl font-bold text-white mb-3">Monitora</h3>
                     <p class="text-slate-400 leading-relaxed px-4">L'app impara le abitudini del tuo Frenchie e tiene traccia dei fattori di rischio ambientali e dei sintomi quotidiani.</p>
                 </div>
-
                 <div class="relative">
                     <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-6 z-10 relative">2</div>
                     <div class="hidden md:block absolute top-6 left-1/2 w-full h-1 bg-slate-800 -z-0"></div>
                     <h3 class="text-xl font-bold text-white mb-3">Interagisci</h3>
                     <p class="text-slate-400 leading-relaxed px-4">Chiedi consiglio all'Assistente Smart. Ricevi risposte immediate ed empatiche basate sui dati del tuo cane.</p>
                 </div>
-
                 <div class="relative">
                     <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-6 z-10 relative">3</div>
                     <h3 class="text-xl font-bold text-white mb-3">Agisci</h3>
@@ -317,7 +255,7 @@
             <div class="order-2 lg:order-1">
                 <h2 class="section-title">Test Drive Interattivo</h2>
                 <p class="text-lg text-slate-400 mb-10">
-                    Prova le due anime di FrenchiePal: il sistema di <strong>Allerta Proattiva</strong> e l'<strong>Assistente Smart</strong>. Clicca sui bottoni per vedere la reazione sul telefono.
+                    Prova le due anime di FrenchiePal: il sistema di <strong>Allerta Proattiva</strong> e l'<strong>Assistente Smart</strong>.
                 </p>
 
                 <div class="mb-10">
@@ -326,19 +264,24 @@
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <button onclick="triggerAlert('ivdd')" class="glass-card p-4 rounded-xl text-left hover:bg-red-500/10 group transition-all cursor-pointer">
-                            <div class="text-red-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">🦴</div>
+                            <div class="text-red-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
+                                <i class="fas fa-bone"></i>
+                            </div>
                             <div class="font-bold text-white text-sm">Rischio IVDD</div>
-                            <div class="text-xs text-slate-500">Salto rilevato</div>
                         </button>
-                        <button onclick="triggerAlert('baos')" class="glass-card p-4 rounded-xl text-left hover:bg-orange-500/10 group transition-all cursor-pointer">
-                            <div class="text-orange-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">🫁</div>
+                        
+                        <button onclick="triggerAlert('baos')" class="glass-card p-4 rounded-xl text-left hover:bg-teal-500/10 group transition-all cursor-pointer">
+                            <div class="text-teal-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
+                                <i class="fas fa-lungs"></i>
+                            </div>
                             <div class="font-bold text-white text-sm">Rischio Calore</div>
-                            <div class="text-xs text-slate-500">Temp. Alta</div>
                         </button>
+                        
                         <button onclick="triggerAlert('derma')" class="glass-card p-4 rounded-xl text-left hover:bg-pink-500/10 group transition-all cursor-pointer">
-                            <div class="text-pink-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">🐾</div>
+                            <div class="text-pink-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
+                                <i class="fas fa-paw"></i>
+                            </div>
                             <div class="font-bold text-white text-sm">Check Pelle</div>
-                            <div class="text-xs text-slate-500">Grattamento</div>
                         </button>
                     </div>
                 </div>
@@ -373,17 +316,14 @@
                                 <div class="text-[10px] font-bold text-slate-400 uppercase">Status Attuale</div>
                                 <div id="phone-status-text" class="text-2xl font-black text-emerald-500 leading-none">OTTIMO</div>
                             </div>
-                            <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-sm">98</div>
-                        </div>
-                        
+                            </div>
                         <div class="flex-1 flex flex-col items-center justify-center p-6 text-center">
                             <div id="alert-icon-container" class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500">
                                 <span id="alert-icon" class="text-6xl">🐶</span>
                             </div>
                             <h3 id="alert-title" class="text-lg font-bold text-slate-800 mb-2">Tutto Tranquillo</h3>
-                            <p id="alert-desc" class="text-sm text-slate-500">Stitch sta riposando. Nessun rischio rilevato al momento.</p>
+                            <p id="alert-desc" class="text-sm text-slate-500 leading-relaxed">Stitch sta riposando. Nessun rischio rilevato al momento.</p>
                         </div>
-
                         <div class="h-16 bg-white border-t flex justify-around items-center text-slate-300 text-xl">
                             <i class="fas fa-home text-indigo-600"></i>
                             <i class="fas fa-chart-bar"></i>
@@ -399,7 +339,6 @@
                                 <div class="text-[10px] text-emerald-500 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> Online</div>
                             </div>
                         </div>
-
                         <div id="phone-chat-log" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50">
                             <div class="flex items-start gap-2">
                                 <div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">
@@ -407,12 +346,10 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="p-3 bg-white border-t">
                             <div class="h-8 bg-slate-100 rounded-full px-3 flex items-center text-xs text-slate-400">Scrivi un messaggio...</div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -458,7 +395,6 @@
 
         window.addEventListener("scroll", () => {
             let current = "";
-            
             sections.forEach((section) => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
@@ -476,94 +412,97 @@
         });
 
         /* 2. DEMO LOGIC */
-        // ELEMENTI DOM
         const phoneFrame = document.getElementById('phone-frame');
         const screenDash = document.getElementById('screen-dashboard');
         const screenChat = document.getElementById('screen-chat');
-        
-        // ELEMENTI DASHBOARD
         const statusText = document.getElementById('phone-status-text');
         const alertIconContainer = document.getElementById('alert-icon-container');
         const alertIcon = document.getElementById('alert-icon');
         const alertTitle = document.getElementById('alert-title');
         const alertDesc = document.getElementById('alert-desc');
-
-        // ELEMENTI CHAT
         const chatInputWeb = document.getElementById('web-chat-input');
         const chatLog = document.getElementById('phone-chat-log');
 
-        // FUNZIONE: ATTIVA ALLARMI (Sezione 1)
         function triggerAlert(type) {
-            // Mostra Dashboard, nascondi Chat
-            screenDash.style.display = 'flex';
-            screenChat.style.display = 'none';
-            
-            // Reset animazione
+            screenDash.style.display = 'flex'; screenChat.style.display = 'none';
             phoneFrame.classList.remove('alert-mode');
-            void phoneFrame.offsetWidth; // trigger reflow
+            phoneFrame.classList.remove('alert-mode-yellow');
+            void phoneFrame.offsetWidth;
 
             if(type === 'ivdd') {
                 phoneFrame.classList.add('alert-mode');
-                statusText.innerText = "CRITICO";
-                statusText.className = "text-2xl font-black text-red-500 leading-none";
-                alertIcon.innerText = "🚨";
+                statusText.innerText = "CRITICO"; statusText.className = "text-2xl font-black text-red-500 leading-none";
+                
+                // Icona Osso Rossa
+                alertIcon.innerHTML = '<i class="fas fa-bone text-red-500"></i>';
                 alertIconContainer.className = "w-32 h-32 bg-red-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
-                alertTitle.innerText = "STOP IMMEDIATO!";
-                alertDesc.innerText = "Rilevati salti eccessivi. Rischio trauma spinale (IVDD). Metti il cane a riposo.";
+                
+                alertTitle.innerText = "ALLARME IVDD";
+                // Contromisure Dettagliate
+                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
+                    <li>🛑 <strong>1. STOP ATTIVITÀ:</strong> Immobilizza subito il cane.</li>
+                    <li>🛏️ <strong>2. RIPOSO:</strong> Mettilo in gabbia/kennel.</li>
+                    <li>🚑 <strong>3. VETERINARIO:</strong> Se trascina le zampe, vai subito.</li>
+                </ul>`;
             } 
             else if(type === 'baos') {
-                phoneFrame.classList.add('alert-mode'); // Usa lo stesso rosso o arancione
-                statusText.innerText = "ALLERTA";
-                statusText.className = "text-2xl font-black text-orange-500 leading-none";
-                alertIcon.innerText = "🥵";
-                alertIconContainer.className = "w-32 h-32 bg-orange-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
-                alertTitle.innerText = "Rischio Calore";
-                alertDesc.innerText = "Respiro affannoso rilevato + Temp esterna alta. Interrompi la passeggiata.";
-            }
+                phoneFrame.classList.add('alert-mode');
+                statusText.innerText = "ALLERTA"; statusText.className = "text-2xl font-black text-teal-500 leading-none";
+                
+                // Icona Polmoni Verde Acqua
+                alertIcon.innerHTML = '<i class="fas fa-lungs text-teal-500"></i>';
+                alertIconContainer.className = "w-32 h-32 bg-teal-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
+                
+                alertTitle.innerText = "RISCHIO BAOS";
+                // Contromisure Dettagliate
+                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
+                    <li>🌡️ <strong>1. CALORE ECCESSIVO:</strong> Vai all'ombra.</li>
+                    <li>💧 <strong>2. RAFFREDDA:</strong> Acqua su zampe e pancia.</li>
+                    <li>🌬️ <strong>3. RESPIRA:</strong> Calma il cane per abbassare l'affanno.</li>
+                </ul>`;
+            } 
             else if(type === 'derma') {
-                phoneFrame.classList.remove('alert-mode'); // Niente pulsazione rossa, ma avviso
-                statusText.innerText = "ATTENZIONE";
-                statusText.className = "text-2xl font-black text-pink-500 leading-none";
-                alertIcon.innerText = "👂";
+                phoneFrame.classList.add('alert-mode-yellow'); // Giallo
+                statusText.innerText = "ATTENZIONE"; statusText.className = "text-2xl font-black text-pink-500 leading-none";
+                
+                // Icona Zampa Rosa
+                alertIcon.innerHTML = '<i class="fas fa-paw text-pink-500"></i>';
                 alertIconContainer.className = "w-32 h-32 bg-pink-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500";
-                alertTitle.innerText = "Fastidio Rilevato";
-                alertDesc.innerText = "Si sta grattando l'orecchio destro frequentemente. Controlla possibili rossori.";
+                
+                alertTitle.innerText = "ALERT DERMATITE";
+                // Contromisure Dettagliate
+                alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
+                    <li>👂 <strong>1. PRURITO ORECCHIO DX:</strong> Frequenza anomala.</li>
+                    <li>🔍 <strong>2. ISPEZIONA:</strong> Cerca rossori o cattivo odore.</li>
+                    <li>🧴 <strong>3. AZIONE:</strong> Pulisci con soluzione otologica.</li>
+                </ul>`;
             }
         }
 
-        // FUNZIONE: ATTIVA CHAT (Sezione 2)
         function triggerChat() {
             const userMsg = chatInputWeb.value;
             if(!userMsg) return;
-
-            // Switch to Chat Screen
-            screenDash.style.display = 'none';
-            screenChat.style.display = 'flex';
-            phoneFrame.classList.remove('alert-mode'); // Stop alert blinking
-
-            // Add User Bubble
+            screenDash.style.display = 'none'; screenChat.style.display = 'flex';
+            phoneFrame.classList.remove('alert-mode');
+            phoneFrame.classList.remove('alert-mode-yellow');
             addChatBubble(userMsg, 'user');
             chatInputWeb.value = '';
-
-            // Simulate Bot Response
+            
             setTimeout(() => {
-                let botReply = "Capisco. Per la gestione specifica di questo aspetto, ti consiglio di consultare il veterinario, ma posso dirti che per i Bulldog Francesi è comune.";
-                
+                let botReply = "Capisco. Per la gestione specifica di questo aspetto, ti consiglio di consultare il veterinario, ma ecco cosa so...";
                 if(userMsg.toLowerCase().includes('calori') || userMsg.toLowerCase().includes('mangia')) {
-                    botReply = "Per un Frenchie adulto medio, l'apporto calorico ideale è tra 25-30 calorie per libbra di peso. Hai notato aumenti di peso recenti? È cruciale per la schiena.";
+                    botReply = "Per un Frenchie adulto, controlla sempre il peso per evitare stress sulla schiena. Circa 25-30 calorie per libbra.";
                 } else if (userMsg.toLowerCase().includes('piegh') || userMsg.toLowerCase().includes('puli')) {
-                    botReply = "Le pieghe vanno pulite ogni giorno con una salvietta delicata e asciugate bene per evitare funghi. Vuoi che ti imposti un promemoria alle 20:00?";
+                    botReply = "Le pieghe vanno pulite ogni giorno e asciugate bene per evitare funghi. Vuoi un promemoria?";
                 } else if (userMsg.toLowerCase().includes('russa')) {
-                    botReply = "Se russa *molto* forte anche da sveglio, potrebbe essere un segno di BAOS. Monitoriamo il respiro durante la prossima passeggiata.";
+                    botReply = "Se russa molto anche da sveglio, attenzione. Potrebbe essere un segno di BAOS.";
                 }
-
                 addChatBubble(botReply, 'bot');
             }, 1000);
         }
 
         function addChatBubble(text, sender) {
             const div = document.createElement('div');
-            
             if(sender === 'user') {
                 div.className = "flex items-center justify-end gap-2";
                 div.innerHTML = `<div class="bg-indigo-600 p-3 rounded-2xl rounded-tr-none text-xs text-white shadow-md max-w-[85%]">${text}</div>`;
@@ -571,14 +510,11 @@
                 div.className = "flex items-start gap-2 animate-fade-in";
                 div.innerHTML = `<div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">${text}</div>`;
             }
-            
             chatLog.appendChild(div);
             chatLog.scrollTop = chatLog.scrollHeight;
         }
 
-        function fillChat(text) {
-            chatInputWeb.value = text;
-        }
+        function fillChat(text) { chatInputWeb.value = text; }
     </script>
 </body>
 </html>
