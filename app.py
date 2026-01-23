@@ -1,300 +1,216 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# --- CONFIGURAZIONE SERVER ---
-st.set_page_config(page_title="FrenchiePal", page_icon="🐾", layout="wide")
-
-# Nascondiamo l'interfaccia standard di Streamlit per sembrare un vero sito
+# --- CONFIGURAZIONE PAGINA STREAMLIT ---
+# Impostiamo il layout su "wide" e nascondiamo l'interfaccia nativa di Streamlit
+st.set_page_config(page_title="FrenchiePal - The French Bulldog Guardian", page_icon="🐾", layout="wide")
 st.markdown("""
 <style>
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
+    /* Rimuove i margini bianchi standard di Streamlit */
     .block-container {padding: 0 !important; max-width: 100% !important;}
 </style>
 """, unsafe_allow_html=True)
 
-# --- RECUPERO CHIAVI DAI SECRETS (Streamlit Cloud) ---
-# Assicurati che su Streamlit Cloud i secrets siano impostati!
-try:
-    SUPABASE_URL = st.secrets["supabase"]["url"]
-    SUPABASE_KEY = st.secrets["supabase"]["key"]
-    OPENAI_KEY = st.secrets["openai"]["key"]
-except:
-    # Fallback per evitare crash se non hai ancora messo le chiavi
-    SUPABASE_URL = ""
-    SUPABASE_KEY = ""
-    OPENAI_KEY = ""
-
-# --- IL SITO WEB COMPLETO (HTML + TAILWIND + JS) ---
-# Questo è un "sito dentro il sito". Grafica al 100% personalizzata.
-website_code = f"""
+# --- CODICE HTML/TAILWIND DELLA LANDING PAGE ---
+landing_page_html = """
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FrenchiePal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        body {{ font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0F172A; color: white; }}
-        .glass-panel {{ background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }}
-        .gradient-text {{ background: linear-gradient(135deg, #A78BFA 0%, #34D399 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }}
-        
-        /* Animazione pulsante pericolo */
-        @keyframes pulse-red {{
-            0% {{ box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }}
-            70% {{ box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }}
-            100% {{ box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }}
-        }}
-        .pulse-danger {{ animation: pulse-red 2s infinite; border-color: #EF4444 !important; }}
-        
-        /* Scrollbar nascosta per la chat */
-        .no-scrollbar::-webkit-scrollbar {{ display: none; }}
-        .no-scrollbar {{ -ms-overflow-style: none; scrollbar-width: none; }}
+        /* Impostazioni Base di Stile */
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0F172A; /* Sfondo Scuro (Slate 900) */
+            color: #E2E8F0; /* Testo Chiaro (Slate 200) */
+            overflow-x: hidden;
+        }
+        /* Effetto Vetro (Glassmorphism) per le card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Testo con Gradiente */
+        .gradient-text {
+            background: linear-gradient(135deg, #818CF8 0%, #2DD4BF 100%); /* Indigo to Teal */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        /* Bottone con Gradiente */
+        .gradient-btn {
+            background: linear-gradient(135deg, #6366F1 0%, #14B8A6 100%);
+        }
+        .gradient-btn:hover {
+            background: linear-gradient(135deg, #4F46E5 0%, #0D9488 100%);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+        }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body>
 
-    <nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center text-2xl shadow-lg shadow-indigo-500/20">🐶</div>
-            <span class="text-xl font-bold tracking-tight">FrenchiePal</span>
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-card border-t-0 border-r-0 border-l-0 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-3xl">🐾</span>
+                <span class="text-xl font-bold tracking-tight text-white">FrenchiePal</span>
+            </div>
+            <a href="#waitlist" class="hidden md:inline-block px-6 py-2.5 text-sm font-bold bg-white text-slate-900 rounded-full hover:bg-slate-200 transition shadow-lg">
+                Unisciti alla Lista d'Attesa
+            </a>
         </div>
-        <button onclick="document.getElementById('waitlist-section').scrollIntoView({{behavior: 'smooth'}})" class="bg-white text-slate-900 px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
-            Pre-ordina
-        </button>
     </nav>
 
-    <div class="flex flex-col lg:flex-row items-center justify-between max-w-7xl mx-auto px-6 py-10 gap-12">
-        
-        <div class="lg:w-1/2 space-y-8 z-10">
-            <div class="inline-block px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-sm font-semibold mb-4">
-                🚀 MVP Live Demo
+    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute top-20 left-0 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px] -z-10"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-teal-600/20 rounded-full blur-[120px] -z-10"></div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-slate-800 border border-slate-700 text-sm font-medium text-indigo-300">
+                🚀 Startup in sviluppo
             </div>
-            <h1 class="text-5xl lg:text-7xl font-extrabold leading-tight">
-                Il Guardian Angel <br>
-                <span class="gradient-text">del tuo Frenchie.</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-white">
+                Il tuo Frenchie è unico. <br>
+                <span class="gradient-text">Anche i suoi rischi lo sono.</span>
             </h1>
-            <p class="text-slate-400 text-lg leading-relaxed max-w-lg">
-                L'unico ecosistema AI che previene i rischi vitali (IVDD, BAOS) e gestisce il benessere quotidiano. 
-                <br><br>
-                <strong class="text-white">Non crederci sulla parola. Provalo qui a destra. 👉</strong>
+            <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Proteggi la sua schiena e il suo respiro prima che sia tardi. 
+                FrenchiePal è il primo assistente intelligente dedicato alla gestione proattiva dei rischi IVDD e BAOS.
             </p>
-            
-            <div class="flex gap-4 pt-4">
-                <div class="glass-panel p-4 rounded-2xl flex items-center gap-3">
-                    <i class="fas fa-bone text-indigo-400 text-xl"></i>
-                    <div>
-                        <div class="text-xs text-slate-400 uppercase font-bold">Protezione</div>
-                        <div class="font-bold">IVDD Shield</div>
+            <a href="#waitlist" class="gradient-btn inline-flex items-center px-8 py-4 rounded-full text-lg font-bold text-white transition-all transform hover:scale-105">
+                Tienimi aggiornato sugli sviluppi
+                <i class="fas fa-arrow-right ml-3"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 bg-slate-900/50">
+        <div class="max-w-6xl mx-auto relative">
+             <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Amare un Frenchie significa gestirne le fragilità.</h2>
+                <p class="text-slate-400 max-w-xl mx-auto">La loro genetica nasconde due nemici silenziosi che ogni proprietario deve conoscere. L'ignoranza è il rischio maggiore.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card p-8 rounded-3xl border-red-500/20 hover:border-red-500/40 transition relative overflow-hidden">
+                    <div class="absolute top-0 right-0 -mt-10 -mr-10 w-32 h-32 bg-red-500/10 rounded-full blur-3xl"></div>
+                    <div class="w-14 h-14 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-400 text-2xl mb-6">
+                        <i class="fas fa-bone"></i>
                     </div>
+                    <h3 class="text-2xl font-bold mb-3 text-white">Il Nemico della Schiena (IVDD)</h3>
+                    <p class="text-slate-400 mb-4">
+                        I loro dischi spinali invecchiano precocemente. Un salto sbagliato dal divano non è solo un gioco, può trasformarsi in un trauma improvviso con conseguenze gravi e costose.
+                    </p>
+                    <div class="inline-block px-3 py-1 rounded-lg bg-red-500/10 text-red-300 text-sm font-bold">Rischio Paralisi</div>
                 </div>
-                <div class="glass-panel p-4 rounded-2xl flex items-center gap-3">
-                    <i class="fas fa-lungs text-emerald-400 text-xl"></i>
-                    <div>
-                        <div class="text-xs text-slate-400 uppercase font-bold">Monitoraggio</div>
-                        <div class="font-bold">Airway Guard</div>
+
+                <div class="glass-card p-8 rounded-3xl border-orange-500/20 hover:border-orange-500/40 transition relative overflow-hidden">
+                     <div class="absolute top-0 right-0 -mt-10 -mr-10 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl"></div>
+                    <div class="w-14 h-14 bg-orange-500/20 rounded-2xl flex items-center justify-center text-orange-400 text-2xl mb-6">
+                        <i class="fas fa-lungs"></i>
                     </div>
+                    <h3 class="text-2xl font-bold mb-3 text-white">Il Nemico del Respiro (BAOS)</h3>
+                    <p class="text-slate-400 mb-4">
+                        "Russare forte" non è carino, è fatica respiratoria. Il caldo e l'esercizio eccessivo possono diventare letali in pochi minuti per un cane che fatica a raffreddarsi.
+                    </p>
+                    <div class="inline-block px-3 py-1 rounded-lg bg-orange-500/10 text-orange-300 text-sm font-bold">Rischio Colpo di Calore</div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="lg:w-1/2 flex justify-center relative">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-600 rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
+    <section class="py-24 px-6 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/10 rounded-full blur-[150px] -z-10"></div>
 
-            <div class="relative w-[360px] h-[720px] bg-white rounded-[45px] border-8 border-slate-900 shadow-2xl overflow-hidden flex flex-col z-20">
-                
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-xl z-30"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-6 text-white">
+                    Non un semplice monitoraggio. <br>
+                    Un <span class="gradient-text">Consulente Proattivo.</span>
+                </h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">Le soluzioni generiche ti dicono <em>quanto</em> si è mosso. Noi ti diciamo <em>come</em> si è mosso e se è al sicuro.</p>
+            </div>
 
-                <div class="bg-slate-50 pt-10 pb-4 px-6 flex justify-between items-center border-b border-gray-100">
-                    <div>
-                        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider">Status</div>
-                        <div id="status-text" class="text-lg font-extrabold text-gray-800">In Attesa...</div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl text-center group hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-20 h-20 mx-auto bg-indigo-500/20 rounded-3xl flex items-center justify-center text-indigo-400 text-3xl mb-8 group-hover:scale-110 transition">
+                        <i class="fas fa-shield-dog"></i>
                     </div>
-                    <div id="score-circle" class="w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center font-bold text-gray-400 transition-all duration-500">
-                        --
-                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-white">1. IVDD Shield</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Analizziamo la <strong>qualità</strong> del movimento. Monitoriamo l'impatto dei salti verticali per preservare la sua colonna vertebrale negli anni.
+                    </p>
                 </div>
 
-                <div class="p-4 grid grid-cols-3 gap-2 bg-slate-50">
-                    <button onclick="setScenario('wellness')" class="p-3 rounded-xl bg-white border border-gray-100 shadow-sm hover:border-emerald-400 hover:bg-emerald-50 transition group">
-                        <div class="text-2xl mb-1 group-hover:scale-110 transition">💤</div>
-                        <div class="text-[10px] font-bold text-gray-500 uppercase">Wellness</div>
-                    </button>
-                    <button onclick="setScenario('derma')" class="p-3 rounded-xl bg-white border border-gray-100 shadow-sm hover:border-orange-400 hover:bg-orange-50 transition group">
-                        <div class="text-2xl mb-1 group-hover:scale-110 transition">🐾</div>
-                        <div class="text-[10px] font-bold text-gray-500 uppercase">Derma</div>
-                    </button>
-                    <button onclick="setScenario('danger')" class="p-3 rounded-xl bg-white border border-red-100 shadow-sm hover:bg-red-50 transition group text-red-500">
-                        <div class="text-2xl mb-1 group-hover:scale-110 transition">🚨</div>
-                        <div class="text-[10px] font-bold uppercase">Pericolo</div>
-                    </button>
+                <div class="glass-card p-8 rounded-3xl text-center group hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-20 h-20 mx-auto bg-teal-500/20 rounded-3xl flex items-center justify-center text-teal-400 text-3xl mb-8 group-hover:scale-110 transition">
+                        <i class="fas fa-temperature-arrow-up"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-white">2. Airway Guard</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Incrociamo temperatura esterna e attività. Ti avvisiamo quando l'ambiente diventa rischioso per un brachicefalo prima che vada in affanno.
+                    </p>
                 </div>
 
-                <div id="chat-box" class="flex-1 bg-white p-4 overflow-y-auto no-scrollbar space-y-3">
-                    <div class="flex items-start gap-2">
-                        <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-sm">🤖</div>
-                        <div class="bg-gray-100 p-3 rounded-2xl rounded-tl-none text-sm text-gray-600">
-                            Ciao! Tocca uno dei pulsanti sopra per simulare una situazione reale.
-                        </div>
+                <div class="glass-card p-8 rounded-3xl text-center group hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-20 h-20 mx-auto bg-purple-500/20 rounded-3xl flex items-center justify-center text-purple-400 text-3xl mb-8 group-hover:scale-110 transition">
+                        <i class="fas fa-brain"></i>
                     </div>
-                </div>
-
-                <div class="p-4 bg-gray-50 border-t border-gray-100">
-                    <div class="flex gap-2">
-                        <input type="text" id="user-input" placeholder="Chiedi al coach..." class="flex-1 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm outline-none focus:border-indigo-500 text-gray-800">
-                        <button onclick="sendMessage()" class="w-10 h-10 bg-indigo-600 rounded-full text-white flex items-center justify-center shadow-md hover:bg-indigo-700 transition">
-                            <i class="fas fa-paper-plane text-xs"></i>
-                        </button>
-                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-white">3. Longevity Coach</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Un'IA verticale sulla razza per la gestione quotidiana: controllo del peso, gestione dello stress e dermatiti. Consigli su misura, ogni giorno.
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="waitlist-section" class="max-w-3xl mx-auto text-center py-20 px-6">
-        <h2 class="text-3xl font-bold mb-4">Pronto per il lancio?</h2>
-        <p class="text-slate-400 mb-8">Unisciti agli altri 2.400 proprietari in lista d'attesa.</p>
-        <div class="flex gap-2 max-w-md mx-auto">
-            <input type="email" id="email-input" placeholder="tua@email.com" class="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white outline-none focus:border-indigo-500">
-            <button onclick="saveLead()" class="bg-white text-slate-900 font-bold px-6 rounded-lg hover:bg-gray-200 transition">ISCRIVITI</button>
+    <section class="py-20 px-6 bg-slate-900/50 border-y border-slate-800/50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6 text-white">Perché un'app solo per i Bulldog Francesi?</h2>
+            <p class="text-lg text-slate-300 leading-relaxed mb-8">
+                Perché un Pastore Tedesco non rischia la paralisi saltando giù dal letto. Il tuo Frenchie sì.
+                <br>Le app generiche trattano tutti i cani allo stesso modo. Noi crediamo che una razza speciale meriti una protezione specializzata.
+            </p>
+            <div class="text-5xl">🐾</div>
         </div>
-        <p id="lead-status" class="mt-4 text-sm text-emerald-400 hidden">🎉 Sei dentro! Ti aggiorneremo.</p>
-    </div>
+    </section>
 
-    <script>
-        // --- 1. CONFIGURAZIONE CHIAVI (INJECTED DA PYTHON) ---
-        const SUPABASE_URL = "{SUPABASE_URL}";
-        const SUPABASE_KEY = "{SUPABASE_KEY}";
-        const OPENAI_KEY = "{OPENAI_KEY}";
+    <section id="waitlist" class="py-24 px-6 relative">
+        <div class="max-w-3xl mx-auto text-center glass-card p-10 md:p-16 rounded-[3rem]">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">Stiamo costruendo il futuro del benessere per i Frenchie.</h2>
+            <p class="text-slate-400 text-lg mb-10">
+                Siamo una startup in fase di sviluppo. Lasciaci la tua email per seguire il viaggio, darci feedback ed essere tra i primi a provare FrenchiePal. Nessuno spam, promesso.
+            </p>
 
-        // Init Supabase
-        let supabase = null;
-        if(SUPABASE_URL && SUPABASE_KEY) {{
-            supabase = dev.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        }}
+            <form class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
+                <input type="email" placeholder="La tua email migliore..." required
+                    class="flex-1 bg-slate-800 border border-slate-700 rounded-full px-6 py-4 text-white placeholder-slate-500 outline-none focus:border-indigo-500 transition w-full">
+                <button type="submit" class="gradient-btn px-8 py-4 rounded-full font-bold text-white shrink-0 transition-all hover:shadow-lg hover:scale-105">
+                    Tienimi aggiornato
+                </button>
+            </form>
+            <p class="text-slate-500 text-sm mt-6">Unendoti accetti di ricevere aggiornamenti sullo sviluppo del prodotto.</p>
+        </div>
+    </section>
 
-        // Stato App
-        let currentScenario = 'neutral';
-        const scenarios = {{
-            wellness: {{ score: 98, text: 'Ottima Salute', color: 'text-emerald-500', border: 'border-emerald-500', bg: 'bg-emerald-50', prompt: "Sei un coach felice. Il cane sta benissimo." }},
-            derma: {{ score: 72, text: 'Allerta Pelle', color: 'text-orange-500', border: 'border-orange-500', bg: 'bg-orange-50', prompt: "Sei preoccupato. Il cane si gratta molto." }},
-            danger: {{ score: 45, text: 'CRITICO', color: 'text-red-600', border: 'border-red-600', bg: 'bg-red-50', prompt: "URGENTE: FERMA IL CANE. Rischio IVDD e Colpo di calore. Sii breve e autoritario." }}
-        }};
+    <footer class="py-8 text-center text-slate-500 text-sm">
+        <p>© 2026 FrenchiePal Startup. Tutti i diritti riservati.</p>
+    </footer>
 
-        // --- 2. FUNZIONI UI ---
-        function setScenario(type) {{
-            currentScenario = type;
-            const data = scenarios[type];
-            const chatBox = document.getElementById('chat-box');
-
-            // Update Header
-            document.getElementById('status-text').innerText = data.text;
-            document.getElementById('status-text').className = `text-lg font-extrabold ${{data.color}}`;
-            
-            const circle = document.getElementById('score-circle');
-            circle.innerText = data.score;
-            circle.className = `w-12 h-12 rounded-full border-4 flex items-center justify-center font-bold ${{data.color}} ${{data.border}} bg-white transition-all duration-500`;
-
-            // Effetto Pericolo
-            const frame = document.querySelector('.relative.w-\\\\[360px\\\\]');
-            if(type === 'danger') {{
-                frame.classList.add('pulse-danger');
-                addMessage('assistant', "🚨 STOP IMMEDIATO! Rilevati salti eccessivi e temperatura alta. Ferma il cane.");
-            }} else {{
-                frame.classList.remove('pulse-danger');
-                if(type === 'wellness') addMessage('assistant', "Tutto perfetto! Stitch riposa. 🟢");
-                if(type === 'derma') addMessage('assistant', "⚠️ Noto che si gratta spesso l'orecchio destro. Controlla.");
-            }}
-            
-            // Log Event
-            logEvent('click_scenario_' + type);
-        }}
-
-        function addMessage(role, text) {{
-            const box = document.getElementById('chat-box');
-            const div = document.createElement('div');
-            div.className = role === 'user' ? "flex justify-end" : "flex items-start gap-2";
-            
-            if(role === 'user') {{
-                div.innerHTML = `<div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none text-sm shadow-md">${{text}}</div>`;
-            }} else {{
-                div.innerHTML = `<div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-sm">🤖</div><div class="bg-gray-100 p-3 rounded-2xl rounded-tl-none text-sm text-gray-600">${{text}}</div>`;
-            }}
-            box.appendChild(div);
-            box.scrollTop = box.scrollHeight;
-        }}
-
-        // --- 3. LOGICA AI & DATABASE ---
-        async function sendMessage() {{
-            const input = document.getElementById('user-input');
-            const text = input.value;
-            if(!text) return;
-
-            addMessage('user', text);
-            input.value = '';
-
-            // OpenAI Call
-            if(OPENAI_KEY) {{
-                try {{
-                    const sysPrompt = currentScenario === 'neutral' ? "Sei un assistente." : scenarios[currentScenario].prompt;
-                    
-                    const response = await fetch('https://api.openai.com/v1/chat/completions', {{
-                        method: 'POST',
-                        headers: {{ 'Content-Type': 'application/json', 'Authorization': `Bearer ${{OPENAI_KEY}}` }},
-                        body: JSON.stringify({{
-                            model: "gpt-3.5-turbo",
-                            messages: [
-                                {{role: "system", content: sysPrompt + " Rispondi in italiano brevemente."}},
-                                {{role: "user", content: text}}
-                            ]
-                        }})
-                    }});
-                    const data = await response.json();
-                    if(data.choices) {{
-                        const reply = data.choices[0].message.content;
-                        addMessage('assistant', reply);
-                        saveChat(text, reply);
-                    }}
-                }} catch(e) {{
-                    addMessage('assistant', "Errore connessione AI.");
-                }}
-            }} else {{
-                setTimeout(() => addMessage('assistant', "Simulazione: Configura la API Key per chattare davvero."), 1000);
-            }}
-        }}
-
-        // Analytics functions
-        async function logEvent(name) {{
-            if(supabase) {{
-                await supabase.from('mba_events').insert([{{ event_type: name, scenario_active: currentScenario }}]);
-            }}
-        }}
-
-        async function saveChat(user, ai) {{
-            if(supabase) {{
-                await supabase.from('chat_logs').insert([{{ user_msg: user, ai_response: ai, scenario_context: currentScenario }}]);
-            }}
-        }}
-        
-        async function saveLead() {{
-            const email = document.getElementById('email-input').value;
-            if(email && supabase) {{
-                await supabase.from('mba_events').insert([{{ event_type: 'lead_submitted', metadata: {{email: email}} }}]);
-                document.getElementById('lead-status').classList.remove('hidden');
-                document.getElementById('email-input').value = '';
-            }}
-        }}
-
-    </script>
 </body>
 </html>
 """
 
-# RENDERIZZA IL SITO A TUTTO SCHERMO
-components.html(website_code, height=1200, scrolling=True)
+# Renderizza l'HTML a tutta pagina
+components.html(landing_page_html, height=1600, scrolling=True)
