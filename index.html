@@ -94,14 +94,17 @@
         }
         
         /* LOGICA SCHERMI TELEFONO */
-        .phone-screen { display: none; height: 100%; flex-direction: column; }
-        .phone-screen.active { display: flex; animation: fadeIn 0.5s ease; }
+        .phone-screen { display: none; height: 100%; flex-direction: column; overflow: hidden; }
+        .phone-screen.active { display: flex; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
         /* CLASSI ALERT DINAMICHE */
         .alert-mode-red { animation: pulse-red 1.5s infinite; border-color: #EF4444 !important; }
         .alert-mode-orange { animation: pulse-orange 1.5s infinite; border-color: #F97316 !important; }
         .alert-mode-yellow { animation: pulse-yellow 1.5s infinite; border-color: #EAB308 !important; }
+
+        /* ACTIVE TAB COLOR */
+        .tab-active { color: #4F46E5 !important; } /* Indigo 600 */
 
         /* UTILITY */
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -292,17 +295,17 @@
                         <i class="fas fa-comments"></i> 2. Parla con l'Assistente
                     </h3>
                     <div class="glass-card p-6 rounded-2xl">
-                        <p class="text-slate-400 text-sm mb-4">Fai una domanda sulla gestione quotidiana:</p>
-                        <div class="flex gap-2">
+                        <p class="text-slate-400 text-sm mb-4">Chiedi a FrenchiePal o usa i bottoni:</p>
+                        <div class="flex gap-2 mb-4">
                             <input type="text" id="web-chat-input" placeholder="Es: Quante calorie deve mangiare?" class="flex-1 bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-indigo-500 transition">
                             <button onclick="triggerChat()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 rounded-lg transition">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
-                        <div class="flex gap-2 mt-3 flex-wrap">
-                            <span onclick="fillChat('Il cane russa molto, è normale?')" class="text-xs bg-slate-800 text-slate-400 px-3 py-1 rounded-full cursor-pointer hover:bg-slate-700 transition">"Russa molto..."</span>
-                            <span onclick="fillChat('Come pulisco le pieghe?')" class="text-xs bg-slate-800 text-slate-400 px-3 py-1 rounded-full cursor-pointer hover:bg-slate-700 transition">"Pulizia pieghe"</span>
-                        </div>
+                        
+                        <button onclick="switchTab('chat')" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white py-3 rounded-lg text-sm font-bold transition flex items-center justify-center gap-2">
+                            <i class="fas fa-mobile-alt"></i> Apri la Chat su Telefono
+                        </button>
                     </div>
                 </div>
             </div>
@@ -311,48 +314,59 @@
                 <div id="phone-frame" class="relative w-[320px] h-[680px] bg-white rounded-[45px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-b-xl z-20"></div>
                     
-                    <div id="screen-dashboard" class="phone-screen active bg-slate-50 flex-1 relative">
-                        <div class="pt-10 pb-4 px-6 flex justify-between items-end">
-                            <div>
-                                <div class="text-[10px] font-bold text-slate-400 uppercase">Status Attuale</div>
-                                <div id="phone-status-text" class="text-2xl font-black text-emerald-500 leading-none">OTTIMO</div>
+                    <div class="flex-1 relative overflow-hidden bg-slate-50 flex flex-col">
+                        
+                        <div id="screen-dashboard" class="phone-screen active flex-1 flex flex-col">
+                            <div class="pt-10 pb-4 px-6 flex justify-between items-end">
+                                <div>
+                                    <div class="text-[10px] font-bold text-slate-400 uppercase">Status Attuale</div>
+                                    <div id="phone-status-text" class="text-2xl font-black text-emerald-500 leading-none">OTTIMO</div>
+                                </div>
                             </div>
-                            </div>
-                        <div class="flex-1 flex flex-col items-center justify-center p-6 text-center">
-                            <div id="alert-icon-container" class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500">
-                                <span id="alert-icon" class="text-6xl">🐶</span>
-                            </div>
-                            <h3 id="alert-title" class="text-lg font-bold text-slate-800 mb-2">Tutto Tranquillo</h3>
-                            <div id="alert-desc" class="text-sm text-slate-500 leading-relaxed">
-                                Stich sta riposando. Nessun rischio rilevato al momento.
-                            </div>
-                        </div>
-                        <div class="h-16 bg-white border-t flex justify-around items-center text-slate-300 text-xl">
-                            <i class="fas fa-home text-indigo-600"></i>
-                            <i class="fas fa-chart-bar"></i>
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
-
-                    <div id="screen-chat" class="phone-screen bg-slate-50 flex-1 relative hidden">
-                        <div class="pt-10 pb-3 px-4 bg-white border-b flex items-center gap-3">
-                            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-xs">🤖</div>
-                            <div>
-                                <div class="text-sm font-bold text-slate-800">Frenchie Coach</div>
-                                <div class="text-[10px] text-emerald-500 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> Online</div>
-                            </div>
-                        </div>
-                        <div id="phone-chat-log" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50">
-                            <div class="flex items-start gap-2">
-                                <div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">
-                                    Ciao! Sono qui per aiutarti con la gestione quotidiana di Stich. Dimmi pure! 🐾
+                            <div class="flex-1 flex flex-col items-center justify-center p-6 text-center">
+                                <div id="alert-icon-container" class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500">
+                                    <span id="alert-icon" class="text-6xl">🐶</span>
+                                </div>
+                                <h3 id="alert-title" class="text-lg font-bold text-slate-800 mb-2">Tutto Tranquillo</h3>
+                                <div id="alert-desc" class="text-sm text-slate-500 leading-relaxed">
+                                    Stich sta riposando. Nessun rischio rilevato al momento.
                                 </div>
                             </div>
                         </div>
-                        <div class="p-3 bg-white border-t">
-                            <div class="h-8 bg-slate-100 rounded-full px-3 flex items-center text-xs text-slate-400">Scrivi un messaggio...</div>
+
+                        <div id="screen-chat" class="phone-screen bg-slate-50 flex-1 flex flex-col hidden">
+                            <div class="pt-10 pb-3 px-4 bg-white border-b flex items-center gap-3">
+                                <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-xs">🤖</div>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-800">Frenchie Coach</div>
+                                    <div class="text-[10px] text-emerald-500 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> Online</div>
+                                </div>
+                            </div>
+                            <div id="phone-chat-log" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50">
+                                <div class="flex items-start gap-2">
+                                    <div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">
+                                        Ciao! Sono qui per aiutarti con la gestione quotidiana di Stich. Dimmi pure! 🐾
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-white border-t">
+                                <div class="h-8 bg-slate-100 rounded-full px-3 flex items-center text-xs text-slate-400">Scrivi un messaggio...</div>
+                            </div>
                         </div>
+
                     </div>
+
+                    <div class="h-16 bg-white border-t border-gray-100 flex justify-around items-center z-30">
+                        <button onclick="switchTab('dash')" id="tab-dash" class="flex flex-col items-center text-indigo-600 transition">
+                            <i class="fas fa-heart-pulse text-xl mb-1"></i>
+                            <span class="text-[10px] font-bold">Salute</span>
+                        </button>
+                        <button onclick="switchTab('chat')" id="tab-chat" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+                            <i class="fas fa-comments text-xl mb-1"></i>
+                            <span class="text-[10px] font-bold">Coach</span>
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -392,10 +406,9 @@
     </footer>
 
     <script>
-        /* 1. SCROLLSPY NAVIGAZIONE */
+        /* 1. SCROLLSPY */
         const sections = document.querySelectorAll("section");
         const navLinks = document.querySelectorAll(".nav-link");
-
         window.addEventListener("scroll", () => {
             let current = "";
             sections.forEach((section) => {
@@ -405,7 +418,6 @@
                     current = section.getAttribute("id");
                 }
             });
-
             navLinks.forEach((link) => {
                 link.classList.remove("active");
                 if (link.getAttribute("href").includes(current)) {
@@ -418,31 +430,56 @@
         const phoneFrame = document.getElementById('phone-frame');
         const screenDash = document.getElementById('screen-dashboard');
         const screenChat = document.getElementById('screen-chat');
+        const tabDash = document.getElementById('tab-dash');
+        const tabChat = document.getElementById('tab-chat');
+        
+        // Alert Elements
         const statusText = document.getElementById('phone-status-text');
         const alertIconContainer = document.getElementById('alert-icon-container');
         const alertIcon = document.getElementById('alert-icon');
         const alertTitle = document.getElementById('alert-title');
         const alertDesc = document.getElementById('alert-desc');
+        
+        // Chat Elements
         const chatInputWeb = document.getElementById('web-chat-input');
         const chatLog = document.getElementById('phone-chat-log');
 
+        // SWITCH TABS
+        function switchTab(tab) {
+            if(tab === 'dash') {
+                screenDash.style.display = 'flex';
+                screenChat.style.display = 'none';
+                
+                // Style Tabs
+                tabDash.classList.add('text-indigo-600');
+                tabDash.classList.remove('text-slate-400');
+                tabChat.classList.add('text-slate-400');
+                tabChat.classList.remove('text-indigo-600');
+            } else {
+                screenDash.style.display = 'none';
+                screenChat.style.display = 'flex';
+                phoneFrame.classList.remove('alert-mode-red', 'alert-mode-orange', 'alert-mode-yellow'); // Reset alerts on chat
+                
+                // Style Tabs
+                tabChat.classList.add('text-indigo-600');
+                tabChat.classList.remove('text-slate-400');
+                tabDash.classList.add('text-slate-400');
+                tabDash.classList.remove('text-indigo-600');
+            }
+        }
+
+        // TRIGGER ALERTS
         function triggerAlert(type) {
-            screenDash.style.display = 'flex'; screenChat.style.display = 'none';
-            phoneFrame.classList.remove('alert-mode-red');
-            phoneFrame.classList.remove('alert-mode-orange');
-            phoneFrame.classList.remove('alert-mode-yellow');
+            switchTab('dash'); // Force dashboard
+            phoneFrame.classList.remove('alert-mode-red', 'alert-mode-orange', 'alert-mode-yellow');
             void phoneFrame.offsetWidth;
 
             if(type === 'ivdd') {
-                phoneFrame.classList.add('alert-mode-red'); // ROSSO
+                phoneFrame.classList.add('alert-mode-red');
                 statusText.innerText = "CRITICO"; statusText.className = "text-2xl font-black text-red-500 leading-none";
-                
-                // Icona Osso Rossa
                 alertIcon.innerHTML = '<i class="fas fa-bone text-red-500"></i>';
                 alertIconContainer.className = "w-32 h-32 bg-red-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
-                
                 alertTitle.innerText = "ALLARME SCHIENA";
-                // Contromisure Chirurgiche
                 alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
                     <li>📉 <strong>1. ATTIVITÀ ECCESSIVA:</strong> Rilevato carico anomalo sulla schiena.</li>
                     <li>⛔ <strong>2. RIPOSO ASSOLUTO:</strong> Tieni Stich fermo per il resto della giornata.</li>
@@ -450,15 +487,11 @@
                 </ul>`;
             } 
             else if(type === 'baos') {
-                phoneFrame.classList.add('alert-mode-orange'); // ARANCIONE
+                phoneFrame.classList.add('alert-mode-orange');
                 statusText.innerText = "ALLERTA"; statusText.className = "text-2xl font-black text-orange-500 leading-none";
-                
-                // Icona Polmoni (Teal icona, ma sfondo arancione per allerta)
                 alertIcon.innerHTML = '<i class="fas fa-lungs text-teal-500"></i>';
                 alertIconContainer.className = "w-32 h-32 bg-orange-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
-                
                 alertTitle.innerText = "RISCHIO BAOS";
-                // Contromisure
                 alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
                     <li>🌡️ <strong>1. CALORE ECCESSIVO:</strong> Vai subito all'ombra.</li>
                     <li>💧 <strong>2. RAFFREDDA:</strong> Acqua su zampe e pancia.</li>
@@ -466,15 +499,11 @@
                 </ul>`;
             } 
             else if(type === 'derma') {
-                phoneFrame.classList.add('alert-mode-yellow'); // GIALLO
+                phoneFrame.classList.add('alert-mode-yellow');
                 statusText.innerText = "ATTENZIONE"; statusText.className = "text-2xl font-black text-pink-500 leading-none";
-                
-                // Icona Zampa
                 alertIcon.innerHTML = '<i class="fas fa-paw text-pink-500"></i>';
                 alertIconContainer.className = "w-32 h-32 bg-pink-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500";
-                
                 alertTitle.innerText = "ALERT DERMATITE";
-                // Contromisure
                 alertDesc.innerHTML = `<ul class="text-left text-xs space-y-2 mt-2">
                     <li>👂 <strong>1. PRURITO ORECCHIO DX:</strong> Frequenza anomala.</li>
                     <li>🔍 <strong>2. ISPEZIONA:</strong> Cerca rossori o cattivo odore.</li>
@@ -483,18 +512,17 @@
             }
         }
 
+        // TRIGGER CHAT
         function triggerChat() {
             const userMsg = chatInputWeb.value;
             if(!userMsg) return;
-            screenDash.style.display = 'none'; screenChat.style.display = 'flex';
-            phoneFrame.classList.remove('alert-mode-red');
-            phoneFrame.classList.remove('alert-mode-orange');
-            phoneFrame.classList.remove('alert-mode-yellow');
+            switchTab('chat'); // Force chat screen
+            
             addChatBubble(userMsg, 'user');
             chatInputWeb.value = '';
             
             setTimeout(() => {
-                let botReply = "Capisco. Per la gestione specifica di questo aspetto, ti consiglio di consultare il veterinario, ma ecco cosa so...";
+                let botReply = "Capisco. Per la gestione specifica di Stich, ti consiglio di consultare il veterinario, ma ecco cosa so...";
                 if(userMsg.toLowerCase().includes('calori') || userMsg.toLowerCase().includes('mangia')) {
                     botReply = "Per Stich, controlla sempre il peso per evitare stress sulla schiena. Circa 25-30 calorie per libbra.";
                 } else if (userMsg.toLowerCase().includes('piegh') || userMsg.toLowerCase().includes('puli')) {
@@ -518,8 +546,6 @@
             chatLog.appendChild(div);
             chatLog.scrollTop = chatLog.scrollHeight;
         }
-
-        function fillChat(text) { chatInputWeb.value = text; }
     </script>
 </body>
 </html>
