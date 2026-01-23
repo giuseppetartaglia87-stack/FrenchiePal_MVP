@@ -4,117 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FrenchiePal | Il Guardian Angel del tuo Frenchie</title>
-    <meta name="description" content="L'app per la prevenzione IVDD, BAOS e dermatiti nel Bulldog Francese.">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* SETUP BASE */
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #0F172A; /* Slate 900 */
-            color: #E2E8F0; /* Slate 200 */
-            overflow-x: hidden;
-        }
-
-        /* EFFETTI GRAFICI */
-        .glass-nav { 
-            background: rgba(15, 23, 42, 0.90); /* Leggermente più scuro per leggibilità */
-            backdrop-filter: blur(12px); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
-            transition: all 0.3s ease;
-        }
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; 
-        }
-        .glass-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* NAVIGATION ACTIVE STATE */
-        .nav-link {
-            position: relative;
-            color: #94A3B8; /* Slate 400 */
-            transition: color 0.3s ease;
-        }
-        .nav-link:hover {
-            color: white;
-        }
-        /* Classe applicata via JS quando la sezione è visibile */
-        .nav-link.active {
-            color: white;
-            font-weight: 700;
-        }
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -28px; /* Posizione sotto la navbar */
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #6366F1, #2DD4BF);
-            border-radius: 2px 2px 0 0;
-        }
-
-        /* TESTI E GRADIENTI */
-        .gradient-text { 
-            background: linear-gradient(135deg, #A78BFA 0%, #2DD4BF 100%); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-        }
-        .section-title {
-            /* Classe standard per i titoli delle sezioni */
-            font-size: 2.25rem; /* text-4xl */
-            line-height: 2.5rem;
-            font-weight: 800; /* font-extrabold */
-            color: white;
-            margin-bottom: 1.5rem; /* mb-6 */
-        }
-        @media (min-width: 768px) {
-            .section-title {
-                font-size: 3rem; /* md:text-5xl */
-                line-height: 1;
-            }
-        }
-
-        /* BOTTONI */
-        .btn-primary {
-            background: linear-gradient(135deg, #6366F1 0%, #0F766E 100%);
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
-        }
-        .btn-secondary {
-            border: 1px solid #475569;
-            color: #CBD5E1;
-            transition: all 0.3s ease;
-        }
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.05);
-            border-color: #94A3B8;
-            color: white;
-        }
-
-        /* ANIMAZIONI SIMULATORE */
-        @keyframes pulse-red {
-            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-        }
-        .pulse-danger { animation: pulse-red 2s infinite; border-color: #EF4444 !important; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0F172A; color: #E2E8F0; overflow-x: hidden; }
+        .glass-nav { background: rgba(15, 23, 42, 0.90); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); transition: transform 0.3s ease; }
+        .glass-card:hover { transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.05); }
         
-        /* UTILITY */
+        .gradient-text { background: linear-gradient(135deg, #A78BFA 0%, #2DD4BF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+        .section-title { font-size: 2.25rem; font-weight: 800; color: white; margin-bottom: 1.5rem; line-height: 1.2; }
+        @media (min-width: 768px) { .section-title { font-size: 3rem; } }
+
+        .btn-primary { background: linear-gradient(135deg, #6366F1 0%, #0F766E 100%); transition: all 0.3s ease; }
+        .btn-primary:hover { opacity: 0.9; box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); }
+        .btn-secondary { border: 1px solid #475569; color: #CBD5E1; transition: all 0.3s ease; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: #94A3B8; color: white; }
+
+        /* TELEFONO E SCHERMATE */
+        .phone-screen { display: none; height: 100%; flex-direction: column; }
+        .phone-screen.active { display: flex; animation: fadeIn 0.5s ease; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes pulse-alert { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+        .alert-mode { animation: pulse-alert 1.5s infinite; border-color: #EF4444 !important; }
+
+        /* SCROLLBAR */
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="antialiased">
@@ -125,19 +44,14 @@
                 <span class="text-3xl">🐾</span>
                 <span class="text-xl font-bold text-white tracking-tight">FrenchiePal</span>
             </div>
-
-            <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#problem" class="nav-link">I Rischi</a>
-                <a href="#solution" class="nav-link">Soluzione</a>
-                <a href="#howitworks" class="nav-link">Come Funziona</a>
-                <a href="#demo" class="nav-link">Live Demo</a>
-                <a href="#mission" class="nav-link">Mission</a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-400">
+                <a href="#home" class="hover:text-white transition">Home</a>
+                <a href="#problem" class="hover:text-white transition">I Rischi</a>
+                <a href="#solution" class="hover:text-white transition">Soluzione</a>
+                <a href="#demo" class="hover:text-white transition">Live Demo</a>
+                <a href="#mission" class="hover:text-white transition">Mission</a>
             </div>
-
-            <a href="#waitlist" class="hidden md:block bg-white text-slate-900 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition shadow-lg">
-                Unisciti
-            </a>
+            <a href="#waitlist" class="hidden md:block bg-white text-slate-900 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition shadow-lg">Unisciti</a>
         </div>
     </nav>
 
@@ -146,26 +60,18 @@
             <div class="absolute top-20 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px]"></div>
             <div class="absolute bottom-20 right-1/4 w-96 h-96 bg-teal-600/20 rounded-full blur-[120px]"></div>
         </div>
-
         <div class="max-w-4xl mx-auto text-center z-10">
             <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-white mb-8">
                 Il tuo Frenchie è unico. <br>
                 <span class="gradient-text">Anche i suoi rischi lo sono.</span>
             </h1>
-            <p class="text-2xl text-slate-200 font-medium mb-4">
-                Proteggi la sua schiena, il suo respiro e la sua pelle.
-            </p>
+            <p class="text-2xl text-slate-200 font-medium mb-4">Proteggi la sua schiena, il suo respiro e la sua pelle.</p>
             <p class="text-lg text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-                FrenchiePal è il primo assistente intelligente dedicato alla <strong>gestione quotidiana</strong> e alla prevenzione proattiva dei rischi <strong>IVDD</strong>, <strong>BAOS</strong> e delle <strong>Dermatiti</strong>. <br>Non aspettare l'emergenza: impara a prevenirla ogni giorno.
+                FrenchiePal è il primo assistente intelligente dedicato alla <strong>gestione quotidiana</strong> e alla prevenzione proattiva dei rischi <strong>IVDD</strong>, <strong>BAOS</strong> e delle <strong>Dermatiti</strong>.
             </p>
-            
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#waitlist" class="btn-primary px-8 py-4 rounded-full text-white font-bold text-lg shadow-xl">
-                    Unisciti alla Lista d'Attesa
-                </a>
-                <a href="#demo" class="btn-secondary px-8 py-4 rounded-full font-bold text-lg">
-                    Prova la Demo 👇
-                </a>
+                <a href="#waitlist" class="btn-primary px-8 py-4 rounded-full text-white font-bold text-lg shadow-xl">Unisciti alla Lista d'Attesa</a>
+                <a href="#demo" class="btn-secondary px-8 py-4 rounded-full font-bold text-lg">Prova la Demo 👇</a>
             </div>
         </div>
     </section>
@@ -174,41 +80,32 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 max-w-3xl mx-auto">
                 <h2 class="section-title">Perché amare un Frenchie significa gestirne le fragilità.</h2>
-                <p class="text-lg text-slate-400">Il Bulldog Francese è un compagno straordinario, ma la sua genetica nasconde <strong>tre nemici silenziosi</strong> che ogni proprietario deve conoscere.</p>
+                <p class="text-lg text-slate-400">Il Bulldog Francese è un compagno straordinario, ma la sua genetica nasconde <strong>tre nemici silenziosi</strong>.</p>
             </div>
-
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="glass-card p-8 rounded-3xl border-t-4 border-t-red-500">
-                    <div class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400 text-3xl mb-6">
-                        <i class="fas fa-bone"></i>
-                    </div>
+                    <div class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400 text-3xl mb-6"><i class="fas fa-bone"></i></div>
                     <h3 class="text-xl font-bold text-white mb-2">Il Nemico della Schiena (IVDD)</h3>
-                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">Cos'è:</p>
-                    <p class="text-slate-300 mb-4 text-sm leading-relaxed">L'Ernia del Disco Intervertebrale (IVDD) è la prima causa di paralisi nei Frenchie. I loro dischi spinali invecchiano precocemente, indurendosi.</p>
-                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">L'Impatto:</p>
-                    <p class="text-slate-300 text-sm leading-relaxed">Un salto sbagliato dal divano o scale fatte di corsa possono trasformarsi in un trauma improvviso, portando a dolore acuto, costi chirurgici elevati e lunghe riabilitazioni.</p>
+                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase">Cos'è:</p>
+                    <p class="text-slate-300 mb-4 text-sm">L'Ernia del Disco Intervertebrale (IVDD) è la prima causa di paralisi. I dischi invecchiano precocemente.</p>
+                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase">L'Impatto:</p>
+                    <p class="text-slate-300 text-sm">Un salto sbagliato dal divano può trasformarsi in un trauma improvviso e costoso.</p>
                 </div>
-
                 <div class="glass-card p-8 rounded-3xl border-t-4 border-t-teal-500">
-                    <div class="w-16 h-16 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-400 text-3xl mb-6">
-                        <i class="fas fa-lungs"></i>
-                    </div>
+                    <div class="w-16 h-16 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-400 text-3xl mb-6"><i class="fas fa-lungs"></i></div>
                     <h3 class="text-xl font-bold text-white mb-2">Il Nemico del Respiro (BAOS)</h3>
-                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">Cos'è:</p>
-                    <p class="text-slate-300 mb-4 text-sm leading-relaxed">La Sindrome Ostruttiva delle Vie Aeree Brachicefale (BAOS) non è solo "russare forte". È una costante fatica respiratoria.</p>
-                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">L'Impatto:</p>
-                    <p class="text-slate-300 text-sm leading-relaxed">Il caldo e l'esercizio eccessivo possono diventare letali in pochi minuti. Un cane che fatica a raffreddarsi è un cane costantemente sotto stress.</p>
+                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase">Cos'è:</p>
+                    <p class="text-slate-300 mb-4 text-sm">La Sindrome Ostruttiva: "Russare forte" non è normale, è fatica respiratoria.</p>
+                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase">L'Impatto:</p>
+                    <p class="text-slate-300 text-sm">Il caldo e l'esercizio eccessivo possono diventare letali in pochi minuti (Colpo di Calore).</p>
                 </div>
-
                 <div class="glass-card p-8 rounded-3xl border-t-4 border-t-pink-500">
-                    <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-400 text-3xl mb-6">
-                        <i class="fas fa-paw"></i>
-                    </div>
+                    <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-400 text-3xl mb-6"><i class="fas fa-paw"></i></div>
                     <h3 class="text-xl font-bold text-white mb-2">Il Nemico della Pelle</h3>
-                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">Cos'è:</p>
-                    <p class="text-slate-300 mb-4 text-sm leading-relaxed">La cute delicata e le pieghe caratteristiche sono il terreno ideale per infezioni, funghi e allergie alimentari o ambientali.</p>
-                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase tracking-wide">L'Impatto:</p>
-                    <p class="text-slate-300 text-sm leading-relaxed">Un prurito ignorato diventa un'otite cronica o una dermatite dolorosa. Gestire le cure quotidiane (pulizia pieghe, dieta) è una sfida costante per ogni proprietario.</p>
+                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase">Cos'è:</p>
+                    <p class="text-slate-300 mb-4 text-sm">La cute delicata e le pieghe sono terreno ideale per infezioni, funghi e allergie.</p>
+                    <p class="text-sm text-slate-400 font-semibold mb-3 uppercase">L'Impatto:</p>
+                    <p class="text-slate-300 text-sm">Un prurito ignorato diventa un'otite cronica o una dermatite dolorosa.</p>
                 </div>
             </div>
         </div>
@@ -216,57 +113,31 @@
 
     <section id="solution" class="py-24 px-6 relative overflow-hidden">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[150px] -z-10"></div>
-
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20 max-w-3xl mx-auto">
-                <h2 class="section-title">
-                    Non un semplice monitoraggio. <br>
-                    Un <span class="gradient-text">Consulente Proattivo.</span>
-                </h2>
-                <p class="text-lg text-slate-300">
-                    Le soluzioni generiche ti dicono <em>quanto</em> si è mosso il tuo cane. FrenchiePal ti dice <em>come</em> si è mosso, se è al sicuro e come sta davvero. <br>Abbiamo unito tecnologia e scienza veterinaria per darti il controllo che ti mancava.
-                </p>
+                <h2 class="section-title">Non un semplice monitoraggio.<br>Un <span class="gradient-text">Consulente Proattivo.</span></h2>
+                <p class="text-lg text-slate-300">Le soluzioni generiche ti dicono <em>quanto</em> si è mosso. Noi ti diciamo <em>come</em> si è mosso, se è al sicuro e come sta davvero.</p>
             </div>
-
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="glass-card p-6 rounded-3xl text-center">
-                    <div class="w-16 h-16 mx-auto bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 text-2xl mb-4">
-                        <i class="fas fa-shield-dog"></i>
-                    </div>
+                    <div class="w-16 h-16 mx-auto bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 text-2xl mb-4"><i class="fas fa-shield-dog"></i></div>
                     <h3 class="text-lg font-bold text-white mb-2">1. IVDD Shield</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Analizziamo la qualità del movimento, non solo la quantità. Monitoriamo i salti pericolosi per preservare la colonna vertebrale.
-                    </p>
+                    <p class="text-sm text-slate-400">Analizziamo la qualità dei salti per proteggere la colonna vertebrale.</p>
                 </div>
-
                 <div class="glass-card p-6 rounded-3xl text-center">
-                    <div class="w-16 h-16 mx-auto bg-teal-500/20 rounded-full flex items-center justify-center text-teal-400 text-2xl mb-4">
-                        <i class="fas fa-temperature-arrow-up"></i>
-                    </div>
+                    <div class="w-16 h-16 mx-auto bg-teal-500/20 rounded-full flex items-center justify-center text-teal-400 text-2xl mb-4"><i class="fas fa-temperature-arrow-up"></i></div>
                     <h3 class="text-lg font-bold text-white mb-2">2. Airway Guard</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Incrociamo temperatura e attività. Ti avvisiamo quando l'ambiente diventa rischioso per un brachicefalo prima dell'affanno.
-                    </p>
+                    <p class="text-sm text-slate-400">Prevenzione colpi di calore basata su meteo e razza.</p>
                 </div>
-
                 <div class="glass-card p-6 rounded-3xl text-center">
-                    <div class="w-16 h-16 mx-auto bg-pink-500/20 rounded-full flex items-center justify-center text-pink-400 text-2xl mb-4">
-                        <i class="fas fa-hand-dots"></i>
-                    </div>
+                    <div class="w-16 h-16 mx-auto bg-pink-500/20 rounded-full flex items-center justify-center text-pink-400 text-2xl mb-4"><i class="fas fa-hand-dots"></i></div>
                     <h3 class="text-lg font-bold text-white mb-2">3. Derma Care</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Monitoraggio mirato per pruriti e arrossamenti. Prevenzione attiva per evitare che un fastidio diventi un'otite o dermatite cronica.
-                    </p>
+                    <p class="text-sm text-slate-400">Monitoraggio mirato per pruriti e arrossamenti. Prevenzione attiva.</p>
                 </div>
-
                 <div class="glass-card p-6 rounded-3xl text-center border-t border-indigo-500/30">
-                    <div class="w-16 h-16 mx-auto bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400 text-2xl mb-4">
-                        <i class="fas fa-wand-magic-sparkles"></i>
-                    </div>
+                    <div class="w-16 h-16 mx-auto bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400 text-2xl mb-4"><i class="fas fa-wand-magic-sparkles"></i></div>
                     <h3 class="text-lg font-bold text-white mb-2">4. Smart Assistant</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Un assistente smart ed empatico che impara dal tuo Bullo specifico. Risponde a ogni domanda, dalla dieta alla gestione dello stress.
-                    </p>
+                    <p class="text-sm text-slate-400">Un assistente empatico che impara dal tuo cane. Risponde su dieta, stress e igiene.</p>
                 </div>
             </div>
         </div>
@@ -275,84 +146,133 @@
     <section id="howitworks" class="py-24 px-6 bg-slate-900/50 border-t border-slate-800">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="section-title">Dalla preoccupazione all'azione in 3 step.</h2>
+                <h2 class="section-title">Dalla preoccupazione all'azione.</h2>
                 <p class="text-slate-400">Semplifichiamo la tecnologia.</p>
             </div>
-
             <div class="grid md:grid-cols-3 gap-8 text-center">
                 <div class="relative">
                     <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-6 z-10 relative">1</div>
-                    <div class="hidden md:block absolute top-6 left-1/2 w-full h-1 bg-slate-800 -z-0"></div>
                     <h3 class="text-xl font-bold text-white mb-3">Monitora</h3>
-                    <p class="text-slate-400 leading-relaxed px-4">L'app impara le abitudini del tuo Frenchie e tiene traccia dei fattori di rischio ambientali e dei sintomi quotidiani.</p>
+                    <p class="text-slate-400 px-4">L'app impara le abitudini del tuo Frenchie e traccia rischi ambientali e sintomi.</p>
                 </div>
-
                 <div class="relative">
                     <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-6 z-10 relative">2</div>
-                    <div class="hidden md:block absolute top-6 left-1/2 w-full h-1 bg-slate-800 -z-0"></div>
                     <h3 class="text-xl font-bold text-white mb-3">Interagisci</h3>
-                    <p class="text-slate-400 leading-relaxed px-4">Chiedi consiglio all'Assistente Smart. Ricevi risposte immediate ed empatiche basate sui dati del tuo cane.</p>
+                    <p class="text-slate-400 px-4">Chiedi all'Assistente Smart. Risposte empatiche basate sui dati del tuo cane.</p>
                 </div>
-
                 <div class="relative">
                     <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-6 z-10 relative">3</div>
                     <h3 class="text-xl font-bold text-white mb-3">Agisci</h3>
-                    <p class="text-slate-400 leading-relaxed px-4">Prendi decisioni informate (es. "Riduci la passeggiata oggi") per estendere la sua longevità.</p>
+                    <p class="text-slate-400 px-4">Prendi decisioni informate (es. "Riduci la passeggiata") per il suo benessere.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="demo" class="py-24 px-6 flex flex-col items-center justify-center relative overflow-hidden bg-slate-900 border-t border-slate-800">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600 rounded-full blur-[150px] opacity-10 -z-10"></div>
+    <section id="demo" class="py-24 px-6 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-600 rounded-full blur-[150px] opacity-10 -z-10"></div>
+        
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            
+            <div class="order-2 lg:order-1">
+                <h2 class="section-title">Test Drive Interattivo</h2>
+                <p class="text-lg text-slate-400 mb-10">
+                    Prova le due anime di FrenchiePal: il sistema di <strong>Allerta Proattiva</strong> e l'<strong>Assistente Smart</strong>. Clicca sui bottoni per vedere la reazione sul telefono.
+                </p>
 
-        <div class="text-center mb-12">
-            <h2 class="section-title">Provalo ora in tempo reale.</h2>
-            <p class="text-slate-400 mb-8">Vedi come l'Assistente reagisce agli eventi. Clicca i bottoni qui sotto.</p>
-            <button onclick="document.getElementById('sim-frame').scrollIntoView({behavior: 'smooth'})" class="btn-primary px-8 py-3 rounded-full text-white font-bold">
-                Avvia Simulazione
-            </button>
-        </div>
-
-        <div id="sim-frame" class="relative w-[340px] h-[720px] bg-white rounded-[45px] border-[8px] border-slate-900 shadow-2xl flex flex-col overflow-hidden transform hover:scale-[1.01] transition duration-500 z-10">
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-xl z-20"></div>
-
-            <div class="bg-slate-50 pt-12 pb-4 px-6 flex justify-between items-center border-b border-gray-100">
-                <div>
-                    <div class="text-xs font-bold text-gray-400 uppercase">Status</div>
-                    <div id="status-text" class="text-lg font-extrabold text-gray-800">In Attesa...</div>
+                <div class="mb-10">
+                    <h3 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <i class="fas fa-bell"></i> 1. Simula Allarmi Biometrici
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button onclick="triggerAlert('ivdd')" class="glass-card p-4 rounded-xl text-left hover:bg-red-500/10 group transition-all">
+                            <div class="text-red-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">🦴</div>
+                            <div class="font-bold text-white text-sm">Rischio IVDD</div>
+                            <div class="text-xs text-slate-500">Salto rilevato</div>
+                        </button>
+                        <button onclick="triggerAlert('baos')" class="glass-card p-4 rounded-xl text-left hover:bg-orange-500/10 group transition-all">
+                            <div class="text-orange-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">🫁</div>
+                            <div class="font-bold text-white text-sm">Rischio Calore</div>
+                            <div class="text-xs text-slate-500">Temp. Alta</div>
+                        </button>
+                        <button onclick="triggerAlert('derma')" class="glass-card p-4 rounded-xl text-left hover:bg-pink-500/10 group transition-all">
+                            <div class="text-pink-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">🐾</div>
+                            <div class="font-bold text-white text-sm">Check Pelle</div>
+                            <div class="text-xs text-slate-500">Grattamento</div>
+                        </button>
+                    </div>
                 </div>
-                <div id="score-circle" class="w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center font-bold text-gray-400">--</div>
-            </div>
 
-            <div class="p-4 bg-slate-50 grid grid-cols-3 gap-2">
-                <button onclick="setScenario('wellness')" class="p-2 bg-white rounded-xl border border-gray-100 shadow-sm hover:bg-emerald-50 hover:border-emerald-400 transition flex flex-col items-center">
-                    <span class="text-2xl">💤</span>
-                    <span class="text-[9px] font-bold text-gray-500 mt-1">Wellness</span>
-                </button>
-                <button onclick="setScenario('derma')" class="p-2 bg-white rounded-xl border border-gray-100 shadow-sm hover:bg-pink-50 hover:border-pink-400 transition flex flex-col items-center">
-                    <span class="text-2xl">🐾</span>
-                    <span class="text-[9px] font-bold text-gray-500 mt-1">Derma</span>
-                </button>
-                <button onclick="setScenario('danger')" class="p-2 bg-white rounded-xl border border-red-100 shadow-sm hover:bg-red-50 hover:border-red-500 text-red-500 transition flex flex-col items-center">
-                    <span class="text-2xl">🚨</span>
-                    <span class="text-[9px] font-bold mt-1">Pericolo</span>
-                </button>
-            </div>
-
-            <div id="chat-box" class="flex-1 bg-white p-4 overflow-y-auto no-scrollbar space-y-3">
-                <div class="flex items-start gap-2">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-sm">🤖</div>
-                    <div class="bg-gray-100 p-3 rounded-2xl rounded-tl-none text-sm text-gray-600 text-left">
-                        Ciao! Sono il tuo Frenchie Assistant. Tocca un pulsante sopra per vedere come ti proteggo.
+                <div>
+                    <h3 class="text-sm font-bold text-teal-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <i class="fas fa-comments"></i> 2. Parla con l'Assistente
+                    </h3>
+                    <div class="glass-card p-6 rounded-2xl">
+                        <p class="text-slate-400 text-sm mb-4">Chiedi consiglio all'AI su dieta o comportamento:</p>
+                        <div class="flex gap-2">
+                            <input type="text" id="web-chat-input" placeholder="Es: Quante calorie deve mangiare?" class="flex-1 bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-indigo-500 transition">
+                            <button onclick="triggerChat()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 rounded-lg transition">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="flex gap-2 mt-3">
+                            <span onclick="fillChat('Il cane russa molto, è normale?')" class="text-xs bg-slate-800 text-slate-400 px-3 py-1 rounded-full cursor-pointer hover:bg-slate-700 transition">"Russa molto..."</span>
+                            <span onclick="fillChat('Come pulisco le pieghe?')" class="text-xs bg-slate-800 text-slate-400 px-3 py-1 rounded-full cursor-pointer hover:bg-slate-700 transition">"Pulizia pieghe"</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="p-4 bg-gray-50 border-t border-gray-100">
-                <div class="flex gap-2">
-                    <input type="text" placeholder="Chiedi al coach..." disabled class="flex-1 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm text-gray-400 cursor-not-allowed">
-                    <button class="w-10 h-10 bg-indigo-600 rounded-full text-white flex items-center justify-center opacity-50"><i class="fas fa-paper-plane text-xs"></i></button>
+            <div class="order-1 lg:order-2 flex justify-center">
+                <div id="phone-frame" class="relative w-[320px] h-[680px] bg-white rounded-[45px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-b-xl z-20"></div>
+                    
+                    <div id="screen-dashboard" class="phone-screen active bg-slate-50 flex-1 relative">
+                        <div class="pt-10 pb-4 px-6 flex justify-between items-end">
+                            <div>
+                                <div class="text-[10px] font-bold text-slate-400 uppercase">Status Attuale</div>
+                                <div id="phone-status-text" class="text-2xl font-black text-emerald-500 leading-none">OTTIMO</div>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-sm">98</div>
+                        </div>
+                        
+                        <div class="flex-1 flex flex-col items-center justify-center p-6 text-center">
+                            <div id="alert-icon-container" class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500">
+                                <span id="alert-icon" class="text-6xl">🐶</span>
+                            </div>
+                            <h3 id="alert-title" class="text-lg font-bold text-slate-800 mb-2">Tutto Tranquillo</h3>
+                            <p id="alert-desc" class="text-sm text-slate-500">Stitch sta riposando. Nessun rischio rilevato al momento.</p>
+                        </div>
+
+                        <div class="h-16 bg-white border-t flex justify-around items-center text-slate-300 text-xl">
+                            <i class="fas fa-home text-indigo-600"></i>
+                            <i class="fas fa-chart-bar"></i>
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+
+                    <div id="screen-chat" class="phone-screen bg-slate-50 flex-1 relative hidden">
+                        <div class="pt-10 pb-3 px-4 bg-white border-b flex items-center gap-3">
+                            <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-xs">🤖</div>
+                            <div>
+                                <div class="text-sm font-bold text-slate-800">Frenchie Coach</div>
+                                <div class="text-[10px] text-emerald-500 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> Online</div>
+                            </div>
+                        </div>
+
+                        <div id="phone-chat-log" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50">
+                            <div class="flex items-start gap-2">
+                                <div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">
+                                    Ciao! Sono qui per aiutarti con la gestione quotidiana di Stitch. Dimmi pure! 🐾
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-white border-t">
+                            <div class="h-8 bg-slate-100 rounded-full px-3 flex items-center text-xs text-slate-400">Scrivi un messaggio...</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -363,8 +283,7 @@
             <h2 class="section-title">Perché un'app solo per i Bulldog Francesi?</h2>
             <p class="text-lg text-slate-300 leading-relaxed mb-8">
                 Perché un Pastore Tedesco non rischia la paralisi saltando giù dal letto e non soffre se non gli pulisci le pieghe del muso. <strong class="text-white">Il tuo Frenchie sì.</strong>
-                <br><br>
-                Le app generiche trattano tutti i cani allo stesso modo. Noi crediamo che una razza speciale meriti una protezione specializzata.
+                <br>Le app generiche trattano tutti i cani allo stesso modo. Noi crediamo che una razza speciale meriti una protezione specializzata.
             </p>
             <span class="text-4xl">🐾</span>
         </div>
@@ -372,16 +291,13 @@
 
     <section id="waitlist" class="py-24 px-6 relative">
         <div class="max-w-3xl mx-auto text-center glass-card p-10 md:p-16 rounded-[3rem] border border-slate-700 shadow-2xl">
-            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6">Costruiamo il futuro del benessere per i Frenchie.</h2>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6">Costruiamo il futuro insieme.</h2>
             <p class="text-slate-400 text-lg mb-10">
-                Siamo una startup in fase di sviluppo. Se vuoi seguire il nostro viaggio, darci feedback e essere tra i primi a provare FrenchiePal, lasciaci la tua email.
+                Siamo una startup in fase di sviluppo. Lasciaci la tua email per accedere alla Beta.
             </p>
-
             <form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto relative z-20" onsubmit="event.preventDefault(); alert('Grazie! Ti abbiamo aggiunto alla lista d\'attesa.');">
                 <input type="email" placeholder="Inserisci la tua email..." required class="flex-1 bg-slate-900 border border-slate-700 rounded-full px-6 py-4 text-white focus:outline-none focus:border-indigo-500 placeholder-slate-500 shadow-inner">
-                <button type="submit" class="btn-primary px-8 py-4 rounded-full font-bold text-white shadow-lg">
-                    Tienimi aggiornato
-                </button>
+                <button type="submit" class="btn-primary px-8 py-4 rounded-full font-bold text-white shadow-lg">Tienimi aggiornato</button>
             </form>
             <p class="text-slate-600 text-sm mt-6">Nessuno spam, solo aggiornamenti reali.</p>
         </div>
@@ -392,94 +308,108 @@
     </footer>
 
     <script>
-        /* 1. SCROLLSPY NAVIGAZIONE */
-        const sections = document.querySelectorAll("section");
-        const navLinks = document.querySelectorAll(".nav-link");
+        // ELEMENTI DOM
+        const phoneFrame = document.getElementById('phone-frame');
+        const screenDash = document.getElementById('screen-dashboard');
+        const screenChat = document.getElementById('screen-chat');
+        
+        // ELEMENTI DASHBOARD
+        const statusText = document.getElementById('phone-status-text');
+        const alertIconContainer = document.getElementById('alert-icon-container');
+        const alertIcon = document.getElementById('alert-icon');
+        const alertTitle = document.getElementById('alert-title');
+        const alertDesc = document.getElementById('alert-desc');
 
-        window.addEventListener("scroll", () => {
-            let current = "";
+        // ELEMENTI CHAT
+        const chatInputWeb = document.getElementById('web-chat-input');
+        const chatLog = document.getElementById('phone-chat-log');
+
+        // FUNZIONE: ATTIVA ALLARMI (Sezione 1)
+        function triggerAlert(type) {
+            // Mostra Dashboard, nascondi Chat
+            screenDash.style.display = 'flex';
+            screenChat.style.display = 'none';
             
-            sections.forEach((section) => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
-                    current = section.getAttribute("id");
-                }
-            });
+            // Reset animazione
+            phoneFrame.classList.remove('alert-mode');
+            void phoneFrame.offsetWidth; // trigger reflow
 
-            navLinks.forEach((link) => {
-                link.classList.remove("active");
-                if (link.getAttribute("href").includes(current)) {
-                    link.classList.add("active");
-                }
-            });
-        });
-
-        /* 2. SIMULATORE IPHONE */
-        const scenarios = {
-            wellness: { 
-                text: 'Ottima Salute', 
-                color: 'text-emerald-500', 
-                border: 'border-emerald-500', 
-                score: 98, 
-                msg: "Tutto perfetto! Stitch riposa tranquillo. I dati sono ottimi. Ricordati di pulire le pieghe del muso stasera per prevenire irritazioni! 🟢" 
-            },
-            derma: { 
-                text: 'Allerta Pelle', 
-                color: 'text-pink-400', 
-                border: 'border-pink-400', 
-                score: 72, 
-                msg: "⚠️ Ho notato che Stitch si gratta spesso l'orecchio destro (15 volte oggi). Potrebbe essere un principio di otite o dermatite. Ti consiglio di controllare se c'è rossore." 
-            },
-            danger: { 
-                text: 'CRITICO', 
-                color: 'text-red-600', 
-                border: 'border-red-600', 
-                score: 45, 
-                msg: "🚨 STOP IMMEDIATO! Ho rilevato troppi salti verticali e la temperatura corporea è in salita. C'è rischio di IVDD e Colpo di Calore. Mettilo subito a riposo al fresco." 
+            if(type === 'ivdd') {
+                phoneFrame.classList.add('alert-mode');
+                statusText.innerText = "CRITICO";
+                statusText.className = "text-2xl font-black text-red-500 leading-none";
+                alertIcon.innerText = "🚨";
+                alertIconContainer.className = "w-32 h-32 bg-red-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
+                alertTitle.innerText = "STOP IMMEDIATO!";
+                alertDesc.innerText = "Rilevati salti eccessivi. Rischio trauma spinale (IVDD). Metti il cane a riposo.";
+            } 
+            else if(type === 'baos') {
+                phoneFrame.classList.add('alert-mode'); // Usa lo stesso rosso o arancione
+                statusText.innerText = "ALLERTA";
+                statusText.className = "text-2xl font-black text-orange-500 leading-none";
+                alertIcon.innerText = "🥵";
+                alertIconContainer.className = "w-32 h-32 bg-orange-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500 scale-110";
+                alertTitle.innerText = "Rischio Calore";
+                alertDesc.innerText = "Respiro affannoso rilevato + Temp esterna alta. Interrompi la passeggiata.";
             }
-        };
-
-        function setScenario(type) {
-            const data = scenarios[type];
-            const statusText = document.getElementById('status-text');
-            const circle = document.getElementById('score-circle');
-            
-            // Aggiorna testo e colore
-            statusText.innerText = data.text;
-            statusText.className = `text-lg font-extrabold ${data.color}`;
-            
-            // Aggiorna cerchio
-            circle.innerText = data.score;
-            circle.className = `w-12 h-12 rounded-full border-4 flex items-center justify-center font-bold ${data.color} ${data.border} bg-white transition-all duration-300`;
-
-            // Effetto pulsante pericolo
-            const phoneFrame = circle.closest('.relative');
-            
-            if(type === 'danger') {
-                phoneFrame.classList.add('pulse-danger');
-            } else {
-                phoneFrame.classList.remove('pulse-danger');
+            else if(type === 'derma') {
+                phoneFrame.classList.remove('alert-mode'); // Niente pulsazione rossa, ma avviso
+                statusText.innerText = "ATTENZIONE";
+                statusText.className = "text-2xl font-black text-pink-500 leading-none";
+                alertIcon.innerText = "👂";
+                alertIconContainer.className = "w-32 h-32 bg-pink-100 rounded-full flex items-center justify-center shadow-sm mb-6 transition-all duration-500";
+                alertTitle.innerText = "Fastidio Rilevato";
+                alertDesc.innerText = "Si sta grattando l'orecchio destro frequentemente. Controlla possibili rossori.";
             }
-            
-            // Aggiungi Messaggio Chat
-            addMessage(data.msg);
         }
 
-        function addMessage(text) {
-            const box = document.getElementById('chat-box');
+        // FUNZIONE: ATTIVA CHAT (Sezione 2)
+        function triggerChat() {
+            const userMsg = chatInputWeb.value;
+            if(!userMsg) return;
+
+            // Switch to Chat Screen
+            screenDash.style.display = 'none';
+            screenChat.style.display = 'flex';
+            phoneFrame.classList.remove('alert-mode'); // Stop alert blinking
+
+            // Add User Bubble
+            addChatBubble(userMsg, 'user');
+            chatInputWeb.value = '';
+
+            // Simulate Bot Response
+            setTimeout(() => {
+                let botReply = "Capisco. Per la gestione specifica di questo aspetto, ti consiglio di consultare il veterinario, ma posso dirti che per i Bulldog Francesi è comune.";
+                
+                if(userMsg.toLowerCase().includes('calori') || userMsg.toLowerCase().includes('mangia')) {
+                    botReply = "Per un Frenchie adulto medio, l'apporto calorico ideale è tra 25-30 calorie per libbra di peso. Hai notato aumenti di peso recenti? È cruciale per la schiena.";
+                } else if (userMsg.toLowerCase().includes('piegh') || userMsg.toLowerCase().includes('puli')) {
+                    botReply = "Le pieghe vanno pulite ogni giorno con una salvietta delicata e asciugate bene per evitare funghi. Vuoi che ti imposti un promemoria alle 20:00?";
+                } else if (userMsg.toLowerCase().includes('russa')) {
+                    botReply = "Se russa *molto* forte anche da sveglio, potrebbe essere un segno di BAOS. Monitoriamo il respiro durante la prossima passeggiata.";
+                }
+
+                addChatBubble(botReply, 'bot');
+            }, 1000);
+        }
+
+        function addChatBubble(text, sender) {
+            const div = document.createElement('div');
             
-            const msgDiv = document.createElement('div');
-            msgDiv.className = "flex items-start gap-2 animate-fade-in mb-3";
-            msgDiv.innerHTML = `
-                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-sm flex-shrink-0">🤖</div>
-                <div class="bg-gray-100 p-3 rounded-2xl rounded-tl-none text-sm text-gray-600 text-left shadow-sm">
-                    ${text}
-                </div>
-            `;
+            if(sender === 'user') {
+                div.className = "flex items-center justify-end gap-2";
+                div.innerHTML = `<div class="bg-indigo-600 p-3 rounded-2xl rounded-tr-none text-xs text-white shadow-md max-w-[85%]">${text}</div>`;
+            } else {
+                div.className = "flex items-start gap-2 animate-fade-in";
+                div.innerHTML = `<div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">${text}</div>`;
+            }
             
-            box.appendChild(msgDiv);
-            box.scrollTop = box.scrollHeight;
+            chatLog.appendChild(div);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        function fillChat(text) {
+            chatInputWeb.value = text;
         }
     </script>
 </body>
