@@ -51,13 +51,21 @@ landing_page_html = """
                 <span class="text-3xl">🐾</span>
                 <span class="text-xl font-bold tracking-tight text-white">FrenchiePal</span>
             </div>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+                <a href="#home" class="hover:text-white hover:text-indigo-400 transition cursor-pointer">Home</a>
+                <a href="#rischi" class="hover:text-white hover:text-indigo-400 transition cursor-pointer">I Rischi</a>
+                <a href="#soluzione" class="hover:text-white hover:text-indigo-400 transition cursor-pointer">Soluzione</a>
+                <a href="#demo" class="hover:text-white hover:text-indigo-400 transition cursor-pointer">Live Demo</a>
+            </div>
+
             <a href="#waitlist" class="hidden md:inline-block px-6 py-2.5 text-sm font-bold bg-white text-slate-900 rounded-full hover:bg-slate-200 transition shadow-lg">
-                Unisciti alla Lista d'Attesa
+                Unisciti
             </a>
         </div>
     </nav>
 
-    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
+    <section id="home" class="pt-32 pb-20 px-6 relative overflow-hidden">
         <div class="absolute top-20 left-0 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px] -z-10"></div>
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-teal-600/20 rounded-full blur-[120px] -z-10"></div>
 
@@ -80,7 +88,7 @@ landing_page_html = """
         </div>
     </section>
 
-    <section class="py-20 px-6 bg-slate-900/50">
+    <section id="rischi" class="py-20 px-6 bg-slate-900/50">
         <div class="max-w-7xl mx-auto relative">
              <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Amare un Frenchie significa gestirne le fragilità.</h2>
@@ -124,7 +132,7 @@ landing_page_html = """
         </div>
     </section>
 
-    <section class="py-24 px-6 relative overflow-hidden">
+    <section id="soluzione" class="py-24 px-6 relative overflow-hidden">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/10 rounded-full blur-[150px] -z-10"></div>
 
         <div class="max-w-7xl mx-auto">
@@ -182,7 +190,7 @@ landing_page_html = """
         </div>
     </section>
 
-    <section class="py-24 px-6 relative flex flex-col items-center justify-center">
+    <section id="demo" class="py-24 px-6 relative flex flex-col items-center justify-center">
         <div class="text-center mb-16">
             <div class="inline-block px-4 py-1.5 mb-4 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-sm font-bold">
                 📱 LIVE DEMO
