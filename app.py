@@ -3,128 +3,86 @@ from supabase import create_client, Client
 import openai
 import uuid
 import hashlib
-from datetime import datetime
 import time
 
-# --- CONFIGURAZIONE PAGINA & LAYOUT ---
-st.set_page_config(page_title="FrenchiePal", page_icon="🐾", layout="centered")
+# --- CONFIGURAZIONE PAGINA ---
+st.set_page_config(page_title="FrenchiePal", page_icon="🐾", layout="centered", initial_sidebar_state="collapsed")
 
-# --- CSS INJECTION (IL TRUCCO PER LA GRAFICA MODERNA) ---
+# --- CSS AVANZATO (GOOGLE STYLE) ---
 st.markdown("""
 <style>
-    /* 1. IMPORT FONT GOOGLE (Poppins) */
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
-
+    /* 1. FONT E COLORI GLOBALI */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    
     html, body, [class*="css"]  {
-        font-family: 'Poppins', sans-serif;
-        background-color: #F4F6F9; /* Sfondo Grigio Moderno */
-        color: #1E293B;
+        font-family: 'Inter', sans-serif;
+        color: #1E293B !important; 
     }
 
-    /* 2. RIMUOVERE SPAZI VUOTI INUTILI */
-    .block-container {
-        padding-top: 2rem;
-        padding-bottom: 5rem;
-    }
-    header {visibility: hidden;}
+    /* 2. NASCONDI ELEMENTI STREAMLIT INUTILI */
+    #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-
-    /* 3. STILE BOTTONI (SCENARI) */
+    header {visibility: hidden;}
+    .stDeployButton {display:none;}
+    
+    /* 3. CARD MODERNE CON OMBRA MORBIDA */
+    .metric-card {
+        background-color: white;
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        border: 1px solid #F1F5F9;
+        text-align: center;
+        margin-bottom: 20px;
+        transition: transform 0.2s;
+    }
+    
+    /* 4. BOTTONI SCENARIO PERSONALIZZATI */
+    /* Resettiamo lo stile dei bottoni standard per renderli "Pillole" */
     div.stButton > button {
         width: 100%;
-        border: none;
-        border-radius: 16px;
-        padding: 15px 20px;
-        font-weight: 600;
-        font-size: 16px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        color: white;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    
-    /* Hover effect */
-    div.stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    }
-
-    /* 4. CARDS (CONTAINER) */
-    .app-card {
-        background: white;
-        border-radius: 24px;
-        padding: 25px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        margin-bottom: 20px;
-        text-align: center;
-        border: 1px solid rgba(0,0,0,0.02);
-    }
-
-    /* 5. SCORE GRANDE */
-    .score-circle {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 6px solid;
-        font-size: 42px;
-        font-weight: 800;
-        margin-bottom: 10px;
-    }
-
-    /* 6. STATUS BADGE */
-    .status-badge {
-        display: inline-block;
-        padding: 6px 16px;
-        border-radius: 20px;
-        font-size: 13px;
+        border-radius: 12px;
+        height: 50px;
         font-weight: 700;
-        text-transform: uppercase;
-        margin-bottom: 15px;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        transition: all 0.3s;
     }
 
-    /* 7. CHAT BUBBLES */
+    /* 5. STILE CHAT */
     .stChatMessage {
         background-color: white;
-        border-radius: 16px;
+        border: 1px solid #E2E8F0;
         box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        border: 1px solid #F1F5F9;
     }
     
-    /* ANIMAZIONE PULSAZIONE (PER DANGER) */
-    @keyframes pulse-red {
-        0% { box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7); }
-        70% { box-shadow: 0 0 0 15px rgba(255, 82, 82, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(255, 82, 82, 0); }
+    /* 6. ANIMAZIONE PULSAZIONE */
+    @keyframes pulse-animation {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7); }
+        70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(255, 82, 82, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 82, 82, 0); }
     }
-    .pulse {
-        animation: pulse-red 2s infinite;
+    .pulse-danger {
+        animation: pulse-animation 2s infinite;
+        border: 2px solid #FF5252;
     }
 
 </style>
 """, unsafe_allow_html=True)
 
-# --- LOGICA BACKEND (SUPABASE & OPENAI) - QUESTA NON CAMBIA ---
-
-# Connessione Supabase
+# --- BACKEND (NON MODIFICARE QUESTA PARTE) ---
 try:
     supabase: Client = create_client(st.secrets["supabase"]["url"], st.secrets["supabase"]["key"])
     DB_ACTIVE = True
-except Exception as e:
-    st.error(f"Errore DB: {e}")
+except:
     DB_ACTIVE = False
 
-# Connessione OpenAI
 if "openai" in st.secrets:
     openai.api_key = st.secrets["openai"]["key"]
     AI_ACTIVE = True
 else:
     AI_ACTIVE = False
 
-# Sessione
 if 'session_id' not in st.session_state:
     st.session_state.session_id = str(uuid.uuid4())
 if 'scenario' not in st.session_state:
@@ -132,23 +90,27 @@ if 'scenario' not in st.session_state:
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
-# Funzioni Log
 def log_event(event_type, metadata=None):
     if DB_ACTIVE:
         try:
-            data = {"session_id": st.session_state.session_id, "event_type": event_type, "scenario_active": st.session_state.scenario, "metadata": metadata if metadata else {}}
-            supabase.table("mba_events").insert(data).execute()
+            supabase.table("mba_events").insert({
+                "session_id": st.session_state.session_id, 
+                "event_type": event_type, 
+                "scenario_active": st.session_state.scenario, 
+                "metadata": metadata if metadata else {}
+            }).execute()
         except: pass
 
 def log_chat(user_msg, ai_response):
     if DB_ACTIVE:
         try:
-            data = {"session_id": st.session_state.session_id, "user_msg": user_msg, "ai_response": ai_response, "scenario_context": st.session_state.scenario}
-            supabase.table("chat_logs").insert(data).execute()
+            supabase.table("chat_logs").insert({
+                "session_id": st.session_state.session_id, 
+                "user_msg": user_msg, 
+                "ai_response": ai_response, 
+                "scenario_context": st.session_state.scenario
+            }).execute()
         except: pass
-
-def hash_email(email):
-    return hashlib.sha256(email.encode().lower().strip()).hexdigest()
 
 def get_ai_response(user_input, scenario):
     if scenario == "wellness":
@@ -167,106 +129,102 @@ def get_ai_response(user_input, scenario):
                 messages=[{"role": "system", "content": role}, {"role": "user", "content": user_input}]
             )
             return response.choices[0].message.content
-        except: return "⚠️ Errore AI."
-    else: return "Simulazione: Manca API Key."
+        except: return "⚠️ Errore AI. (Controlla le chiavi o il credito)."
+    else: return "Simulazione: Chatbot offline (Manca API Key)."
 
-# --- INTERFACCIA UI/UX (RIDISEGNATA) ---
+# --- INTERFACCIA UI (FRONTEND) ---
 
-# Header Minimalista
-c_logo, c_title = st.columns([1, 4])
+# 1. Header Pulito
+c_logo, c_text = st.columns([1, 5])
 with c_logo:
-    st.image("https://img.icons8.com/3d-fluency/94/french-bulldog.png", width=70)
-with c_title:
-    st.markdown("<h2 style='margin:0; padding-top:10px;'>FrenchiePal</h2><p style='color:#64748B; margin:0;'>AI Guardian System</p>", unsafe_allow_html=True)
+    st.image("https://img.icons8.com/3d-fluency/94/french-bulldog.png", width=60)
+with c_text:
+    st.markdown("<h2 style='margin-bottom:0; color:#1E293B;'>FrenchiePal</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='margin-top:0; color:#64748B; font-size:14px;'>Intelligent Biometric Guardian</p>", unsafe_allow_html=True)
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.divider()
 
-# SELETTORE SCENARI (STILE APP NAVIGATION)
-st.markdown("<p style='font-weight:600; color:#94A3B8; font-size:12px; letter-spacing:1px;'>SELEZIONA STATO SIMULAZIONE</p>", unsafe_allow_html=True)
+# 2. Selettore Scenari (Bottoni Colorati)
+st.markdown("<p style='font-size:12px; font-weight:700; color:#94A3B8; letter-spacing:1px; text-transform:uppercase;'>SIMULA CONTESTO</p>", unsafe_allow_html=True)
 
-# CSS specifico per colorare i bottoni diversamente
+# Hack CSS per colorare i bottoni specifici
 st.markdown("""
 <style>
-div.stButton > button:first-child { background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); } /* Wellness */
-div.row-widget.stButton:nth-of-type(2) > button { background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%); } /* Derma */
-div.row-widget.stButton:nth-of-type(3) > button { background: linear-gradient(135deg, #FF5252 0%, #D32F2F 100%); } /* Danger */
+/* Bottone 1: Verde */
+div.stButton > button:first-child { color: #166534; background-color: #DCFCE7; border: 1px solid #BBF7D0; }
+div.stButton > button:first-child:hover { background-color: #BBF7D0; }
+/* Bottone 2: Arancio */
+div.row-widget.stButton:nth-of-type(2) > button { color: #9A3412; background-color: #FFEDD5; border: 1px solid #FED7AA; }
+div.row-widget.stButton:nth-of-type(2) > button:hover { background-color: #FED7AA; }
+/* Bottone 3: Rosso */
+div.row-widget.stButton:nth-of-type(3) > button { color: #991B1B; background-color: #FEE2E2; border: 1px solid #FECACA; }
+div.row-widget.stButton:nth-of-type(3) > button:hover { background-color: #FECACA; }
 </style>
 """, unsafe_allow_html=True)
 
-c1, c2, c3 = st.columns(3)
+col1, col2, col3 = st.columns(3)
+if col1.button("💤 Wellness"):
+    st.session_state.scenario = "wellness"
+    st.session_state.messages = []
+    log_event("click_wellness")
 
-with c1:
-    if st.button("💤 WELLNESS"):
-        st.session_state.scenario = "wellness"
-        st.session_state.messages = []
-        log_event("click_wellness")
-with c2:
-    if st.button("🐾 PRURITO"):
-        st.session_state.scenario = "derma"
-        st.session_state.messages = []
-        log_event("click_derma")
-with c3:
-    if st.button("🚨 PERICOLO"):
-        st.session_state.scenario = "danger"
-        st.session_state.messages = []
-        log_event("click_danger")
-        log_event("emotional_peak")
+if col2.button("🐾 Prurito"):
+    st.session_state.scenario = "derma"
+    st.session_state.messages = []
+    log_event("click_derma")
 
-# LOGICA VISUALIZZAZIONE DATI
-score = "--"
-theme_color = "#94A3B8"
+if col3.button("🚨 Pericolo"):
+    st.session_state.scenario = "danger"
+    st.session_state.messages = []
+    log_event("click_danger")
+
+# 3. Dashboard Dinamica
+score_val = "--"
 status_text = "Seleziona uno scenario"
-pulse_class = ""
-intro_msg = "Ciao! Sono pronto a monitorare Stitch."
+status_color = "#94A3B8"
+pulse_css = ""
+intro_msg = "Ciao! Seleziona uno scenario sopra per iniziare il test."
 
 if st.session_state.scenario == "wellness":
-    score = 98
-    theme_color = "#4CAF50" # Verde Material
-    status_text = "OTTIMA SALUTE"
-    intro_msg = "☀️ **Tutto perfetto!** Stitch ha dormito 8 ore. Nessun fastidio cutaneo. Giornata ideale per una passeggiata!"
-elif st.session_state.scenario == "derma":
-    score = 72
-    theme_color = "#FF9800" # Arancione Material
-    status_text = "ALLERTA PELLE"
-    intro_msg = "⚠️ **Rilevato fastidio.** Si gratta l'orecchio destro (15 volte/ora). Potrebbe essere un principio di otite."
-elif st.session_state.scenario == "danger":
-    score = 45
-    theme_color = "#FF5252" # Rosso Material
-    status_text = "RISCHIO CRITICO"
-    pulse_class = "pulse"
-    intro_msg = "🚨 **STOP IMMEDIATO!**\nSalti eccessivi (20) + Temperatura Alta (28°C).\nRischio combinato IVDD + Colpo di Calore."
+    score_val = 98
+    status_text = "SALUTE OTTIMA"
+    status_color = "#22C55E" # Green 500
+    intro_msg = "☀️ **Tutto perfetto!**\nStitch ha dormito 8 ore (Deep Sleep). Nessun prurito. Giornata ideale per il parco!"
 
-# DASHBOARD CARD (DESIGN NUOVO)
+elif st.session_state.scenario == "derma":
+    score_val = 72
+    status_text = "ALLERTA PELLE"
+    status_color = "#F97316" # Orange 500
+    intro_msg = "⚠️ **Rilevato fastidio.**\nSi sta grattando l'orecchio destro (15x/ora). Possibile inizio di otite."
+
+elif st.session_state.scenario == "danger":
+    score_val = 45
+    status_text = "RISCHIO CRITICO"
+    status_color = "#EF4444" # Red 500
+    pulse_css = "pulse-danger"
+    intro_msg = "🚨 **STOP IMMEDIATO!**\nRilevati 20 Salti + 28°C.\nRischio combinato IVDD e Colpo di Calore."
+
+# Render HTML Card
 st.markdown(f"""
-<div class="app-card {pulse_class}" style="border-top: 5px solid {theme_color};">
-    <div class="status-badge" style="background-color: {theme_color}20; color: {theme_color};">
+<div class="metric-card {pulse_css}">
+    <div style="font-size:12px; font-weight:800; color:{status_color}; letter-spacing:1px; margin-bottom:10px;">
         {status_text}
     </div>
-    <br>
-    <div class="score-circle" style="color: {theme_color}; border-color: {theme_color}; background-color: {theme_color}10;">
-        {score}
+    <div style="font-size:56px; font-weight:900; line-height:1; color:{status_color}; margin-bottom:5px;">
+        {score_val}
     </div>
-    <div style="color: #64748B; font-size: 14px; font-weight: 500;">Guardian Score</div>
+    <div style="font-size:14px; color:#64748B;">Guardian Score</div>
     
-    <div style="display: flex; justify-content: space-around; margin-top: 25px; border-top: 1px solid #F1F5F9; padding-top: 15px;">
-        <div style="text-align: center;">
-            <div style="font-size: 20px;">🦴</div>
-            <div style="font-size: 10px; color: #94A3B8; font-weight: 600;">SCHIENA</div>
-        </div>
-        <div style="text-align: center;">
-            <div style="font-size: 20px;">🫁</div>
-            <div style="font-size: 10px; color: #94A3B8; font-weight: 600;">RESPIRO</div>
-        </div>
-        <div style="text-align: center;">
-            <div style="font-size: 20px;">💤</div>
-            <div style="font-size: 10px; color: #94A3B8; font-weight: 600;">SONNO</div>
-        </div>
+    <div style="margin-top:20px; padding-top:15px; border-top:1px solid #F1F5F9; display:flex; justify-content:space-around;">
+        <span style="font-size:24px;" title="Schiena">🦴</span>
+        <span style="font-size:24px;" title="Respiro">🫁</span>
+        <span style="font-size:24px;" title="Pelle">🐾</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# CHAT INTERFACE
-st.markdown("<h4 style='color:#1E293B;'>💬 AI Coach</h4>", unsafe_allow_html=True)
+# 4. Chatbot
+st.markdown("<h4 style='color:#334155; margin-bottom:15px;'>Coach AI</h4>", unsafe_allow_html=True)
 
 if not st.session_state.messages and st.session_state.scenario != "neutral":
     st.session_state.messages.append({"role": "assistant", "content": intro_msg})
@@ -275,27 +233,27 @@ for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-user_input = st.chat_input("Chiedi al coach...")
+user_input = st.chat_input("Chiedi consiglio...")
 if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
         st.markdown(user_input)
     
     with st.chat_message("assistant"):
-        with st.spinner("Analisi..."):
+        with st.spinner("Analisi in corso..."):
             reply = get_ai_response(user_input, st.session_state.scenario)
             st.markdown(reply)
+            
     st.session_state.messages.append({"role": "assistant", "content": reply})
     log_chat(user_input, reply)
 
-# LEAD GEN (Solo Danger)
+# 5. Lead Gen (Solo Danger)
 if st.session_state.scenario == "danger":
     st.markdown("<br>", unsafe_allow_html=True)
     with st.form("lead"):
-        st.markdown(f"<div style='background:#FEF2F2; padding:15px; border-radius:10px; border:1px solid #FECACA; color:#991B1B; font-size:14px;'>⚠️ <b>Nella realtà non c'è il tasto reset.</b><br>Proteggi Stitch prima che sia tardi.</div>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        email = st.text_input("La tua email", placeholder="esempio@gmail.com")
+        st.markdown("<div style='color:#991B1B; font-weight:600; font-size:14px;'>⚠️ Proteggi Stitch prima che sia tardi.</div>", unsafe_allow_html=True)
+        email = st.text_input("Email", placeholder="tua@email.com")
         if st.form_submit_button("ENTRA IN LISTA D'ATTESA"):
             if email:
-                log_event("lead_submitted", {"email_hash": hash_email(email)})
+                log_event("lead_submitted", {"email_hash": hashlib.sha256(email.encode()).hexdigest()})
                 st.success("Sei in lista!")
