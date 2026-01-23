@@ -1,20 +1,18 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# --- CONFIGURAZIONE PAGINA STREAMLIT ---
-# Impostiamo il layout su "wide" e nascondiamo l'interfaccia nativa di Streamlit
-st.set_page_config(page_title="FrenchiePal - The French Bulldog Guardian", page_icon="🐾", layout="wide")
+# --- CONFIGURAZIONE ---
+st.set_page_config(page_title="FrenchiePal - Startup", page_icon="🐾", layout="wide")
 st.markdown("""
 <style>
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
-    /* Rimuove i margini bianchi standard di Streamlit */
     .block-container {padding: 0 !important; max-width: 100% !important;}
 </style>
 """, unsafe_allow_html=True)
 
-# --- CODICE HTML/TAILWIND DELLA LANDING PAGE ---
+# --- CODICE HTML ---
 landing_page_html = """
 <!DOCTYPE html>
 <html lang="it" class="scroll-smooth">
@@ -27,34 +25,11 @@ landing_page_html = """
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* Impostazioni Base di Stile */
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0F172A; /* Sfondo Scuro (Slate 900) */
-            color: #E2E8F0; /* Testo Chiaro (Slate 200) */
-            overflow-x: hidden;
-        }
-        /* Effetto Vetro (Glassmorphism) per le card */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        /* Testo con Gradiente */
-        .gradient-text {
-            background: linear-gradient(135deg, #818CF8 0%, #2DD4BF 100%); /* Indigo to Teal */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-        /* Bottone con Gradiente */
-        .gradient-btn {
-            background: linear-gradient(135deg, #6366F1 0%, #14B8A6 100%);
-        }
-        .gradient-btn:hover {
-            background: linear-gradient(135deg, #4F46E5 0%, #0D9488 100%);
-            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0F172A; color: #E2E8F0; overflow-x: hidden; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .gradient-text { background: linear-gradient(135deg, #818CF8 0%, #2DD4BF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+        .gradient-btn { background: linear-gradient(135deg, #6366F1 0%, #14B8A6 100%); }
+        .gradient-btn:hover { background: linear-gradient(135deg, #4F46E5 0%, #0D9488 100%); box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4); }
     </style>
 </head>
 <body>
@@ -75,19 +50,25 @@ landing_page_html = """
         <div class="absolute top-20 left-0 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px] -z-10"></div>
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-teal-600/20 rounded-full blur-[120px] -z-10"></div>
 
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-slate-800 border border-slate-700 text-sm font-medium text-indigo-300">
-                🚀 Startup in sviluppo
-            </div>
-            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-white">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-8 text-white">
                 Il tuo Frenchie è unico. <br>
                 <span class="gradient-text">Anche i suoi rischi lo sono.</span>
             </h1>
-            <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-                Proteggi la sua schiena e il suo respiro prima che sia tardi. 
-                FrenchiePal è il primo assistente intelligente dedicato alla gestione proattiva dei rischi IVDD e BAOS.
-            </p>
-            <a href="#waitlist" class="gradient-btn inline-flex items-center px-8 py-4 rounded-full text-lg font-bold text-white transition-all transform hover:scale-105">
+
+            <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 md:p-8 mb-10 backdrop-blur-sm max-w-3xl mx-auto shadow-2xl">
+                <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+                    <strong class="text-white">Siamo una Startup</strong> che sta sviluppando la prima soluzione tecnologica dedicata esclusivamente al Bulldog Francese. 
+                    <br><br>
+                    Il nostro obiettivo è creare un <strong>Consulente Digitale</strong> per la gestione proattiva dei rischi, 
+                    specializzato in <span class="text-indigo-400 font-bold">IVDD</span> (schiena), 
+                    <span class="text-teal-400 font-bold">BAOS</span> (respiro) e 
+                    <span class="text-pink-400 font-bold">Dermatiti</span>.
+                    <br>Ti aiutiamo a intercettare i problemi prima che diventino emergenze.
+                </p>
+            </div>
+
+            <a href="#waitlist" class="gradient-btn inline-flex items-center px-8 py-4 rounded-full text-lg font-bold text-white transition-all transform hover:scale-105 hover:shadow-xl">
                 Tienimi aggiornato sugli sviluppi
                 <i class="fas fa-arrow-right ml-3"></i>
             </a>
@@ -95,116 +76,99 @@ landing_page_html = """
     </section>
 
     <section class="py-20 px-6 bg-slate-900/50">
-        <div class="max-w-6xl mx-auto relative">
+        <div class="max-w-7xl mx-auto relative">
              <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Amare un Frenchie significa gestirne le fragilità.</h2>
-                <p class="text-slate-400 max-w-xl mx-auto">La loro genetica nasconde due nemici silenziosi che ogni proprietario deve conoscere. L'ignoranza è il rischio maggiore.</p>
+                <p class="text-slate-400 max-w-xl mx-auto">La genetica non è un'opinione. Ecco i tre nemici silenziosi che la nostra app ti aiuta a combattere ogni giorno.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="glass-card p-8 rounded-3xl border-red-500/20 hover:border-red-500/40 transition relative overflow-hidden">
-                    <div class="absolute top-0 right-0 -mt-10 -mr-10 w-32 h-32 bg-red-500/10 rounded-full blur-3xl"></div>
-                    <div class="w-14 h-14 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-400 text-2xl mb-6">
+            <div class="grid md:grid-cols-3 gap-6">
+                
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-red-500 hover:border-red-500/40 transition relative group">
+                    <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400 text-2xl mb-6 group-hover:scale-110 transition">
                         <i class="fas fa-bone"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-white">Il Nemico della Schiena (IVDD)</h3>
-                    <p class="text-slate-400 mb-4">
-                        I loro dischi spinali invecchiano precocemente. Un salto sbagliato dal divano non è solo un gioco, può trasformarsi in un trauma improvviso con conseguenze gravi e costose.
+                    <h3 class="text-xl font-bold mb-3 text-white">IVDD (Schiena)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        I dischi spinali del Frenchie invecchiano precocemente. Un salto dal divano o troppe scale possono causare traumi improvvisi e paralisi.
                     </p>
-                    <div class="inline-block px-3 py-1 rounded-lg bg-red-500/10 text-red-300 text-sm font-bold">Rischio Paralisi</div>
+                    <div class="inline-block px-3 py-1 rounded-lg bg-red-500/10 text-red-300 text-xs font-bold uppercase tracking-wider">Monitoraggio Salti</div>
                 </div>
 
-                <div class="glass-card p-8 rounded-3xl border-orange-500/20 hover:border-orange-500/40 transition relative overflow-hidden">
-                     <div class="absolute top-0 right-0 -mt-10 -mr-10 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl"></div>
-                    <div class="w-14 h-14 bg-orange-500/20 rounded-2xl flex items-center justify-center text-orange-400 text-2xl mb-6">
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-teal-500 hover:border-teal-500/40 transition relative group">
+                    <div class="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-400 text-2xl mb-6 group-hover:scale-110 transition">
                         <i class="fas fa-lungs"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-white">Il Nemico del Respiro (BAOS)</h3>
-                    <p class="text-slate-400 mb-4">
-                        "Russare forte" non è carino, è fatica respiratoria. Il caldo e l'esercizio eccessivo possono diventare letali in pochi minuti per un cane che fatica a raffreddarsi.
+                    <h3 class="text-xl font-bold mb-3 text-white">BAOS (Respiro)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Il respiro affannoso non è "normale". Il caldo e l'esercizio eccessivo possono diventare letali in pochi minuti per un cane che non dissipa calore.
                     </p>
-                    <div class="inline-block px-3 py-1 rounded-lg bg-orange-500/10 text-orange-300 text-sm font-bold">Rischio Colpo di Calore</div>
+                    <div class="inline-block px-3 py-1 rounded-lg bg-teal-500/10 text-teal-300 text-xs font-bold uppercase tracking-wider">Alert Meteo + Attività</div>
                 </div>
+
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-pink-500 hover:border-pink-500/40 transition relative group">
+                    <div class="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-400 text-2xl mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Dermatiti & Otiti</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        La pelle delicata e le pieghe sono il terreno ideale per allergie e infezioni. Un prurito ignorato diventa un'otite cronica molto dolorosa.
+                    </p>
+                    <div class="inline-block px-3 py-1 rounded-lg bg-pink-500/10 text-pink-300 text-xs font-bold uppercase tracking-wider">Tracking Sintomi</div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <section class="py-24 px-6 relative overflow-hidden">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/10 rounded-full blur-[150px] -z-10"></div>
-
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20">
-                <h2 class="text-4xl md:text-5xl font-extrabold mb-6 text-white">
-                    Non un semplice monitoraggio. <br>
-                    Un <span class="gradient-text">Consulente Proattivo.</span>
-                </h2>
-                <p class="text-slate-400 text-lg max-w-2xl mx-auto">Le soluzioni generiche ti dicono <em>quanto</em> si è mosso. Noi ti diciamo <em>come</em> si è mosso e se è al sicuro.</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass-card p-8 rounded-3xl text-center group hover:-translate-y-2 transition-all duration-300">
-                    <div class="w-20 h-20 mx-auto bg-indigo-500/20 rounded-3xl flex items-center justify-center text-indigo-400 text-3xl mb-8 group-hover:scale-110 transition">
-                        <i class="fas fa-shield-dog"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-white">1. IVDD Shield</h3>
-                    <p class="text-slate-400 leading-relaxed">
-                        Analizziamo la <strong>qualità</strong> del movimento. Monitoriamo l'impatto dei salti verticali per preservare la sua colonna vertebrale negli anni.
-                    </p>
-                </div>
-
-                <div class="glass-card p-8 rounded-3xl text-center group hover:-translate-y-2 transition-all duration-300">
-                    <div class="w-20 h-20 mx-auto bg-teal-500/20 rounded-3xl flex items-center justify-center text-teal-400 text-3xl mb-8 group-hover:scale-110 transition">
-                        <i class="fas fa-temperature-arrow-up"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-white">2. Airway Guard</h3>
-                    <p class="text-slate-400 leading-relaxed">
-                        Incrociamo temperatura esterna e attività. Ti avvisiamo quando l'ambiente diventa rischioso per un brachicefalo prima che vada in affanno.
-                    </p>
-                </div>
-
-                <div class="glass-card p-8 rounded-3xl text-center group hover:-translate-y-2 transition-all duration-300">
-                    <div class="w-20 h-20 mx-auto bg-purple-500/20 rounded-3xl flex items-center justify-center text-purple-400 text-3xl mb-8 group-hover:scale-110 transition">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-white">3. Longevity Coach</h3>
-                    <p class="text-slate-400 leading-relaxed">
-                        Un'IA verticale sulla razza per la gestione quotidiana: controllo del peso, gestione dello stress e dermatiti. Consigli su misura, ogni giorno.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-20 px-6 bg-slate-900/50 border-y border-slate-800/50">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[150px] -z-10"></div>
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6 text-white">Perché un'app solo per i Bulldog Francesi?</h2>
-            <p class="text-lg text-slate-300 leading-relaxed mb-8">
-                Perché un Pastore Tedesco non rischia la paralisi saltando giù dal letto. Il tuo Frenchie sì.
-                <br>Le app generiche trattano tutti i cani allo stesso modo. Noi crediamo che una razza speciale meriti una protezione specializzata.
+            <h2 class="text-3xl font-bold mb-6 text-white">La nostra Proposta di Valore</h2>
+            <p class="text-lg text-slate-300 leading-relaxed mb-10">
+                Non offriamo un semplice tracker GPS. Offriamo un <strong>Sistema di Allerta Precoce</strong>.
+                <br>FrenchiePal unisce dati biometrici e intelligenza artificiale per darti consigli proattivi, non solo grafici che non sai interpretare.
             </p>
-            <div class="text-5xl">🐾</div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+                    <div class="text-2xl mb-2">🛡️</div>
+                    <div class="text-xs font-bold text-slate-400">Prevenzione</div>
+                </div>
+                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+                    <div class="text-2xl mb-2">🧠</div>
+                    <div class="text-xs font-bold text-slate-400">AI Coach</div>
+                </div>
+                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+                    <div class="text-2xl mb-2">📊</div>
+                    <div class="text-xs font-bold text-slate-400">Dati Reali</div>
+                </div>
+                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+                    <div class="text-2xl mb-2">❤️</div>
+                    <div class="text-xs font-bold text-slate-400">Longevità</div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="waitlist" class="py-24 px-6 relative">
-        <div class="max-w-3xl mx-auto text-center glass-card p-10 md:p-16 rounded-[3rem]">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">Stiamo costruendo il futuro del benessere per i Frenchie.</h2>
-            <p class="text-slate-400 text-lg mb-10">
-                Siamo una startup in fase di sviluppo. Lasciaci la tua email per seguire il viaggio, darci feedback ed essere tra i primi a provare FrenchiePal. Nessuno spam, promesso.
+        <div class="max-w-3xl mx-auto text-center glass-card p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-700">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">Costruiamo insieme il futuro.</h2>
+            <p class="text-slate-400 text-lg mb-8">
+                Siamo in fase di sviluppo attivo. Lasciaci la tua email per ricevere aggiornamenti sul lancio della Beta e consigli esclusivi per il tuo Frenchie.
             </p>
 
             <form class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
                 <input type="email" placeholder="La tua email migliore..." required
-                    class="flex-1 bg-slate-800 border border-slate-700 rounded-full px-6 py-4 text-white placeholder-slate-500 outline-none focus:border-indigo-500 transition w-full">
+                    class="flex-1 bg-slate-900 border border-slate-700 rounded-full px-6 py-4 text-white placeholder-slate-500 outline-none focus:border-indigo-500 transition w-full shadow-inner">
                 <button type="submit" class="gradient-btn px-8 py-4 rounded-full font-bold text-white shrink-0 transition-all hover:shadow-lg hover:scale-105">
                     Tienimi aggiornato
                 </button>
             </form>
-            <p class="text-slate-500 text-sm mt-6">Unendoti accetti di ricevere aggiornamenti sullo sviluppo del prodotto.</p>
+            <p class="text-slate-500 text-sm mt-6">Zero spam. Solo aggiornamenti importanti.</p>
         </div>
     </section>
 
-    <footer class="py-8 text-center text-slate-500 text-sm">
+    <footer class="py-8 text-center text-slate-600 text-sm border-t border-slate-800/50">
         <p>© 2026 FrenchiePal Startup. Tutti i diritti riservati.</p>
     </footer>
 
@@ -212,5 +176,4 @@ landing_page_html = """
 </html>
 """
 
-# Renderizza l'HTML a tutta pagina
-components.html(landing_page_html, height=1600, scrolling=True)
+components.html(landing_page_html, height=2200, scrolling=True)
