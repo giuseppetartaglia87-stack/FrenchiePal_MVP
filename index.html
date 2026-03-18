@@ -141,7 +141,6 @@
                 <a href="#demo" class="nav-link">Demo</a>
                 <a href="#mission" class="nav-link">Mission</a>
             </div>
-            <a href="#waitlist" onclick="trackEvent('cta_click', { location: 'navbar' })" class="hidden md:block bg-white text-slate-900 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition shadow-lg">Unisciti alla lista d'attesa</a>
         </div>
     </nav>
 
@@ -321,17 +320,12 @@
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
-                        <div class="flex gap-2 mt-3 flex-wrap">
-                            <span onclick="fillChat('Il cane russa molto, è normale?')" class="text-xs bg-slate-800 text-slate-400 px-3 py-1 rounded-full cursor-pointer hover:bg-slate-700 transition">"Russa molto"</span>
-                            <span onclick="fillChat('Come pulisco bene le pieghe?')" class="text-xs bg-slate-800 text-slate-400 px-3 py-1 rounded-full cursor-pointer hover:bg-slate-700 transition">"Pulizia pieghe"</span>
-                            <span onclick="fillChat('Oggi ha fatto tanti salti dal divano, devo fermarlo?')" class="text-xs bg-slate-800 text-slate-400 px-3 py-1 rounded-full cursor-pointer hover:bg-slate-700 transition">"Troppi salti"</span>
-                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="order-1 lg:order-2 flex justify-center w-full">
-                <div id="phone-frame" class="relative w-[280px] h-[580px] bg-white rounded-[40px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
+                <div id="phone-frame" class="relative w-[300px] sm:w-[320px] h-[620px] sm:h-[660px] bg-white rounded-[40px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-xl z-20"></div>
                     <div id="screen-dashboard" class="phone-screen active bg-slate-50 flex-1 relative">
                         <div class="pt-8 pb-4 px-5 flex justify-between items-end">
@@ -701,11 +695,6 @@
             if (typingBubble) typingBubble.remove();
         }
 
-        function fillChat(text) {
-            chatInputWeb.value = text;
-            trackEvent('chat_prompt_click', { prompt: text });
-        }
-
         function resetAlerts() {
             switchTab('dash');
             phoneFrame.classList.remove('alert-mode-red', 'alert-mode-orange', 'alert-mode-yellow');
@@ -721,6 +710,8 @@
         }
 
         async function submitLeadForm() {
+            trackEvent('form_cta_click', { location: 'waitlist_form' });
+
             const email = document.getElementById('email-input')?.value || '';
             const dogAge = document.getElementById('dog-age-input')?.value || '';
             const priority = document.getElementById('priority-input')?.value || '';
