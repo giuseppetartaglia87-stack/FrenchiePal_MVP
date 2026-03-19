@@ -13,34 +13,86 @@ const supabase = createClient(
 const PRIVACY_WARNING =
   'Grazie! Per motivi di privacy, ti prego di non inserire i tuoi dati personali qui. Continuiamo a parlare del tuo amico a quattro zampe? 🐶';
 
-const EMAIL_REGEX = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
-const PHONE_REGEX = /(?:\+?\d[\d\s().-]{6,}\d)/g;
-const ADDRESS_REGEX = /\b(via|viale|piazza|corso|largo|vicolo|strada)\b/i;
-const ADDRESS_LINE_REGEX = /\b(via|viale|piazza|corso|largo|vicolo|strada)\b.*/gi;
-const NAME_REGEX = /\b(mi chiamo|il mio nome è)\b/i;
-const NAME_LINE_REGEX_1 = /\b(mi chiamo)\s+[A-Za-zÀ-ÿ' -]+/gi;
-const NAME_LINE_REGEX_2 = /\b(il mio nome è)\s+[A-Za-zÀ-ÿ' -]+/gi;
+// -----------------------------
+// REGEX EMAIL
+// -----------------------------
+const EMAIL_TEST_REGEX = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
+const EMAIL_REPLACE_REGEX = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
+
+// -----------------------------
+// REGEX TELEFONO
+// -----------------------------
+const PHONE_TEST_REGEX = /(?:\+?\d[\d\s().-]{6,}\d)/;
+const PHONE_REPLACE_REGEX = /(?:\+?\d[\d\s().-]{6,}\d)/g;
+
+// -----------------------------
+// REGEX INDIRIZZO
+// Più restrittiva della versione precedente
+// -----------------------------
+const ADDRESS_TEST_REGEX =
+  /\b(?:via|viale|piazza|corso|largo|vicolo|strada)\s+[A-Za-zÀ-ÿ0-9'’.\- ]{3,}\b/i;
+
+const ADDRESS_REPLACE_REGEX =
+  /\b(?:via|viale|piazza|corso|largo|vicolo|strada)\s+[A-Za-zÀ-ÿ0-9'’.\- ]{3,}\b/gi;
+
+// -----------------------------
+// REGEX NOME
+// Evito "io sono ..." perché genera troppi falsi positivi
+// tipo "io sono preoccupato"
+// -----------------------------
+const NAME_TEST_REGEXES = [
+  /\bmi chiamo\s+[A-Za-zÀ-ÿ'’-]{2,30}\b/i,
+  /\bil mio nome è\s+[A-Za-zÀ-ÿ'’-]{2,30}\b/i
+];
+
+const NAME_REPLACE_REGEXES = [
+  {
+    re: /(\bmi chiamo)\s+[A-Za-zÀ-ÿ'’-]{2,30}\b/gi,
+    replacement: '$1 [NOME]'
+  },
+  {
+    re: /(\bil mio nome è)\s+[A-Za-zÀ-ÿ'’-]{2,30}\b/gi,
+    replacement: '$1 [NOME]'
+  }
+];
 
 function extractEmail(text = '') {
-  const matches = text.match(EMAIL_REGEX);
+  const matches = text.match(EMAIL_REPLACE_REGEX);
   return matches?.[0] || null;
 }
 
-function containsRestrictedPersonalData(text = '') {
-  return PHONE_REGEX.test(text) || ADDRESS_REGEX.test(text) || NAME_REGEX.test(text);
+function containsEmail(text = '') {
+  return EMAIL_TEST_REGEX.test(text);
+}
+
+function containsName(text = '') {
+  return NAME_TEST_REGEXES.some((re) => re.test(text));
+}
+
+function containsPhone(text = '') {
+  return PHONE_TEST_REGEX.test(text);
+}
+
+function containsAddress(text = '') {
+  return ADDRESS_TEST_REGEX.test(text);
+}
+
+// L'email NON conta come motivo di blocco,
+// perché vuoi consentirne la raccolta.
+function containsRestrictedPersonalDataExcludingEmail(text = '') {
+  return containsName(text) || containsPhone(text) || containsAddress(text);
 }
 
 function sanitizeForStorage(text = '') {
   let sanitized = text;
 
-  sanitized = sanitized.replace(EMAIL_REGEX, '[EMAIL]');
-  sanitized = sanitized.replace(PHONE_REGEX, '[TELEFONO]');
-  sanitized = sanitized.replace(NAME_LINE_REGEX_1, '$1 [NOME]');
-  sanitized = sanitized.replace(NAME_LINE_REGEX_2, '$1 [NOME]');
+  sanitized = sanitized.replace(EMAIL_REPLACE_REGEX, '[EMAIL]');
+  sanitized = sanitized.replace(PHONE_REPLACE_REGEX, '[TELEFONO]');
+  sanitized = sanitized.replace(ADDRESS_REPLACE_REGEX, '[INDIRIZZO]');
 
-  if (ADDRESS_REGEX.test(sanitized)) {
-    sanitized = sanitized.replace(ADDRESS_LINE_REGEX, '[INDIRIZZO]');
-  }
+  NAME_REPLACE_REGEXES.forEach(({ re, replacement }) => {
+    sanitized = sanitized.replace(re, replacement);
+  });
 
   return sanitized.trim();
 }
@@ -48,14 +100,16 @@ function sanitizeForStorage(text = '') {
 function sanitizeForModel(text = '') {
   let sanitized = text;
 
-  sanitized = sanitized.replace(EMAIL_REGEX, '[EMAIL RACCOLTA PER AGGIORNAMENTI]');
-  sanitized = sanitized.replace(PHONE_REGEX, '[TELEFONO]');
-  sanitized = sanitized.replace(NAME_LINE_REGEX_1, '$1 [NOME]');
-  sanitized = sanitized.replace(NAME_LINE_REGEX_2, '$1 [NOME]');
+  sanitized = sanitized.replace(
+    EMAIL_REPLACE_REGEX,
+    '[EMAIL RACCOLTA PER AGGIORNAMENTI]'
+  );
+  sanitized = sanitized.replace(PHONE_REPLACE_REGEX, '[TELEFONO]');
+  sanitized = sanitized.replace(ADDRESS_REPLACE_REGEX, '[INDIRIZZO]');
 
-  if (ADDRESS_REGEX.test(sanitized)) {
-    sanitized = sanitized.replace(ADDRESS_LINE_REGEX, '[INDIRIZZO]');
-  }
+  NAME_REPLACE_REGEXES.forEach(({ re, replacement }) => {
+    sanitized = sanitized.replace(re, replacement);
+  });
 
   return sanitized.trim();
 }
@@ -146,7 +200,11 @@ function inferNeedsSummary(message = '', topic = 'routine') {
   const msg = message.toLowerCase();
 
   if (topic === 'schiena') {
-    if (msg.includes('salti') || msg.includes('divano') || msg.includes('scale')) {
+    if (
+      msg.includes('salti') ||
+      msg.includes('divano') ||
+      msg.includes('scale')
+    ) {
       return 'gestione salti/scale e carico sulla schiena';
     }
     return 'preoccupazione per schiena o ivdd';
@@ -187,7 +245,9 @@ export default async function handler(req, res) {
   const { session_id, message } = req.body || {};
 
   if (!session_id || !message) {
-    return res.status(400).json({ error: 'session_id o message mancanti.' });
+    return res
+      .status(400)
+      .json({ error: 'session_id o message mancanti.' });
   }
 
   const topic = inferTopic(message);
@@ -196,7 +256,9 @@ export default async function handler(req, res) {
 
   const now = new Date().toISOString();
   const email = extractEmail(message);
-  const hasRestrictedPersonalData = containsRestrictedPersonalData(message);
+  const hasEmail = containsEmail(message);
+  const hasRestrictedPersonalData =
+    containsRestrictedPersonalDataExcludingEmail(message);
 
   const systemPrompt = `
 # CONTESTO E IDENTITÀ
@@ -258,7 +320,9 @@ Rispetta queste regole di comportamento:
   try {
     await supabase
       .from('chat_sessions')
-      .upsert([{ session_id, last_activity_at: now }], { onConflict: 'session_id' });
+      .upsert([{ session_id, last_activity_at: now }], {
+        onConflict: 'session_id'
+      });
 
     if (email) {
       const normalizedEmail = String(email).trim().toLowerCase();
@@ -281,11 +345,7 @@ Rispetta queste regole di comportamento:
         {
           session_id,
           event_name: 'lead_chat_submit',
-          event_data: {
-            topic,
-            intent,
-            source: 'chat'
-          }
+          event_data: { topic, intent, source: 'chat' }
         }
       ]);
 
@@ -306,7 +366,8 @@ Rispetta queste regole di comportamento:
     }
 
     const isFirstUserMessage =
-      !previousMessages || previousMessages.filter((m) => m.role === 'user').length === 0;
+      !previousMessages ||
+      previousMessages.filter((m) => m.role === 'user').length === 0;
 
     if (isFirstUserMessage) {
       await supabase.from('events').insert([
@@ -335,11 +396,11 @@ Rispetta queste regole di comportamento:
       {
         session_id,
         event_name: 'chat_message_sent',
-        event_data: { topic, intent }
+        event_data: { topic, intent, has_email: hasEmail }
       }
     ]);
 
-    if (hasRestrictedPersonalData && !email) {
+    if (hasRestrictedPersonalData) {
       await supabase.from('chat_messages').insert([
         {
           session_id,
