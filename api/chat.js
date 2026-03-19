@@ -14,9 +14,12 @@ const PRIVACY_WARNING =
   'Grazie! Per motivi di privacy, ti prego di non inserire i tuoi dati personali qui. Continuiamo a parlare del tuo amico a quattro zampe? 🐶';
 
 const EMAIL_REGEX = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
-const PHONE_REGEX = /(?:\+?\d[\d\s().-]{6,}\d)/;
+const PHONE_REGEX = /(?:\+?\d[\d\s().-]{6,}\d)/g;
 const ADDRESS_REGEX = /\b(via|viale|piazza|corso|largo|vicolo|strada)\b/i;
+const ADDRESS_LINE_REGEX = /\b(via|viale|piazza|corso|largo|vicolo|strada)\b.*/gi;
 const NAME_REGEX = /\b(mi chiamo|il mio nome è)\b/i;
+const NAME_LINE_REGEX_1 = /\b(mi chiamo)\s+[A-Za-zÀ-ÿ' -]+/gi;
+const NAME_LINE_REGEX_2 = /\b(il mio nome è)\s+[A-Za-zÀ-ÿ' -]+/gi;
 
 function extractEmail(text = '') {
   const matches = text.match(EMAIL_REGEX);
@@ -32,21 +35,29 @@ function sanitizeForStorage(text = '') {
 
   sanitized = sanitized.replace(EMAIL_REGEX, '[EMAIL]');
   sanitized = sanitized.replace(PHONE_REGEX, '[TELEFONO]');
-  sanitized = sanitized.replace(/\b(mi chiamo)\s+[A-Za-zÀ-ÿ' -]+/gi, '$1 [NOME]');
-  sanitized = sanitized.replace(/\b(il mio nome è)\s+[A-Za-zÀ-ÿ' -]+/gi, '$1 [NOME]');
+  sanitized = sanitized.replace(NAME_LINE_REGEX_1, '$1 [NOME]');
+  sanitized = sanitized.replace(NAME_LINE_REGEX_2, '$1 [NOME]');
 
   if (ADDRESS_REGEX.test(sanitized)) {
-    sanitized = sanitized.replace(
-      /\b(via|viale|piazza|corso|largo|vicolo|strada)\b.*/i,
-      '[INDIRIZZO]'
-    );
+    sanitized = sanitized.replace(ADDRESS_LINE_REGEX, '[INDIRIZZO]');
   }
 
-  return sanitized;
+  return sanitized.trim();
 }
 
 function sanitizeForModel(text = '') {
-  return text.replace(EMAIL_REGEX, '[EMAIL RACCOLTA PER AGGIORNAMENTI]');
+  let sanitized = text;
+
+  sanitized = sanitized.replace(EMAIL_REGEX, '[EMAIL RACCOLTA PER AGGIORNAMENTI]');
+  sanitized = sanitized.replace(PHONE_REGEX, '[TELEFONO]');
+  sanitized = sanitized.replace(NAME_LINE_REGEX_1, '$1 [NOME]');
+  sanitized = sanitized.replace(NAME_LINE_REGEX_2, '$1 [NOME]');
+
+  if (ADDRESS_REGEX.test(sanitized)) {
+    sanitized = sanitized.replace(ADDRESS_LINE_REGEX, '[INDIRIZZO]');
+  }
+
+  return sanitized.trim();
 }
 
 function inferTopic(message = '') {
@@ -87,6 +98,87 @@ function inferTopic(message = '') {
   return 'routine';
 }
 
+function inferIntent(message = '') {
+  const msg = message.toLowerCase();
+
+  if (
+    msg.includes('è normale') ||
+    msg.includes('devo') ||
+    msg.includes('posso') ||
+    msg.includes('cosa devo fare') ||
+    msg.includes('cosa faccio') ||
+    msg.includes('?')
+  ) {
+    return 'advice_request';
+  }
+
+  if (
+    msg.includes('preven') ||
+    msg.includes('evitare') ||
+    msg.includes('monitor') ||
+    msg.includes('controllare')
+  ) {
+    return 'prevention_help';
+  }
+
+  if (
+    msg.includes('interessato') ||
+    msg.includes('aggiornami') ||
+    msg.includes('lista d') ||
+    msg.includes('ti lascio la mail')
+  ) {
+    return 'lead_interest';
+  }
+
+  if (
+    msg.includes('sintomo') ||
+    msg.includes('problema') ||
+    msg.includes('respira male') ||
+    msg.includes('si gratta')
+  ) {
+    return 'symptom_help';
+  }
+
+  return 'general_support';
+}
+
+function inferNeedsSummary(message = '', topic = 'routine') {
+  const msg = message.toLowerCase();
+
+  if (topic === 'schiena') {
+    if (msg.includes('salti') || msg.includes('divano') || msg.includes('scale')) {
+      return 'gestione salti/scale e carico sulla schiena';
+    }
+    return 'preoccupazione per schiena o ivdd';
+  }
+
+  if (topic === 'respiro') {
+    if (msg.includes('caldo') || msg.includes('affanno')) {
+      return 'gestione caldo e affanno';
+    }
+    if (msg.includes('russa')) {
+      return 'rumori respiratori e possibile rischio baos';
+    }
+    return 'preoccupazione per respiro';
+  }
+
+  if (topic === 'pelle') {
+    if (msg.includes('pieghe')) {
+      return 'cura pieghe e prevenzione irritazioni';
+    }
+    if (msg.includes('gratta') || msg.includes('prurito')) {
+      return 'prurito e possibile dermatite';
+    }
+    return 'preoccupazione per pelle o allergie';
+  }
+
+  if (msg.includes('cibo') || msg.includes('mangia') || msg.includes('dieta')) {
+    return 'supporto su alimentazione';
+  }
+
+  return 'supporto sulla routine quotidiana';
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -99,6 +191,9 @@ export default async function handler(req, res) {
   }
 
   const topic = inferTopic(message);
+  const intent = inferIntent(message);
+  const needs_summary = inferNeedsSummary(message, topic);
+
   const now = new Date().toISOString();
   const email = extractEmail(message);
   const hasRestrictedPersonalData = containsRestrictedPersonalData(message);
@@ -188,6 +283,7 @@ Rispetta queste regole di comportamento:
           event_name: 'lead_chat_submit',
           event_data: {
             topic,
+            intent,
             source: 'chat'
           }
         }
@@ -217,7 +313,7 @@ Rispetta queste regole di comportamento:
         {
           session_id,
           event_name: 'chat_first_message',
-          event_data: { topic }
+          event_data: { topic, intent }
         }
       ]);
     }
@@ -229,7 +325,9 @@ Rispetta queste regole di comportamento:
         session_id,
         role: 'user',
         content: sanitizedUserMessage,
-        topic
+        topic,
+        intent,
+        needs_summary
       }
     ]);
 
@@ -237,7 +335,7 @@ Rispetta queste regole di comportamento:
       {
         session_id,
         event_name: 'chat_message_sent',
-        event_data: { topic }
+        event_data: { topic, intent }
       }
     ]);
 
@@ -247,7 +345,9 @@ Rispetta queste regole di comportamento:
           session_id,
           role: 'assistant',
           content: PRIVACY_WARNING,
-          topic: 'privacy'
+          topic: 'privacy',
+          intent: 'privacy_warning',
+          needs_summary: 'richiesta con dati personali bloccata'
         }
       ]);
 
@@ -267,7 +367,7 @@ Rispetta queste regole di comportamento:
     const currentMessageForModel = sanitizeForModel(message);
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o',
+      model: 'gpt-4o-mini',
       messages: [
         { role: 'system', content: systemPrompt },
         ...historyForModel,
@@ -283,7 +383,9 @@ Rispetta queste regole di comportamento:
         session_id,
         role: 'assistant',
         content: sanitizeForStorage(reply),
-        topic
+        topic,
+        intent: 'assistant_reply',
+        needs_summary
       }
     ]);
 
