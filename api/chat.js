@@ -16,7 +16,7 @@ const PRIVACY_WARNING =
 const EMAIL_REGEX = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
 const PHONE_REGEX = /(?:\+?\d[\d\s().-]{6,}\d)/;
 const ADDRESS_REGEX = /\b(via|viale|piazza|corso|largo|vicolo|strada)\b/i;
-const NAME_REGEX = /\b(mi chiamo|il mio nome è)\b/i;
+const NAME_REGEX = /\b(mi chiamo|il mio nome è|sono)\b/i;
 
 function extractEmail(text = '') {
   const matches = text.match(EMAIL_REGEX);
