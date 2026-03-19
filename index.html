@@ -140,6 +140,7 @@
                 <a href="#solution" class="nav-link">Soluzione</a>
                 <a href="#demo" class="nav-link">Demo</a>
                 <a href="#mission" class="nav-link">Mission</a>
+                <a href="#privacy" class="nav-link">Privacy</a>
             </div>
         </div>
     </nav>
@@ -166,7 +167,7 @@
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <a href="#waitlist" onclick="trackEvent('cta_click', { location: 'hero_primary' })" class="btn-primary px-8 py-4 rounded-full text-white font-bold text-lg shadow-xl">Unisciti alla lista d'attesa</a>
+                <a href="#waitlist" onclick="trackEvent('cta_click', { location: 'hero_primary' })" class="btn-primary px-8 py-4 rounded-full text-white font-bold text-lg shadow-xl">Unisciti alla lista d’attesa</a>
                 <a href="#demo" onclick="trackEvent('cta_click', { location: 'hero_secondary_demo' })" class="btn-secondary px-8 py-4 rounded-full font-bold text-lg">Prova la demo</a>
             </div>
         </div>
@@ -270,10 +271,10 @@
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-600 rounded-full blur-[150px] opacity-10 -z-10"></div>
 
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-            <div class="order-2 lg:order-1">
+            <div class="order-1 lg:order-1">
                 <h2 class="section-title">Prova l’esperienza FrenchiePal</h2>
                 <p class="text-lg text-slate-400 mb-10">
-                    Esplora le due anime della piattaforma: <strong>alert intelligenti</strong> per i momenti delicati e un <strong>assistente AI</strong> dedicato alla gestione quotidiana del tuo Frenchie.
+                    Esplora le due anime della piattaforma: <strong>alert intelligenti</strong> per i momenti delicati e un <strong>assistente AI</strong> dedicato alla gestione quotidiana del tuo Frenchie. Puoi testare entrambe sia dai controlli qui accanto sia direttamente nel cellulare.
                 </p>
 
                 <div class="mb-10">
@@ -281,25 +282,25 @@
                         <i class="fas fa-bell"></i> 1. Simula un alert
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                        <button onclick="triggerAlert('ivdd')" class="glass-card p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-red-500/10 group transition-all cursor-pointer">
+                        <button onclick="triggerAlert('ivdd', 'panel')" class="glass-card p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-red-500/10 group transition-all cursor-pointer">
                             <div class="text-red-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
                                 <i class="fas fa-bone"></i>
                             </div>
                             <div class="font-bold text-white text-sm">Schiena</div>
                         </button>
-                        <button onclick="triggerAlert('baos')" class="glass-card p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-teal-500/10 group transition-all cursor-pointer">
+                        <button onclick="triggerAlert('baos', 'panel')" class="glass-card p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-teal-500/10 group transition-all cursor-pointer">
                             <div class="text-teal-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
                                 <i class="fas fa-lungs"></i>
                             </div>
                             <div class="font-bold text-white text-sm">Respiro</div>
                         </button>
-                        <button onclick="triggerAlert('derma')" class="glass-card p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-pink-500/10 group transition-all cursor-pointer">
+                        <button onclick="triggerAlert('derma', 'panel')" class="glass-card p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-pink-500/10 group transition-all cursor-pointer">
                             <div class="text-pink-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
                                 <i class="fas fa-paw"></i>
                             </div>
                             <div class="font-bold text-white text-sm">Pelle</div>
                         </button>
-                        <button onclick="resetAlerts()" class="glass-card p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-emerald-500/10 group transition-all cursor-pointer">
+                        <button onclick="resetAlerts('panel')" class="glass-card p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-emerald-500/10 group transition-all cursor-pointer">
                             <div class="text-emerald-400 text-2xl mb-2 group-hover:scale-110 transition duration-300">
                                 <i class="fas fa-rotate-left"></i>
                             </div>
@@ -324,9 +325,10 @@
                 </div>
             </div>
 
-            <div class="order-1 lg:order-2 flex justify-center w-full">
-                <div id="phone-frame" class="relative w-[300px] sm:w-[320px] h-[620px] sm:h-[660px] bg-white rounded-[40px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
+            <div class="order-2 lg:order-2 flex justify-center w-full">
+                <div id="phone-frame" class="relative w-[285px] sm:w-[305px] h-[590px] sm:h-[630px] bg-white rounded-[40px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-xl z-20"></div>
+
                     <div id="screen-dashboard" class="phone-screen active bg-slate-50 flex-1 relative">
                         <div class="pt-8 pb-4 px-5 flex justify-between items-end">
                             <div>
@@ -334,10 +336,12 @@
                                 <div id="phone-status-text" class="text-xl font-black text-emerald-500 leading-none">STABILE</div>
                             </div>
                         </div>
+
                         <div class="flex-1 flex flex-col items-center justify-center p-4 text-center">
                             <div id="alert-icon-container" class="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 transition-all duration-500">
                                 <span id="alert-icon" class="text-5xl">🐶</span>
                             </div>
+
                             <div class="grid grid-cols-3 gap-2 w-full mb-4">
                                 <div class="bg-white rounded-lg p-1.5 border border-slate-100 shadow-sm">
                                     <div class="text-[8px] text-slate-400 uppercase font-bold">RR</div>
@@ -352,6 +356,22 @@
                                     <div id="val-act" class="text-sm font-bold text-slate-700">Bassa</div>
                                 </div>
                             </div>
+
+                            <div class="grid grid-cols-4 gap-2 w-full mb-4">
+                                <button onclick="triggerAlert('ivdd', 'phone')" class="rounded-lg bg-red-50 border border-red-100 py-2 text-[10px] font-bold text-red-600">
+                                    Schiena
+                                </button>
+                                <button onclick="triggerAlert('baos', 'phone')" class="rounded-lg bg-orange-50 border border-orange-100 py-2 text-[10px] font-bold text-orange-600">
+                                    Respiro
+                                </button>
+                                <button onclick="triggerAlert('derma', 'phone')" class="rounded-lg bg-pink-50 border border-pink-100 py-2 text-[10px] font-bold text-pink-600">
+                                    Pelle
+                                </button>
+                                <button onclick="resetAlerts('phone')" class="rounded-lg bg-emerald-50 border border-emerald-100 py-2 text-[10px] font-bold text-emerald-600">
+                                    Reset
+                                </button>
+                            </div>
+
                             <div class="bg-white rounded-xl p-3 border border-slate-100 shadow-sm flex-1 w-full text-left">
                                 <h3 id="alert-title" class="text-sm font-bold text-slate-800 mb-1">Tutto tranquillo</h3>
                                 <div id="alert-desc" class="text-xs text-slate-500 leading-relaxed">
@@ -359,6 +379,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="h-14 bg-white border-t flex justify-around items-center z-30">
                             <button onclick="switchTab('dash')" id="tab-dash" class="flex flex-col items-center text-indigo-600 transition">
                                 <i class="fas fa-heart-pulse text-lg mb-0.5"></i>
@@ -370,6 +391,7 @@
                             </button>
                         </div>
                     </div>
+
                     <div id="screen-chat" class="phone-screen bg-slate-50 flex-1 relative hidden">
                         <div class="pt-8 pb-3 px-4 bg-white border-b flex items-center gap-2">
                             <div class="w-7 h-7 bg-indigo-100 rounded-full flex items-center justify-center text-[10px]">🐶</div>
@@ -456,6 +478,55 @@
             </form>
             <p class="text-slate-500 text-sm mt-6">Nessuno spam, solo aggiornamenti sul progetto e sulle prossime novità.</p>
             <p id="form-success" class="hidden text-emerald-400 font-semibold mt-6">Grazie! La tua richiesta è stata registrata.</p>
+        </div>
+    </section>
+
+    <section id="privacy" class="py-20 px-6 bg-slate-900/60 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
+            <div class="glass-card rounded-3xl p-8">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4">Privacy & Data Use</h2>
+
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    FrenchiePal adotta un approccio privacy-first. Raccogliamo come dato personale l’<strong>email</strong>, quando scegli di lasciarcela per restare aggiornato sul servizio.
+                </p>
+
+                <p class="text-slate-400 leading-relaxed mb-4">
+                    La piattaforma è progettata per trattare l’email separatamente dai log di conversazione: i contenuti della chat vengono salvati in forma sanitizzata, mentre l’email viene gestita come dato di contatto separato.
+                </p>
+
+                <p class="text-slate-400 leading-relaxed mb-4">
+                    I dati di utilizzo e di interazione con il prodotto sono associati a sessioni anonime e utilizzati per analisi e miglioramento del servizio.
+                </p>
+
+                <p class="text-slate-400 leading-relaxed mb-4">
+                    I log di utilizzo e conversazione vengono anonimizzati, ridotti o cancellati dopo 12 mesi. I dati di contatto lasciati volontariamente per ricevere aggiornamenti sul servizio possono essere conservati più a lungo, fino a richiesta di cancellazione.
+                </p>
+
+                <div class="space-y-2 text-sm text-slate-400">
+                    <p><strong class="text-slate-200">Titolare del trattamento:</strong> FrenchiePal</p>
+                    <p><strong class="text-slate-200">Contatto privacy:</strong> <a href="mailto:frenchiepal@gmail.com" class="text-teal-300 hover:text-teal-200 transition">frenchiepal@gmail.com</a></p>
+                    <p><strong class="text-slate-200">Dati personali raccolti:</strong> email</p>
+                    <p><strong class="text-slate-200">Dati tecnici/di utilizzo:</strong> eventi di sessione anonimi, interazioni con demo e chat</p>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-8">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4">Medical Disclaimer</h2>
+
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    FrenchiePal <strong>non sostituisce il veterinario</strong>. Le informazioni fornite hanno finalità informative e di supporto alla gestione quotidiana del tuo Frenchie.
+                </p>
+
+                <p class="text-slate-400 leading-relaxed mb-4">
+                    Per diagnosi, terapie, emergenze o situazioni delicate è sempre necessario rivolgersi a un veterinario.
+                </p>
+
+                <div class="rounded-2xl bg-slate-800/70 border border-slate-700 p-4">
+                    <p class="text-sm text-slate-300">
+                        Usiamo partner tecnologici selezionati per il funzionamento del servizio, inclusi Supabase per database e logging e OpenAI per l’elaborazione AI.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -563,8 +634,8 @@
             }
         }
 
-        function triggerAlert(type) {
-            trackEvent('alert_click', { type });
+        function triggerAlert(type, source = 'panel') {
+            trackEvent('alert_click', { type, source });
 
             switchTab('dash');
             phoneFrame.classList.remove('alert-mode-red', 'alert-mode-orange', 'alert-mode-yellow');
@@ -675,9 +746,7 @@
                 div.innerHTML = `<div class="bg-indigo-600 p-2.5 rounded-2xl rounded-tr-none text-xs text-white shadow-md max-w-[85%]">${escapeHtml(text)}</div>`;
             } else {
                 div.className = 'flex items-start gap-2 animate-fade-in';
-                if (isTyping) {
-                    div.setAttribute('data-typing', 'true');
-                }
+                if (isTyping) div.setAttribute('data-typing', 'true');
                 div.innerHTML = `
                     <div class="w-7 h-7 bg-indigo-100 rounded-full flex items-center justify-center text-[10px] flex-shrink-0">🐶</div>
                     <div class="bg-white p-2.5 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[85%]">
@@ -695,7 +764,9 @@
             if (typingBubble) typingBubble.remove();
         }
 
-        function resetAlerts() {
+        function resetAlerts(source = 'panel') {
+            trackEvent('alert_reset', { source });
+
             switchTab('dash');
             phoneFrame.classList.remove('alert-mode-red', 'alert-mode-orange', 'alert-mode-yellow');
             statusText.innerText = 'STABILE';
