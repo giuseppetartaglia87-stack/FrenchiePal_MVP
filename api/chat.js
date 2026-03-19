@@ -1,9 +1,7 @@
-import OpenAI from 'openai';
-import { createClient } from '@supabase/supabase-js';
+import OpenAI from "openai";
+import { createClient } from "@supabase/supabase-js";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -11,99 +9,9 @@ const supabase = createClient(
 );
 
 const PRIVACY_WARNING =
-  'Grazie! Per motivi di privacy, ti prego di non inserire i tuoi dati personali qui. Continuiamo a parlare del tuo amico a quattro zampe? 🐶';
+  "Grazie! Per motivi di privacy, ti prego di non inserire qui dati personali come numero di telefono o indirizzo. Continuiamo a parlare del tuo Frenchie? 🐶";
 
-const EMAIL_REGEX = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
-const PHONE_REGEX = /(?:\+?\d[\d\s().-]{6,}\d)/;
-const ADDRESS_REGEX = /\b(via|viale|piazza|corso|largo|vicolo|strada)\b/i;
-const NAME_REGEX = /\b(mi chiamo|il mio nome è)\b/i;
-
-function extractEmail(text = '') {
-  const matches = text.match(EMAIL_REGEX);
-  return matches?.[0] || null;
-}
-
-function containsRestrictedPersonalData(text = '') {
-  return PHONE_REGEX.test(text) || ADDRESS_REGEX.test(text) || NAME_REGEX.test(text);
-}
-
-function sanitizeForStorage(text = '') {
-  let sanitized = text;
-
-  sanitized = sanitized.replace(EMAIL_REGEX, '[EMAIL]');
-  sanitized = sanitized.replace(PHONE_REGEX, '[TELEFONO]');
-  sanitized = sanitized.replace(/\b(mi chiamo)\s+[A-Za-zÀ-ÿ' -]+/gi, '$1 [NOME]');
-  sanitized = sanitized.replace(/\b(il mio nome è)\s+[A-Za-zÀ-ÿ' -]+/gi, '$1 [NOME]');
-
-  if (ADDRESS_REGEX.test(sanitized)) {
-    sanitized = sanitized.replace(
-      /\b(via|viale|piazza|corso|largo|vicolo|strada)\b.*/i,
-      '[INDIRIZZO]'
-    );
-  }
-
-  return sanitized;
-}
-
-function sanitizeForModel(text = '') {
-  return text.replace(EMAIL_REGEX, '[EMAIL RACCOLTA PER AGGIORNAMENTI]');
-}
-
-function inferTopic(message = '') {
-  const msg = message.toLowerCase();
-
-  if (
-    msg.includes('salti') ||
-    msg.includes('salto') ||
-    msg.includes('divano') ||
-    msg.includes('scale') ||
-    msg.includes('schiena') ||
-    msg.includes('ernia') ||
-    msg.includes('ivdd')
-  ) {
-    return 'schiena';
-  }
-
-  if (
-    msg.includes('caldo') ||
-    msg.includes('affanno') ||
-    msg.includes('respiro') ||
-    msg.includes('russa') ||
-    msg.includes('baos')
-  ) {
-    return 'respiro';
-  }
-
-  if (
-    msg.includes('pelle') ||
-    msg.includes('pieghe') ||
-    msg.includes('gratta') ||
-    msg.includes('prurito') ||
-    msg.includes('dermatite')
-  ) {
-    return 'pelle';
-  }
-
-  return 'routine';
-}
-
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  const { session_id, message } = req.body || {};
-
-  if (!session_id || !message) {
-    return res.status(400).json({ error: 'session_id o message mancanti.' });
-  }
-
-  const topic = inferTopic(message);
-  const now = new Date().toISOString();
-  const email = extractEmail(message);
-  const hasRestrictedPersonalData = containsRestrictedPersonalData(message);
-
-  const systemPrompt = `
+const systemPrompt = `
 # CONTESTO E IDENTITÀ
 Sei "FrenchiePal", assistente esperto per proprietari di cani, con una Iper-Specializzazione nei Bulldog Francesi.
 
@@ -160,141 +68,346 @@ Rispetta queste regole di comportamento:
   - Rispondi educatamente: "Scusa, sono allenato solo per parlare dei nostri amici Bulldog Francesi! Hai domande su di loro?"
 `;
 
-  try {
+function extractEmail(text = "") {
+  const match = text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+  return match ? match[0].toLowerCase() : null;
+}
+
+function sanitizeMessage(text = "") {
+  let out = text;
+
+  out = out.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[EMAIL]");
+  out = out.replace(/(\+?\d[\d\s().-]{7,}\d)/g, "[TELEFONO]");
+  out = out.replace(/\b(via|viale|piazza|corso|largo)\s+[a-zà-ù0-9\s.'-]{3,}/gi, "[INDIRIZZO]");
+
+  return out.trim();
+}
+
+function containsBlockedPersonalData(text = "") {
+  const hasPhone = /(\+?\d[\d\s().-]{7,}\d)/.test(text);
+  const hasAddress = /\b(via|viale|piazza|corso|largo)\s+[a-zà-ù0-9\s.'-]{3,}/i.test(text);
+  return hasPhone || hasAddress;
+}
+
+function inferTopic(message = "") {
+  const msg = message.toLowerCase();
+
+  if (
+    msg.includes("schiena") ||
+    msg.includes("ernia") ||
+    msg.includes("ivdd") ||
+    msg.includes("salta") ||
+    msg.includes("salti") ||
+    msg.includes("divano") ||
+    msg.includes("scale")
+  ) return "schiena";
+
+  if (
+    msg.includes("respiro") ||
+    msg.includes("respira") ||
+    msg.includes("affanno") ||
+    msg.includes("russa") ||
+    msg.includes("caldo") ||
+    msg.includes("baos") ||
+    msg.includes("temperatura")
+  ) return "respiro";
+
+  if (
+    msg.includes("pelle") ||
+    msg.includes("prurito") ||
+    msg.includes("gratta") ||
+    msg.includes("grattamento") ||
+    msg.includes("pieghe") ||
+    msg.includes("dermatite") ||
+    msg.includes("orecchie")
+  ) return "pelle";
+
+  if (
+    msg.includes("cibo") ||
+    msg.includes("mangia") ||
+    msg.includes("routine") ||
+    msg.includes("passeggiata") ||
+    msg.includes("riposo") ||
+    msg.includes("dieta")
+  ) return "routine";
+
+  return "other";
+}
+
+function inferIntent(message = "") {
+  const msg = message.toLowerCase();
+
+  if (
+    msg.includes("?") ||
+    msg.includes("è normale") ||
+    msg.includes("cosa devo fare") ||
+    msg.includes("posso") ||
+    msg.includes("devo")
+  ) return "advice_request";
+
+  if (
+    msg.includes("problema") ||
+    msg.includes("sintomo") ||
+    msg.includes("respira male") ||
+    msg.includes("si gratta") ||
+    msg.includes("zoppica")
+  ) return "symptom_help";
+
+  if (
+    msg.includes("preven") ||
+    msg.includes("evitare") ||
+    msg.includes("monitor") ||
+    msg.includes("controllare")
+  ) return "prevention_help";
+
+  if (
+    msg.includes("interessato") ||
+    msg.includes("lista") ||
+    msg.includes("mail") ||
+    msg.includes("aggiornami")
+  ) return "lead_interest";
+
+  return "general_support";
+}
+
+function inferNeedsSummary(message = "", topic = "other", intent = "general_support") {
+  const msg = message.toLowerCase();
+
+  if (topic === "schiena") {
+    if (msg.includes("salti") || msg.includes("divano") || msg.includes("scale")) {
+      return "gestione salti/scale e carico sulla schiena";
+    }
+    return "preoccupazione per schiena/ivdd";
+  }
+
+  if (topic === "respiro") {
+    if (msg.includes("caldo") || msg.includes("affanno")) {
+      return "gestione caldo e difficoltà respiratoria";
+    }
+    if (msg.includes("russa")) {
+      return "rumori respiratori e possibile rischio BAOS";
+    }
+    return "preoccupazione per respiro/baos";
+  }
+
+  if (topic === "pelle") {
+    if (msg.includes("pieghe")) {
+      return "cura delle pieghe e prevenzione irritazioni";
+    }
+    if (msg.includes("gratta") || msg.includes("prurito")) {
+      return "prurito e possibile dermatite";
+    }
+    return "preoccupazione per pelle/allergie";
+  }
+
+  if (topic === "routine") {
+    if (msg.includes("cibo") || msg.includes("dieta") || msg.includes("mangia")) {
+      return "supporto su alimentazione e gestione quotidiana";
+    }
+    return "supporto sulla routine quotidiana";
+  }
+
+  if (intent === "lead_interest") return "interesse verso il prodotto/aggiornamenti";
+  return "richiesta generica sul Frenchie";
+}
+
+async function ensureChatSession(sessionId) {
+  const { data: existing } = await supabase
+    .from("chat_sessions")
+    .select("id, session_id, opened_at, last_activity_at")
+    .eq("session_id", sessionId)
+    .maybeSingle();
+
+  if (existing) {
     await supabase
-      .from('chat_sessions')
-      .upsert([{ session_id, last_activity_at: now }], { onConflict: 'session_id' });
+      .from("chat_sessions")
+      .update({ last_activity_at: new Date().toISOString() })
+      .eq("session_id", sessionId);
+    return existing;
+  }
 
-    if (email) {
-      const normalizedEmail = String(email).trim().toLowerCase();
+  const now = new Date().toISOString();
+  const { data, error } = await supabase
+    .from("chat_sessions")
+    .insert([{
+      session_id: sessionId,
+      opened_at: now,
+      last_activity_at: now,
+      lead_captured: false
+    }])
+    .select()
+    .single();
 
-      await supabase
-        .from('waitlist_leads')
-        .upsert(
-          [
-            {
-              email: normalizedEmail,
-              source: 'chat',
-              session_id,
-              priority: topic
-            }
-          ],
-          { onConflict: 'email,source' }
-        );
+  if (error) throw error;
+  return data;
+}
 
-      await supabase.from('events').insert([
-        {
-          session_id,
-          event_name: 'lead_chat_submit',
-          event_data: {
-            topic,
-            source: 'chat'
-          }
-        }
-      ]);
+async function createEvent(sessionId, eventName, eventData = {}) {
+  await supabase.from("events").insert([{
+    session_id: sessionId,
+    event_name: eventName,
+    event_data: eventData
+  }]);
+}
 
-      await supabase
-        .from('chat_sessions')
-        .update({ lead_captured: true, last_activity_at: now })
-        .eq('session_id', session_id);
+async function upsertChatLead(sessionId, email) {
+  const { data: existing } = await supabase
+    .from("waitlist_leads")
+    .select("id")
+    .eq("email", email)
+    .maybeSingle();
+
+  if (!existing) {
+    await supabase.from("waitlist_leads").insert([{
+      email,
+      dog_age: null,
+      priority: null,
+      source: "chat",
+      session_id: sessionId
+    }]);
+  }
+
+  await supabase
+    .from("chat_sessions")
+    .update({ lead_captured: true, last_activity_at: new Date().toISOString() })
+    .eq("session_id", sessionId);
+
+  await createEvent(sessionId, "lead_chat_submit", { source: "chat" });
+}
+
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  try {
+    const { session_id, message } = req.body || {};
+
+    if (!session_id || !message || typeof message !== "string") {
+      return res.status(400).json({ error: "session_id e message sono obbligatori" });
     }
 
-    const { data: previousMessages, error: historyError } = await supabase
-      .from('chat_messages')
-      .select('role, content, created_at')
-      .eq('session_id', session_id)
-      .order('created_at', { ascending: true });
+    await ensureChatSession(session_id);
 
-    if (historyError) {
-      return res.status(500).json({ error: historyError.message });
+    const rawMessage = message.trim();
+    const extractedEmail = extractEmail(rawMessage);
+
+    if (extractedEmail) {
+      await upsertChatLead(session_id, extractedEmail);
     }
 
-    const isFirstUserMessage =
-      !previousMessages || previousMessages.filter((m) => m.role === 'user').length === 0;
+    if (containsBlockedPersonalData(rawMessage)) {
+      const warningText = PRIVACY_WARNING;
+      const sanitizedUserMessage = sanitizeMessage(rawMessage);
 
-    if (isFirstUserMessage) {
-      await supabase.from('events').insert([
-        {
-          session_id,
-          event_name: 'chat_first_message',
-          event_data: { topic }
-        }
-      ]);
-    }
+      const topic = inferTopic(sanitizedUserMessage);
+      const intent = inferIntent(sanitizedUserMessage);
+      const needsSummary = inferNeedsSummary(sanitizedUserMessage, topic, intent);
 
-    const sanitizedUserMessage = sanitizeForStorage(message);
+      const { count: userCountBefore } = await supabase
+        .from("chat_messages")
+        .select("*", { count: "exact", head: true })
+        .eq("session_id", session_id)
+        .eq("role", "user");
 
-    await supabase.from('chat_messages').insert([
-      {
-        session_id,
-        role: 'user',
-        content: sanitizedUserMessage,
-        topic
+      if ((userCountBefore || 0) === 0) {
+        await createEvent(session_id, "chat_first_message", { source: "chat_api" });
       }
-    ]);
 
-    await supabase.from('events').insert([
-      {
-        session_id,
-        event_name: 'chat_message_sent',
-        event_data: { topic }
-      }
-    ]);
-
-    if (hasRestrictedPersonalData && !email) {
-      await supabase.from('chat_messages').insert([
+      await supabase.from("chat_messages").insert([
         {
           session_id,
-          role: 'assistant',
-          content: PRIVACY_WARNING,
-          topic: 'privacy'
+          role: "user",
+          content: sanitizedUserMessage,
+          topic,
+          intent,
+          needs_summary: needsSummary
+        },
+        {
+          session_id,
+          role: "assistant",
+          content: warningText,
+          topic,
+          intent: "privacy_warning",
+          needs_summary: "richiesta con possibile dato personale"
         }
       ]);
 
       await supabase
-        .from('chat_sessions')
-        .update({ last_activity_at: now })
-        .eq('session_id', session_id);
+        .from("chat_sessions")
+        .update({ last_activity_at: new Date().toISOString() })
+        .eq("session_id", session_id);
 
-      return res.status(200).json({ reply: PRIVACY_WARNING });
+      return res.status(200).json({ reply: warningText });
     }
 
-    const historyForModel = (previousMessages || []).map((m) => ({
-      role: m.role,
-      content: m.content
-    }));
+    const sanitizedUserMessage = sanitizeMessage(rawMessage);
+    const topic = inferTopic(sanitizedUserMessage);
+    const intent = inferIntent(sanitizedUserMessage);
+    const needsSummary = inferNeedsSummary(sanitizedUserMessage, topic, intent);
 
-    const currentMessageForModel = sanitizeForModel(message);
+    const { count: userCountBefore } = await supabase
+      .from("chat_messages")
+      .select("*", { count: "exact", head: true })
+      .eq("session_id", session_id)
+      .eq("role", "user");
+
+    if ((userCountBefore || 0) === 0) {
+      await createEvent(session_id, "chat_first_message", { source: "chat_api" });
+    }
+
+    await supabase.from("chat_messages").insert([{
+      session_id,
+      role: "user",
+      content: sanitizedUserMessage,
+      topic,
+      intent,
+      needs_summary: needsSummary
+    }]);
+
+    const { data: historyRows } = await supabase
+      .from("chat_messages")
+      .select("role, content")
+      .eq("session_id", session_id)
+      .order("created_at", { ascending: true })
+      .limit(12);
+
+    const history = (historyRows || [])
+      .filter((row) => row.role === "user" || row.role === "assistant")
+      .map((row) => ({ role: row.role, content: row.content }));
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o',
+      model: "gpt-4o-mini",
+      temperature: 0.8,
       messages: [
-        { role: 'system', content: systemPrompt },
-        ...historyForModel,
-        { role: 'user', content: currentMessageForModel }
-      ],
-      temperature: 0.8
+        { role: "system", content: systemPrompt },
+        ...history
+      ]
     });
 
-    const reply = completion?.choices?.[0]?.message?.content || 'Errore interno';
+    const reply = completion.choices?.[0]?.message?.content?.trim() || "C’è stato un problema. Riprova tra poco.";
 
-    await supabase.from('chat_messages').insert([
-      {
-        session_id,
-        role: 'assistant',
-        content: sanitizeForStorage(reply),
-        topic
-      }
-    ]);
+    const assistantTopic = topic;
+    const assistantIntent = "assistant_reply";
+    const assistantNeedsSummary = needsSummary;
+
+    await supabase.from("chat_messages").insert([{
+      session_id,
+      role: "assistant",
+      content: reply,
+      topic: assistantTopic,
+      intent: assistantIntent,
+      needs_summary: assistantNeedsSummary
+    }]);
 
     await supabase
-      .from('chat_sessions')
-      .update({ last_activity_at: now })
-      .eq('session_id', session_id);
+      .from("chat_sessions")
+      .update({ last_activity_at: new Date().toISOString() })
+      .eq("session_id", session_id);
 
     return res.status(200).json({ reply });
-  } catch (err) {
-    console.error('Chat API Error:', err);
-    return res.status(500).json({ error: 'Errore interno' });
+  } catch (error) {
+    console.error("chat api error", error);
+    return res.status(500).json({ error: "Errore interno del server" });
   }
 }
