@@ -14,24 +14,17 @@ const PRIVACY_WARNING =
   'Grazie! Per motivi di privacy, ti prego di non inserire i tuoi dati personali qui. Continuiamo a parlare del tuo amico a quattro zampe? 🐶';
 
 const EMAIL_REGEX = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
-const PHONE_REGEX = /(?:\+?\d[\d\s().-]{6,}\d)/g;
-const ADDRESS_LINE_REGEX = /\b(via|viale|piazza|corso|largo|vicolo|strada)\b.*/gi;
-const ADDRESS_DETECT_REGEX = /\b(via|viale|piazza|corso|largo|vicolo|strada)\b/i;
-const NAME_REGEX_1 = /\b(mi chiamo)\s+[A-Za-zÀ-ÿ' -]+/gi;
-const NAME_REGEX_2 = /\b(il mio nome è)\s+[A-Za-zÀ-ÿ' -]+/gi;
-const NAME_DETECT_REGEX = /\b(mi chiamo|il mio nome è)\b/i;
+const PHONE_REGEX = /(?:\+?\d[\d\s().-]{6,}\d)/;
+const ADDRESS_REGEX = /\b(via|viale|piazza|corso|largo|vicolo|strada)\b/i;
+const NAME_REGEX = /\b(mi chiamo|il mio nome è)\b/i;
 
 function extractEmail(text = '') {
   const matches = text.match(EMAIL_REGEX);
-  return matches?.[0]?.toLowerCase() || null;
+  return matches?.[0] || null;
 }
 
 function containsRestrictedPersonalData(text = '') {
-  return (
-    PHONE_REGEX.test(text) ||
-    ADDRESS_DETECT_REGEX.test(text) ||
-    NAME_DETECT_REGEX.test(text)
-  );
+  return PHONE_REGEX.test(text) || ADDRESS_REGEX.test(text) || NAME_REGEX.test(text);
 }
 
 function sanitizeForStorage(text = '') {
@@ -39,23 +32,21 @@ function sanitizeForStorage(text = '') {
 
   sanitized = sanitized.replace(EMAIL_REGEX, '[EMAIL]');
   sanitized = sanitized.replace(PHONE_REGEX, '[TELEFONO]');
-  sanitized = sanitized.replace(NAME_REGEX_1, '$1 [NOME]');
-  sanitized = sanitized.replace(NAME_REGEX_2, '$1 [NOME]');
-  sanitized = sanitized.replace(ADDRESS_LINE_REGEX, '[INDIRIZZO]');
+  sanitized = sanitized.replace(/\b(mi chiamo)\s+[A-Za-zÀ-ÿ' -]+/gi, '$1 [NOME]');
+  sanitized = sanitized.replace(/\b(il mio nome è)\s+[A-Za-zÀ-ÿ' -]+/gi, '$1 [NOME]');
 
-  return sanitized.trim();
+  if (ADDRESS_REGEX.test(sanitized)) {
+    sanitized = sanitized.replace(
+      /\b(via|viale|piazza|corso|largo|vicolo|strada)\b.*/i,
+      '[INDIRIZZO]'
+    );
+  }
+
+  return sanitized;
 }
 
 function sanitizeForModel(text = '') {
-  let sanitized = text;
-
-  sanitized = sanitized.replace(EMAIL_REGEX, '[EMAIL RACCOLTA PER AGGIORNAMENTI]');
-  sanitized = sanitized.replace(PHONE_REGEX, '[TELEFONO]');
-  sanitized = sanitized.replace(NAME_REGEX_1, '$1 [NOME]');
-  sanitized = sanitized.replace(NAME_REGEX_2, '$1 [NOME]');
-  sanitized = sanitized.replace(ADDRESS_LINE_REGEX, '[INDIRIZZO]');
-
-  return sanitized.trim();
+  return text.replace(EMAIL_REGEX, '[EMAIL RACCOLTA PER AGGIORNAMENTI]');
 }
 
 function inferTopic(message = '') {
@@ -69,7 +60,9 @@ function inferTopic(message = '') {
     msg.includes('schiena') ||
     msg.includes('ernia') ||
     msg.includes('ivdd')
-  ) return 'schiena';
+  ) {
+    return 'schiena';
+  }
 
   if (
     msg.includes('caldo') ||
@@ -77,7 +70,9 @@ function inferTopic(message = '') {
     msg.includes('respiro') ||
     msg.includes('russa') ||
     msg.includes('baos')
-  ) return 'respiro';
+  ) {
+    return 'respiro';
+  }
 
   if (
     msg.includes('pelle') ||
@@ -85,82 +80,11 @@ function inferTopic(message = '') {
     msg.includes('gratta') ||
     msg.includes('prurito') ||
     msg.includes('dermatite')
-  ) return 'pelle';
+  ) {
+    return 'pelle';
+  }
 
   return 'routine';
-}
-
-function inferIntent(message = '') {
-  const msg = message.toLowerCase();
-
-  if (
-    msg.includes('è normale') ||
-    msg.includes('devo') ||
-    msg.includes('posso') ||
-    msg.includes('cosa faccio') ||
-    msg.includes('cosa devo fare') ||
-    msg.includes('?')
-  ) return 'advice_request';
-
-  if (
-    msg.includes('preven') ||
-    msg.includes('evitare') ||
-    msg.includes('monitor') ||
-    msg.includes('controllare')
-  ) return 'prevention_help';
-
-  if (
-    msg.includes('interessato') ||
-    msg.includes('aggiornami') ||
-    msg.includes('lista d') ||
-    msg.includes('ti lascio la mail')
-  ) return 'lead_interest';
-
-  if (
-    msg.includes('sintomo') ||
-    msg.includes('problema') ||
-    msg.includes('respira male') ||
-    msg.includes('si gratta')
-  ) return 'symptom_help';
-
-  return 'general_support';
-}
-
-function inferNeedsSummary(message = '', topic = 'routine') {
-  const msg = message.toLowerCase();
-
-  if (topic === 'schiena') {
-    if (msg.includes('salti') || msg.includes('divano') || msg.includes('scale')) {
-      return 'gestione salti/scale e carico sulla schiena';
-    }
-    return 'preoccupazione per schiena o ivdd';
-  }
-
-  if (topic === 'respiro') {
-    if (msg.includes('caldo') || msg.includes('affanno')) {
-      return 'gestione caldo e affanno';
-    }
-    if (msg.includes('russa')) {
-      return 'rumori respiratori e possibile rischio baos';
-    }
-    return 'preoccupazione per respiro';
-  }
-
-  if (topic === 'pelle') {
-    if (msg.includes('pieghe')) {
-      return 'cura pieghe e prevenzione irritazioni';
-    }
-    if (msg.includes('gratta') || msg.includes('prurito')) {
-      return 'prurito e possibile dermatite';
-    }
-    return 'preoccupazione per pelle o allergie';
-  }
-
-  if (msg.includes('cibo') || msg.includes('mangia') || msg.includes('dieta')) {
-    return 'supporto su alimentazione';
-  }
-
-  return 'supporto sulla routine quotidiana';
 }
 
 export default async function handler(req, res) {
@@ -174,13 +98,10 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'session_id o message mancanti.' });
   }
 
+  const topic = inferTopic(message);
   const now = new Date().toISOString();
   const email = extractEmail(message);
   const hasRestrictedPersonalData = containsRestrictedPersonalData(message);
-
-  const topic = inferTopic(message);
-  const intent = inferIntent(message);
-  const needs_summary = inferNeedsSummary(message, topic);
 
   const systemPrompt = `
 # CONTESTO E IDENTITÀ
@@ -245,23 +166,32 @@ Rispetta queste regole di comportamento:
       .upsert([{ session_id, last_activity_at: now }], { onConflict: 'session_id' });
 
     if (email) {
+      const normalizedEmail = String(email).trim().toLowerCase();
+
       await supabase
         .from('waitlist_leads')
         .upsert(
-          [{
-            email: email.trim().toLowerCase(),
-            source: 'chat',
-            session_id,
-            priority: topic
-          }],
+          [
+            {
+              email: normalizedEmail,
+              source: 'chat',
+              session_id,
+              priority: topic
+            }
+          ],
           { onConflict: 'email,source' }
         );
 
-      await supabase.from('events').insert([{
-        session_id,
-        event_name: 'lead_chat_submit',
-        event_data: { topic, intent, source: 'chat' }
-      }]);
+      await supabase.from('events').insert([
+        {
+          session_id,
+          event_name: 'lead_chat_submit',
+          event_data: {
+            topic,
+            source: 'chat'
+          }
+        }
+      ]);
 
       await supabase
         .from('chat_sessions')
@@ -283,39 +213,43 @@ Rispetta queste regole di comportamento:
       !previousMessages || previousMessages.filter((m) => m.role === 'user').length === 0;
 
     if (isFirstUserMessage) {
-      await supabase.from('events').insert([{
-        session_id,
-        event_name: 'chat_first_message',
-        event_data: { topic, intent }
-      }]);
+      await supabase.from('events').insert([
+        {
+          session_id,
+          event_name: 'chat_first_message',
+          event_data: { topic }
+        }
+      ]);
     }
 
     const sanitizedUserMessage = sanitizeForStorage(message);
 
-    await supabase.from('chat_messages').insert([{
-      session_id,
-      role: 'user',
-      content: sanitizedUserMessage,
-      topic,
-      intent,
-      needs_summary
-    }]);
+    await supabase.from('chat_messages').insert([
+      {
+        session_id,
+        role: 'user',
+        content: sanitizedUserMessage,
+        topic
+      }
+    ]);
 
-    await supabase.from('events').insert([{
-      session_id,
-      event_name: 'chat_message_sent',
-      event_data: { topic, intent }
-    }]);
+    await supabase.from('events').insert([
+      {
+        session_id,
+        event_name: 'chat_message_sent',
+        event_data: { topic }
+      }
+    ]);
 
     if (hasRestrictedPersonalData && !email) {
-      await supabase.from('chat_messages').insert([{
-        session_id,
-        role: 'assistant',
-        content: PRIVACY_WARNING,
-        topic: 'privacy',
-        intent: 'privacy_warning',
-        needs_summary: 'richiesta con dati personali bloccata'
-      }]);
+      await supabase.from('chat_messages').insert([
+        {
+          session_id,
+          role: 'assistant',
+          content: PRIVACY_WARNING,
+          topic: 'privacy'
+        }
+      ]);
 
       await supabase
         .from('chat_sessions')
@@ -333,7 +267,7 @@ Rispetta queste regole di comportamento:
     const currentMessageForModel = sanitizeForModel(message);
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: 'gpt-4o',
       messages: [
         { role: 'system', content: systemPrompt },
         ...historyForModel,
@@ -344,14 +278,14 @@ Rispetta queste regole di comportamento:
 
     const reply = completion?.choices?.[0]?.message?.content || 'Errore interno';
 
-    await supabase.from('chat_messages').insert([{
-      session_id,
-      role: 'assistant',
-      content: sanitizeForStorage(reply),
-      topic,
-      intent: 'assistant_reply',
-      needs_summary
-    }]);
+    await supabase.from('chat_messages').insert([
+      {
+        session_id,
+        role: 'assistant',
+        content: sanitizeForStorage(reply),
+        topic
+      }
+    ]);
 
     await supabase
       .from('chat_sessions')
