@@ -124,31 +124,6 @@
         .alert-mode-yellow { animation: pulse-yellow 1.5s infinite; border-color: #EAB308 !important; }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
-
-        @media (max-width: 767px) {
-            .mobile-chat-expanded {
-                position: fixed !important;
-                inset: 0 !important;
-                width: 100vw !important;
-                height: 100dvh !important;
-                max-width: none !important;
-                border-radius: 0 !important;
-                border-width: 0 !important;
-                z-index: 9999 !important;
-            }
-
-            .mobile-chat-expanded .phone-notch {
-                display: none !important;
-            }
-
-            .mobile-chat-expanded #screen-chat {
-                display: flex !important;
-            }
-
-            .mobile-chat-expanded #screen-dashboard {
-                display: none !important;
-            }
-        }
     </style>
 </head>
 <body class="antialiased">
@@ -351,10 +326,10 @@
             </div>
 
             <div class="order-2 lg:order-2 flex justify-center w-full">
-                <div id="phone-frame" class="relative w-full max-w-[310px] h-[620px] sm:w-[330px] sm:h-[650px] lg:w-[290px] lg:h-[590px] xl:w-[305px] xl:h-[620px] bg-white rounded-[40px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
-                    <div class="phone-notch absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-xl z-20"></div>
+                <div id="phone-frame" class="relative w-[285px] sm:w-[305px] h-[590px] sm:h-[630px] bg-white rounded-[40px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-b-xl z-20"></div>
 
-                    <div id="screen-dashboard" class="phone-screen bg-slate-50 flex-1 relative hidden">
+                    <div id="screen-dashboard" class="phone-screen active bg-slate-50 flex-1 relative">
                         <div class="pt-8 pb-4 px-5 flex justify-between items-end">
                             <div>
                                 <div class="text-[10px] font-bold text-slate-400 uppercase">Status attuale</div>
@@ -406,31 +381,25 @@
                         </div>
 
                         <div class="h-14 bg-white border-t flex justify-around items-center z-30">
-                            <button onclick="switchTab('dash')" id="tab-dash" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
+                            <button onclick="switchTab('dash')" id="tab-dash" class="flex flex-col items-center text-indigo-600 transition">
                                 <i class="fas fa-heart-pulse text-lg mb-0.5"></i>
                                 <span class="text-[9px] font-bold">Salute</span>
                             </button>
-                            <button onclick="switchTab('chat')" id="tab-chat" class="flex flex-col items-center text-indigo-600 transition">
+                            <button onclick="switchTab('chat')" id="tab-chat" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
                                 <i class="fas fa-comments text-lg mb-0.5"></i>
                                 <span class="text-[9px] font-bold">Assistente AI</span>
                             </button>
                         </div>
                     </div>
 
-                    <div id="screen-chat" class="phone-screen active bg-slate-50 flex-1 relative">
-                        <div class="pt-8 pb-3 px-4 bg-white border-b flex items-center justify-between gap-2">
-                            <div class="flex items-center gap-2">
-                                <div class="w-7 h-7 bg-indigo-100 rounded-full flex items-center justify-center text-[10px]">🐶</div>
-                                <div>
-                                    <div class="text-xs font-bold text-slate-800">Frenchie Coach</div>
-                                    <div class="text-[8px] text-emerald-500 flex items-center gap-1"><span class="w-1 h-1 bg-emerald-500 rounded-full"></span> Online</div>
-                                </div>
+                    <div id="screen-chat" class="phone-screen bg-slate-50 flex-1 relative hidden">
+                        <div class="pt-8 pb-3 px-4 bg-white border-b flex items-center gap-2">
+                            <div class="w-7 h-7 bg-indigo-100 rounded-full flex items-center justify-center text-[10px]">🐶</div>
+                            <div>
+                                <div class="text-xs font-bold text-slate-800">Frenchie Coach</div>
+                                <div class="text-[8px] text-emerald-500 flex items-center gap-1"><span class="w-1 h-1 bg-emerald-500 rounded-full"></span> Online</div>
                             </div>
-                            <button id="close-mobile-chat-btn" onclick="closeMobileChatExperience()" class="md:hidden w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200 transition" aria-label="Chiudi chat">
-                                <i class="fas fa-xmark text-sm"></i>
-                            </button>
                         </div>
-
                         <div id="phone-chat-log" class="flex-1 p-3 overflow-y-auto space-y-2 bg-slate-50">
                             <div class="flex items-start gap-2">
                                 <div class="bg-white p-2.5 rounded-2xl rounded-tl-none text-xs text-slate-600 shadow-sm border border-slate-100 max-w-[90%]">
@@ -438,31 +407,12 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div id="chat-inline-lead" class="hidden p-3 bg-slate-50 border-t border-slate-200">
-                            <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-3">
-                                <p class="text-[11px] text-slate-500 mb-2">
-                                    Vuoi essere aggiornato su FrenchiePal? Lascia qui la tua email.
-                                </p>
-                                <div class="flex gap-2">
-                                    <input id="chat-lead-email" type="email" placeholder="La tua email" class="flex-1 bg-slate-100 rounded-full px-3 py-2 text-xs outline-none text-slate-700 border border-slate-200">
-                                    <button onclick="submitChatLead()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-full text-white text-xs font-bold transition">
-                                        Invia
-                                    </button>
-                                </div>
-                                <p id="chat-lead-success" class="hidden text-[11px] text-emerald-600 mt-2 font-semibold">
-                                    Grazie! Ti terremo aggiornato.
-                                </p>
-                            </div>
-                        </div>
-
                         <div class="p-2 bg-white border-t flex gap-2">
                             <input type="text" id="phone-chat-input" placeholder="Scrivi..." class="flex-1 bg-slate-100 rounded-full px-3 py-1.5 text-xs outline-none text-slate-600">
-                            <button onclick="triggerChat('phone')" class="w-8 h-8 bg-indigo-600 hover:bg-indigo-700 rounded-full text-white flex items-center justify-center shadow-sm transition">
+                            <button onclick="triggerChat('phone')" class="w-7 h-7 bg-indigo-600 hover:bg-indigo-700 rounded-full text-white flex items-center justify-center shadow-sm transition">
                                 <i class="fas fa-paper-plane text-[10px]"></i>
                             </button>
                         </div>
-
                         <div class="h-14 bg-white border-t flex justify-around items-center z-30">
                             <button onclick="switchTab('dash')" class="flex flex-col items-center text-slate-400 hover:text-slate-600 transition">
                                 <i class="fas fa-heart-pulse text-lg mb-0.5"></i>
@@ -684,18 +634,6 @@
         const chatInputWeb = document.getElementById('web-chat-input');
         const chatInputPhone = document.getElementById('phone-chat-input');
         const chatLog = document.getElementById('phone-chat-log');
-        const closeMobileChatBtn = document.getElementById('close-mobile-chat-btn');
-
-        function openMobileChatExperience() {
-            switchTab('chat');
-            if (window.innerWidth < 768) {
-                phoneFrame.classList.add('mobile-chat-expanded');
-            }
-        }
-
-        function closeMobileChatExperience() {
-            phoneFrame.classList.remove('mobile-chat-expanded');
-        }
 
         function switchTab(tab) {
             if (tab === 'dash') {
@@ -705,7 +643,6 @@
                 tabDash.classList.remove('text-slate-400');
                 tabChat.classList.add('text-slate-400');
                 tabChat.classList.remove('text-indigo-600');
-                closeMobileChatExperience();
             } else {
                 screenDash.style.display = 'none';
                 screenChat.style.display = 'flex';
@@ -716,9 +653,6 @@
                 tabDash.classList.remove('text-indigo-600');
 
                 trackChatOpenOnce('phone_tab');
-                if (window.innerWidth < 768) {
-                    phoneFrame.classList.add('mobile-chat-expanded');
-                }
             }
         }
 
@@ -795,12 +729,7 @@
 
             trackChatOpenOnce(source === 'phone' ? 'phone_input' : 'web_input');
 
-            if (source !== 'phone') {
-                switchTab('chat');
-                if (window.innerWidth < 768) {
-                    phoneFrame.classList.add('mobile-chat-expanded');
-                }
-            }
+            if (source !== 'phone') switchTab('chat');
 
             addChatBubble(userMsg, 'user');
             addChatBubble('Sto pensando...', 'bot', true);
@@ -821,16 +750,13 @@
 
                 if (!res.ok) {
                     addChatBubble(data.error || 'C’è stato un problema. Riprova tra poco.', 'bot');
-                    maybeShowChatLeadPrompt();
                     return;
                 }
 
                 addChatBubble(data.reply, 'bot');
-                maybeShowChatLeadPrompt(data.reply);
             } catch (e) {
                 removeTypingBubble();
                 addChatBubble('Errore di rete. Riprova tra poco.', 'bot');
-                maybeShowChatLeadPrompt();
             }
         }
 
@@ -858,59 +784,6 @@
         function removeTypingBubble() {
             const typingBubble = chatLog.querySelector('[data-typing="true"]');
             if (typingBubble) typingBubble.remove();
-        }
-
-        function maybeShowChatLeadPrompt(replyText = '') {
-            const leadBox = document.getElementById('chat-inline-lead');
-            const emailAlreadyCaptured = sessionStorage.getItem('fp_chat_email_captured');
-            if (emailAlreadyCaptured === '1') return;
-
-            const lower = String(replyText || '').toLowerCase();
-            const shouldShow =
-                lower.includes('lascia qui la tua mail') ||
-                lower.includes('lascia la tua mail') ||
-                lower.includes('lascia qui la tua email') ||
-                lower.includes('lascia la tua email');
-
-            if (shouldShow || chatLog.querySelectorAll('.flex').length >= 6) {
-                leadBox.classList.remove('hidden');
-            }
-        }
-
-        async function submitChatLead() {
-            const emailInput = document.getElementById('chat-lead-email');
-            const success = document.getElementById('chat-lead-success');
-            const email = emailInput.value.trim();
-
-            if (!email) return;
-
-            try {
-                const res = await fetch('/api/waitlist', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email,
-                        dog_age: '',
-                        priority: 'Supporto AI per la gestione quotidiana',
-                        session_id: SESSION_ID,
-                        source: 'chat'
-                    })
-                });
-
-                const data = await res.json();
-
-                if (!res.ok) {
-                    alert(data.error || 'Errore nel salvataggio');
-                    return;
-                }
-
-                sessionStorage.setItem('fp_chat_email_captured', '1');
-                emailInput.value = '';
-                success.classList.remove('hidden');
-                trackEvent('lead_form_submit', { source: 'chat_inline' });
-            } catch (e) {
-                alert('Errore di rete');
-            }
         }
 
         function resetAlerts(source = 'panel') {
@@ -988,10 +861,6 @@
                 e.preventDefault();
                 triggerChat('phone');
             }
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            switchTab('chat');
         });
     </script>
 </body>
