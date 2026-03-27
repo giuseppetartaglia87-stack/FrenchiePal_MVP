@@ -439,6 +439,46 @@ body {
         padding-bottom: 1.35rem !important;
     }
 
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home span.text-\[10px\] {
+        font-size: 0.78rem !important;
+        letter-spacing: 0.12em !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home h3 {
+        font-size: 1.9rem !important;
+        line-height: 1.05 !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home p.text-\[0\.96rem\] {
+        font-size: 1.15rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home p.text-\[0\.82rem\] {
+        font-size: 0.98rem !important;
+        line-height: 1.45 !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home .demo-option {
+        padding: 1rem !important;
+        border-radius: 1.15rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home .demo-option .w-12 {
+        width: 3.5rem !important;
+        height: 3.5rem !important;
+        font-size: 1.25rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home .demo-option .text-\[0\.98rem\] {
+        font-size: 1.14rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home .demo-option p {
+        font-size: 0.95rem !important;
+        line-height: 1.45 !important;
+    }
+
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-topbar {
         padding-top: calc(env(safe-area-inset-top) + 4.5rem) !important;
         padding-left: 1rem !important;
@@ -454,9 +494,89 @@ body {
         padding-bottom: calc(env(safe-area-inset-bottom) + 1rem) !important;
     }
 
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-topbar button,
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .demo-tab-btn {
+        min-height: 2.8rem !important;
+        font-size: 0.8rem !important;
+        letter-spacing: 0.08em !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #phone-status-text {
+        font-size: 2rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #alert-title {
+        font-size: 1.22rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #alert-icon-container {
+        width: 5.4rem !important;
+        height: 5.4rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #alert-icon {
+        font-size: 2.2rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .metric-card {
+        padding: 0.65rem 0.4rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .metric-card .text-\[8px\] {
+        font-size: 0.68rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #val-heart,
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #val-temp,
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #val-act {
+        font-size: 1.08rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .alert-panel .alert-tag {
+        font-size: 0.78rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #alert-desc p {
+        font-size: 0.98rem !important;
+        line-height: 1.45 !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen [data-alert-scenario] {
+        min-height: 2.95rem !important;
+        font-size: 0.84rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #phone-chat-log {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .chat-bubble-bot,
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .chat-bubble-user {
+        font-size: 0.97rem !important;
+        line-height: 1.5 !important;
+        padding: 0.95rem !important;
+    }
+
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-chat .border-t.border-sky-100\/90 {
         padding-bottom: calc(env(safe-area-inset-bottom) + 0.85rem) !important;
         background: rgba(248, 252, 255, 0.94) !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #phone-chat-input {
+        font-size: 1rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-chat .border.border-sky-400 {
+        min-height: 3.4rem !important;
+        padding-top: 0.55rem !important;
+        padding-bottom: 0.55rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-chat .h-9.w-9 {
+        width: 2.9rem !important;
+        height: 2.9rem !important;
     }
 }
 
