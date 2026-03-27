@@ -399,6 +399,8 @@ body {
         border-width: 0 !important;
         z-index: 120 !important;
         max-width: none !important;
+        background: linear-gradient(180deg, #edf6ff 0%, #d8ebfb 100%) !important;
+        box-shadow: none !important;
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-preview-trigger {
@@ -406,15 +408,55 @@ body {
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-notch {
-        width: 7.5rem;
-        height: 1.25rem;
-        border-bottom-left-radius: 0.9rem;
-        border-bottom-right-radius: 0.9rem;
+        display: none;
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen .overlay-close-btn {
         display: inline-flex;
         z-index: 140;
+        top: calc(env(safe-area-inset-top) + 0.9rem);
+        right: 1rem;
+        width: 2.85rem;
+        height: 2.85rem;
+        background: rgba(255, 255, 255, 0.96);
+        border-color: rgba(96, 165, 250, 0.28);
+        box-shadow: 0 14px 34px rgba(96, 165, 250, 0.18);
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-screen-home,
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-screen-shell,
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .chat-shell {
+        background:
+            radial-gradient(circle at top left, rgba(96, 165, 250, 0.18), transparent 30%),
+            radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.14), transparent 28%),
+            linear-gradient(180deg, #f3f9ff 0%, #deedf9 100%) !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home > .flex-1 {
+        padding-top: calc(env(safe-area-inset-top) + 4.7rem) !important;
+        padding-left: 1.1rem !important;
+        padding-right: 1.1rem !important;
+        padding-bottom: 1.35rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-topbar {
+        padding-top: calc(env(safe-area-inset-top) + 4.5rem) !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        background: rgba(248, 252, 255, 0.9) !important;
+        border-bottom-color: rgba(191, 219, 254, 0.95) !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-dashboard .flex-1,
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-chat .flex-1 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-bottom: calc(env(safe-area-inset-bottom) + 1rem) !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-chat .border-t.border-sky-100\/90 {
+        padding-bottom: calc(env(safe-area-inset-bottom) + 0.85rem) !important;
+        background: rgba(248, 252, 255, 0.94) !important;
     }
 }
 
