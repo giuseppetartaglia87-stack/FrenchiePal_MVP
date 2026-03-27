@@ -150,6 +150,12 @@ window.FrenchiePal.createChatController = function createChatController({
                 triggerChat('phone_input');
             }
         });
+
+        document.addEventListener('frenchiepal:chat-opened', () => {
+            if (chatLog && suggestedQuestions && document.body.clientWidth < 1024) {
+                chatLog.scrollTop = 0;
+            }
+        });
     }
 
     return {
