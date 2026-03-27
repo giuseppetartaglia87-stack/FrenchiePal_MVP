@@ -611,7 +611,17 @@ body {
         padding-bottom: 1rem !important;
     }
 
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #chat-suggested-questions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.6rem !important;
+        padding-top: 0.2rem !important;
+    }
+
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen #chat-suggested-questions button {
+        display: flex !important;
+        width: 100% !important;
+        align-items: flex-start !important;
         font-size: 0.86rem !important;
         line-height: 1.4 !important;
         padding: 0.8rem 0.95rem !important;
