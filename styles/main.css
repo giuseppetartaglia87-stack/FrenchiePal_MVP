@@ -76,6 +76,23 @@ body {
     outline: none;
 }
 
+@media (max-width: 767px) {
+    .glass-nav {
+        backdrop-filter: blur(10px);
+    }
+
+    .mobile-nav-scroll {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-bottom: 0.45rem;
+    }
+
+    .mobile-nav-link {
+        padding: 0.34rem 0.62rem;
+        font-size: 0.68rem;
+    }
+}
+
 .gradient-text {
     background: linear-gradient(135deg, #1e3a8a 0%, #0369a1 45%, #2563eb 100%);
     -webkit-background-clip: text;
@@ -337,7 +354,7 @@ body {
 
 .overlay-close-btn {
     position: absolute;
-    top: 1rem;
+    top: max(0.85rem, env(safe-area-inset-top));
     right: 1rem;
     width: 2.5rem;
     height: 2.5rem;
@@ -362,6 +379,11 @@ body {
 }
 
 @media (max-width: 1023px) {
+    .demo-fullscreen-lock .glass-nav {
+        opacity: 0;
+        pointer-events: none;
+    }
+
     .phone-frame-inline-shell {
         display: flex !important;
         margin-inline: auto;
@@ -375,7 +397,7 @@ body {
         height: 100dvh !important;
         border-radius: 0 !important;
         border-width: 0 !important;
-        z-index: 80 !important;
+        z-index: 120 !important;
         max-width: none !important;
     }
 
@@ -392,6 +414,7 @@ body {
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen .overlay-close-btn {
         display: inline-flex;
+        z-index: 140;
     }
 }
 
