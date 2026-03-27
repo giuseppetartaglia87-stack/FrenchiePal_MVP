@@ -392,15 +392,25 @@ body {
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen {
         display: flex !important;
         position: fixed !important;
-        inset: 0 !important;
-        width: 100vw !important;
-        height: 100dvh !important;
-        border-radius: 0 !important;
-        border-width: 0 !important;
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important;
+        bottom: auto !important;
+        inset: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: min(92vw, 23rem) !important;
+        height: auto !important;
+        aspect-ratio: 286 / 592 !important;
+        max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 1rem) !important;
+        border-radius: 2.5rem !important;
+        border-width: 8px !important;
         z-index: 120 !important;
         max-width: none !important;
-        background: linear-gradient(180deg, #edf6ff 0%, #d8ebfb 100%) !important;
-        box-shadow: none !important;
+        background: linear-gradient(180deg, rgba(236, 245, 255, 1), rgba(210, 227, 246, 1)) !important;
+        box-shadow:
+            0 34px 90px rgba(2, 6, 23, 0.34),
+            0 0 0 1px rgba(226, 240, 255, 0.9),
+            0 0 0 9999px rgba(15, 23, 42, 0.16) !important;
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-preview-trigger {
@@ -408,16 +418,20 @@ body {
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-notch {
-        display: none;
+        display: block;
+        width: 6.75rem;
+        height: 1.15rem;
+        border-bottom-left-radius: 0.9rem;
+        border-bottom-right-radius: 0.9rem;
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen .overlay-close-btn {
         display: inline-flex;
         z-index: 140;
-        top: calc(env(safe-area-inset-top) + 0.9rem);
-        right: 1rem;
-        width: 2.85rem;
-        height: 2.85rem;
+        top: 0.8rem;
+        right: 0.8rem;
+        width: 2.65rem;
+        height: 2.65rem;
         background: rgba(255, 255, 255, 0.96);
         border-color: rgba(96, 165, 250, 0.28);
         box-shadow: 0 14px 34px rgba(96, 165, 250, 0.18);
@@ -433,7 +447,7 @@ body {
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home > .flex-1 {
-        padding-top: calc(env(safe-area-inset-top) + 4.7rem) !important;
+        padding-top: 4.6rem !important;
         padding-left: 1.1rem !important;
         padding-right: 1.1rem !important;
         padding-bottom: 1.35rem !important;
@@ -480,7 +494,7 @@ body {
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-topbar {
-        padding-top: calc(env(safe-area-inset-top) + 4.5rem) !important;
+        padding-top: 4.35rem !important;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
         background: rgba(248, 252, 255, 0.9) !important;
@@ -491,7 +505,7 @@ body {
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-chat .flex-1 {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
-        padding-bottom: calc(env(safe-area-inset-bottom) + 1rem) !important;
+        padding-bottom: 1rem !important;
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-topbar button,
@@ -560,7 +574,7 @@ body {
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-chat .border-t.border-sky-100\/90 {
-        padding-bottom: calc(env(safe-area-inset-bottom) + 0.85rem) !important;
+        padding-bottom: 0.85rem !important;
         background: rgba(248, 252, 255, 0.94) !important;
     }
 
