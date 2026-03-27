@@ -97,9 +97,9 @@
                             </div>
 
                             <div class="mt-3 space-y-2.5">
-                                <button type="button" onclick="openDemoExperience('dash', 'launcher_alerts')" class="demo-option focus-ring w-full rounded-[18px] p-3.5 text-left">
+                                <button type="button" onclick="openDemoExperience('dash', 'launcher_alerts')" class="demo-option focus-ring w-full rounded-[26px] p-3.5 text-left">
                                     <div class="flex items-start gap-3">
-                                        <div class="w-12 h-12 rounded-2xl border border-sky-200 bg-sky-100 text-sky-700 flex items-center justify-center text-xl shrink-0 shadow-sm">
+                                        <div class="w-12 h-12 rounded-[22px] border border-sky-200 bg-sky-100 text-sky-700 flex items-center justify-center text-xl shrink-0 shadow-sm">
                                             <i class="fas fa-bell-concierge"></i>
                                         </div>
                                         <div>
@@ -109,9 +109,9 @@
                                     </div>
                                 </button>
 
-                                <button type="button" onclick="openDemoExperience('chat', 'launcher_chat')" class="demo-option focus-ring w-full rounded-[18px] p-3.5 text-left">
+                                <button type="button" onclick="openDemoExperience('chat', 'launcher_chat')" class="demo-option focus-ring w-full rounded-[26px] p-3.5 text-left">
                                     <div class="flex items-start gap-3">
-                                        <div class="w-12 h-12 rounded-2xl border border-sky-200 bg-cyan-50 text-sky-700 flex items-center justify-center text-xl shrink-0 shadow-sm">
+                                        <div class="w-12 h-12 rounded-[22px] border border-sky-200 bg-cyan-50 text-sky-700 flex items-center justify-center text-xl shrink-0 shadow-sm">
                                             <i class="fas fa-comments"></i>
                                         </div>
                                         <div>
@@ -127,15 +127,15 @@
                     <div id="screen-dashboard" class="phone-screen phone-screen-shell flex-1 relative text-slate-900">
                         <div class="phone-topbar px-3 pt-8 pb-2 border-b border-sky-100/90 bg-sky-50/85 backdrop-blur">
                             <div class="flex items-center justify-between gap-1.5">
-                                <button type="button" onclick="returnToDemoHome()" class="focus-ring inline-flex items-center gap-1.5 rounded-xl border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-slate-800 shadow-sm">
+                                <button type="button" onclick="returnToDemoHome()" class="focus-ring inline-flex items-center gap-1.5 rounded-[18px] border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-slate-800 shadow-sm">
                                     <i class="fas fa-chevron-left text-[10px]"></i>
                                     <span id="phone-exit-label">Home</span>
                                 </button>
-                                <div class="flex items-center gap-1 rounded-2xl border border-sky-200 bg-white/70 p-0.5 shadow-sm">
-                                    <button type="button" onclick="switchTab('dash')" data-demo-tab="dash" class="demo-tab-btn active focus-ring rounded-xl px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em]">
+                                <div class="flex items-center gap-1 rounded-[22px] border border-sky-200 bg-white/70 p-0.5 shadow-sm">
+                                    <button type="button" onclick="switchTab('dash')" data-demo-tab="dash" class="demo-tab-btn active focus-ring rounded-[18px] px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em]">
                                         Alert
                                     </button>
-                                    <button type="button" onclick="switchTab('chat')" data-demo-tab="chat" class="demo-tab-btn focus-ring rounded-xl px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em]">
+                                    <button type="button" onclick="switchTab('chat')" data-demo-tab="chat" class="demo-tab-btn focus-ring rounded-[18px] px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em]">
                                         Assistente
                                     </button>
                                 </div>
@@ -152,7 +152,7 @@
                         <div class="flex-1 overflow-y-auto p-3.5 space-y-3.5">
                             <div class="p-1">
                                 <div class="flex items-center gap-4">
-                                    <div id="alert-icon-container" class="w-20 h-20 rounded-[24px] bg-white/95 text-slate-900 flex items-center justify-center shadow-xl transition-all duration-500">
+                                    <div id="alert-icon-container" class="w-20 h-20 rounded-[28px] bg-white/95 text-slate-900 flex items-center justify-center shadow-xl transition-all duration-500">
                                         <span id="alert-icon" class="text-4xl"><i class="fas fa-shield-heart"></i></span>
                                     </div>
                                     <div>
@@ -162,15 +162,15 @@
                                 </div>
 
                                 <div class="grid grid-cols-3 gap-2 w-full mt-3.5">
-                                    <div class="metric-card rounded-2xl p-2.5 text-center">
+                                    <div class="metric-card rounded-[22px] p-2.5 text-center">
                                         <div class="text-[8px] text-slate-500 uppercase font-bold tracking-[0.16em]">Respiri</div>
                                         <div id="val-heart" class="mt-1 text-[0.9rem] font-black text-slate-900 leading-none">24</div>
                                     </div>
-                                    <div class="metric-card rounded-2xl p-2.5 text-center">
+                                    <div class="metric-card rounded-[22px] p-2.5 text-center">
                                         <div class="text-[8px] text-slate-500 uppercase font-bold tracking-[0.16em]">TEMP</div>
                                         <div id="val-temp" class="mt-1 text-[0.9rem] font-black text-slate-900 leading-none">22 C</div>
                                     </div>
-                                    <div class="metric-card rounded-2xl p-2.5 text-center">
+                                    <div class="metric-card rounded-[22px] p-2.5 text-center">
                                         <div class="text-[8px] text-slate-500 uppercase font-bold tracking-[0.16em]">Attivita</div>
                                         <div id="val-act" class="mt-1 text-[0.9rem] font-black text-slate-900 leading-none">Basso</div>
                                     </div>
@@ -187,16 +187,16 @@
                             <div>
                                 <div class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-bold mb-2">Scenari demo</div>
                                 <div class="grid grid-cols-4 gap-2">
-                                    <button type="button" onclick="setAlertScenario('stable')" data-alert-scenario="stable" class="focus-ring rounded-xl border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2 py-2 text-[10px] font-bold text-slate-800 text-center shadow-sm">
+                                    <button type="button" onclick="setAlertScenario('stable')" data-alert-scenario="stable" class="focus-ring rounded-[18px] border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2 py-2 text-[10px] font-bold text-slate-800 text-center shadow-sm">
                                         Stabile
                                     </button>
-                                    <button type="button" onclick="setAlertScenario('ivdd')" data-alert-scenario="ivdd" class="focus-ring rounded-xl border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2 py-2 text-[10px] font-bold text-slate-800 text-center shadow-sm">
+                                    <button type="button" onclick="setAlertScenario('ivdd')" data-alert-scenario="ivdd" class="focus-ring rounded-[18px] border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2 py-2 text-[10px] font-bold text-slate-800 text-center shadow-sm">
                                         Schiena
                                     </button>
-                                    <button type="button" onclick="setAlertScenario('baos')" data-alert-scenario="baos" class="focus-ring rounded-xl border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2 py-2 text-[10px] font-bold text-slate-800 text-center shadow-sm">
+                                    <button type="button" onclick="setAlertScenario('baos')" data-alert-scenario="baos" class="focus-ring rounded-[18px] border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2 py-2 text-[10px] font-bold text-slate-800 text-center shadow-sm">
                                         Respiro
                                     </button>
-                                    <button type="button" onclick="setAlertScenario('derma')" data-alert-scenario="derma" class="focus-ring rounded-xl border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2 py-2 text-[10px] font-bold text-slate-800 text-center shadow-sm">
+                                    <button type="button" onclick="setAlertScenario('derma')" data-alert-scenario="derma" class="focus-ring rounded-[18px] border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2 py-2 text-[10px] font-bold text-slate-800 text-center shadow-sm">
                                         Pelle
                                     </button>
                                 </div>
@@ -207,15 +207,15 @@
                     <div id="screen-chat" class="phone-screen chat-shell flex-1 relative text-slate-900">
                         <div class="phone-topbar px-3 pt-8 pb-2 border-b border-sky-100/90 bg-sky-50/85 backdrop-blur">
                             <div class="flex items-center justify-between gap-1.5">
-                                <button type="button" onclick="returnToDemoHome()" class="focus-ring inline-flex items-center gap-1.5 rounded-xl border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-slate-800 shadow-sm">
+                                <button type="button" onclick="returnToDemoHome()" class="focus-ring inline-flex items-center gap-1.5 rounded-[18px] border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-slate-800 shadow-sm">
                                     <i class="fas fa-chevron-left text-[10px]"></i>
                                     <span>Home</span>
                                 </button>
-                                <div class="flex items-center gap-1 rounded-2xl border border-sky-200 bg-white/70 p-0.5 shadow-sm">
-                                    <button type="button" onclick="switchTab('dash')" data-demo-tab="dash" class="demo-tab-btn focus-ring rounded-xl px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em]">
+                                <div class="flex items-center gap-1 rounded-[22px] border border-sky-200 bg-white/70 p-0.5 shadow-sm">
+                                    <button type="button" onclick="switchTab('dash')" data-demo-tab="dash" class="demo-tab-btn focus-ring rounded-[18px] px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em]">
                                         Alert
                                     </button>
-                                    <button type="button" onclick="switchTab('chat')" data-demo-tab="chat" class="demo-tab-btn active focus-ring rounded-xl px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em]">
+                                    <button type="button" onclick="switchTab('chat')" data-demo-tab="chat" class="demo-tab-btn active focus-ring rounded-[18px] px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em]">
                                         Assistente
                                     </button>
                                 </div>
@@ -224,14 +224,14 @@
 
                         <div id="phone-chat-log" class="chat-log flex-1 p-2.5 overflow-y-auto space-y-2.5 bg-transparent" aria-live="polite">
                             <div class="flex items-start">
-                                <div class="chat-bubble-bot w-full p-2.5 rounded-[22px] text-[11px] leading-[1.35] shadow-sm">
+                                <div class="chat-bubble-bot w-full p-2.5 rounded-[26px] text-[11px] leading-[1.35] shadow-sm">
                                     Ciao! Puoi chiedermi consigli pratici sulla routine del tuo Frenchie oppure tornare alla demo alert per simulare una giornata piu delicata.
                                 </div>
                             </div>
                         </div>
 
                         <div class="border-t border-sky-100/90 bg-sky-50/85 p-2.5">
-                            <div class="flex items-center gap-2 rounded-[18px] border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-3 py-1.5 shadow-sm">
+                            <div class="flex items-center gap-2 rounded-[24px] border border-sky-400 bg-gradient-to-b from-white to-sky-50 px-3 py-1.5 shadow-sm">
                                 <input id="phone-chat-input" type="text" aria-label="Scrivi un messaggio all'assistente" placeholder="Scrivi all'assistente..." class="flex-1 bg-transparent text-[0.8rem] text-slate-900 placeholder:text-slate-400 focus:outline-none">
                                 <button type="button" onclick="triggerChat('phone')" class="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full bg-sky-500 text-white shadow-sm">
                                     <i class="fas fa-paper-plane text-sm"></i>
