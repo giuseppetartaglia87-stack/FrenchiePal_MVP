@@ -229,6 +229,7 @@ window.FrenchiePal.createDemoController = function createDemoController({ trackE
         } else if (screen === 'chat') {
             clearPhoneFrameAlertMode();
             screenChat.classList.add('active');
+            document.dispatchEvent(new CustomEvent('frenchiepal:chat-opened'));
         } else {
             screenDash.classList.add('active');
             renderAlertState(currentAlertType);
