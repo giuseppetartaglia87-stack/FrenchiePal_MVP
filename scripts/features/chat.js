@@ -13,6 +13,13 @@ window.FrenchiePal.createChatController = function createChatController({ trackC
     const chatInputWeb = document.getElementById('web-chat-input');
     const chatInputPhone = document.getElementById('phone-chat-input');
     const chatLog = document.getElementById('phone-chat-log');
+    const suggestedQuestions = document.getElementById('chat-suggested-questions');
+
+    function hideSuggestedQuestions() {
+        if (suggestedQuestions) {
+            suggestedQuestions.remove();
+        }
+    }
 
     function buildFallbackReply(message) {
         const msg = String(message || '').toLowerCase();
@@ -39,13 +46,10 @@ window.FrenchiePal.createChatController = function createChatController({ trackC
             div.className = 'flex items-center justify-end gap-2';
             div.innerHTML = `<div class="chat-bubble-user p-2.5 rounded-[22px] rounded-tr-none text-[11px] leading-[1.35] shadow-lg max-w-[85%]">${escapeHtml(text)}</div>`;
         } else {
-            div.className = 'flex items-start gap-2 animate-fade-in';
+            div.className = 'flex items-start animate-fade-in';
             if (isTyping) div.setAttribute('data-typing', 'true');
             div.innerHTML = `
-                <div class="w-8 h-8 rounded-2xl bg-indigo-500/12 text-indigo-100 flex items-center justify-center text-[11px] shrink-0">
-                    <i class="fas fa-dog"></i>
-                </div>
-                <div class="chat-bubble-bot p-2.5 rounded-[22px] rounded-tl-none text-[11px] leading-[1.35] shadow-sm max-w-[85%]">
+                <div class="chat-bubble-bot w-full p-2.5 rounded-[22px] text-[11px] leading-[1.35] shadow-sm">
                     ${escapeHtml(text)}
                 </div>
             `;
@@ -60,19 +64,10 @@ window.FrenchiePal.createChatController = function createChatController({ trackC
         if (typingBubble) typingBubble.remove();
     }
 
-    async function triggerChat(source) {
-        let userMsg = '';
-
-        if (source === 'phone') {
-            userMsg = chatInputPhone.value.trim();
-            chatInputPhone.value = '';
-        } else {
-            userMsg = chatInputWeb.value.trim();
-            chatInputWeb.value = '';
-        }
-
+    async function sendChatMessage(userMsg, source) {
         if (!userMsg) return;
 
+        hideSuggestedQuestions();
         trackChatOpenOnce(source === 'phone' ? 'phone_input' : 'web_input');
         demoController.ensureDemoVisibility('chat');
 
@@ -104,6 +99,24 @@ window.FrenchiePal.createChatController = function createChatController({ trackC
         }
     }
 
+    async function triggerChat(source) {
+        let userMsg = '';
+
+        if (source === 'phone') {
+            userMsg = chatInputPhone.value.trim();
+            chatInputPhone.value = '';
+        } else {
+            userMsg = chatInputWeb.value.trim();
+            chatInputWeb.value = '';
+        }
+
+        await sendChatMessage(userMsg, source);
+    }
+
+    async function sendSuggestedQuestion(message) {
+        await sendChatMessage(String(message || '').trim(), 'phone');
+    }
+
     function init() {
         chatInputWeb?.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
@@ -121,6 +134,7 @@ window.FrenchiePal.createChatController = function createChatController({ trackC
     }
 
     return {
+        sendSuggestedQuestion,
         triggerChat,
         init
     };
