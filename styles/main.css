@@ -56,24 +56,41 @@ body {
 
 .mobile-nav-scroll {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
 }
 
 .mobile-nav-link {
     white-space: nowrap;
     color: #475569;
-    background: rgba(232, 241, 250, 0.9);
-    border: 1px solid rgba(191, 219, 254, 0.35);
-    border-radius: 999px;
-    padding: 0.45rem 0.8rem;
-    transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(235, 245, 255, 0.78));
+    border: 1px solid rgba(186, 230, 253, 0.55);
+    border-radius: 1rem;
+    padding: 0.52rem 0.86rem;
+    box-shadow:
+        0 8px 20px rgba(148, 163, 184, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.88);
+    transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .mobile-nav-link:hover,
 .mobile-nav-link:focus-visible {
     color: #0f172a;
-    background: rgba(219, 234, 254, 0.92);
-    border-color: rgba(147, 197, 253, 0.35);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(224, 242, 254, 0.94));
+    border-color: rgba(125, 211, 252, 0.7);
+    box-shadow:
+        0 12px 24px rgba(125, 211, 252, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    transform: translateY(-1px);
     outline: none;
+}
+
+.mobile-nav-link.active {
+    color: #0f4fa8;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(219, 234, 254, 0.95));
+    border-color: rgba(96, 165, 250, 0.58);
+    box-shadow:
+        0 12px 26px rgba(96, 165, 250, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.96);
 }
 
 @media (max-width: 767px) {
@@ -84,12 +101,13 @@ body {
     .mobile-nav-scroll {
         padding-left: 0.75rem;
         padding-right: 0.75rem;
-        padding-bottom: 0.45rem;
+        padding-bottom: 0.55rem;
     }
 
     .mobile-nav-link {
-        padding: 0.34rem 0.62rem;
-        font-size: 0.68rem;
+        padding: 0.42rem 0.72rem;
+        font-size: 0.72rem;
+        border-radius: 0.95rem;
     }
 }
 
