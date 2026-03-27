@@ -36,6 +36,7 @@ window.FrenchiePal = window.FrenchiePal || {};
     window.setAlertScenario = demoController.setAlertScenario;
     window.resetAlerts = demoController.resetAlerts;
     window.triggerChat = chatController.triggerChat;
+    window.sendSuggestedQuestion = chatController.sendSuggestedQuestion;
     window.submitLeadForm = waitlistController.submitLeadForm;
     window.trackEvent = trackEvent;
 })();
