@@ -392,12 +392,14 @@ body {
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen {
         display: flex !important;
         position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
+        top: 50dvh !important;
+        left: 50vw !important;
         right: auto !important;
         bottom: auto !important;
         inset: auto !important;
-        transform: translate(-50%, -50%) !important;
+        margin: 0 !important;
+        transform: translate3d(-50%, -50%, 0) !important;
+        transform-origin: center center !important;
         width: min(92vw, 23rem) !important;
         height: auto !important;
         aspect-ratio: 286 / 592 !important;
