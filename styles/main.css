@@ -358,7 +358,8 @@ body {
 .phone-topbar button,
 .overlay-close-btn,
 [data-alert-scenario],
-#screen-chat .border.border-sky-400 {
+#screen-chat .border.border-sky-400,
+#chat-suggested-questions button {
     transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
 }
 
@@ -369,7 +370,9 @@ body {
 [data-alert-scenario]:hover,
 [data-alert-scenario]:focus-visible,
 #screen-chat .border.border-sky-400:hover,
-#screen-chat .border.border-sky-400:focus-within {
+#screen-chat .border.border-sky-400:focus-within,
+#chat-suggested-questions button:hover,
+#chat-suggested-questions button:focus-visible {
     transform: translateY(-1px);
     box-shadow: 0 12px 26px rgba(96, 165, 250, 0.18);
 }
@@ -606,6 +609,13 @@ body {
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen #phone-chat-log {
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
+    }
+
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #chat-suggested-questions button {
+        font-size: 0.86rem !important;
+        line-height: 1.4 !important;
+        padding: 0.8rem 0.95rem !important;
+        border-radius: 1.1rem !important;
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen .chat-bubble-bot,
