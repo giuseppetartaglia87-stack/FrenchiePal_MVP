@@ -395,11 +395,11 @@ body {
         inset: 0 !important;
         margin: auto !important;
         transform: none !important;
-        width: min(92vw, 23rem) !important;
+        width: min(97vw, 27rem) !important;
         height: auto !important;
         aspect-ratio: 286 / 592 !important;
-        max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 1rem) !important;
-        border-radius: 2.5rem !important;
+        max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 0.35rem) !important;
+        border-radius: 2.35rem !important;
         border-width: 8px !important;
         z-index: 120 !important;
         max-width: none !important;
