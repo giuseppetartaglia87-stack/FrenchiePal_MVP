@@ -104,7 +104,7 @@ window.FrenchiePal.createDemoController = function createDemoController({ trackE
 
     function updateExitLabel() {
         if (phoneExitLabel) {
-            phoneExitLabel.textContent = isDemoFullscreen ? 'Chiudi' : 'Home';
+            phoneExitLabel.textContent = 'Home';
         }
     }
 
@@ -235,7 +235,6 @@ window.FrenchiePal.createDemoController = function createDemoController({ trackE
 
     function returnToDemoHome() {
         setActiveScreen('home');
-        exitDemoFullscreen();
     }
 
     function switchTab(tab) {
