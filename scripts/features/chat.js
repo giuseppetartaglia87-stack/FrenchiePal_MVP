@@ -51,20 +51,26 @@ window.FrenchiePal.createChatController = function createChatController({
         const div = document.createElement('div');
 
         if (sender === 'user') {
-            div.className = 'flex items-center justify-end gap-2';
-            div.innerHTML = `<div class="chat-bubble-user p-2.5 rounded-[22px] rounded-tr-none text-[11px] leading-[1.35] shadow-lg max-w-[85%]">${escapeHtml(text)}</div>`;
+            div.className = 'flex justify-end';
+            div.innerHTML = `
+                <div class="chat-bubble-user max-w-[85%] rounded-full bg-[#68abff] px-3 py-2 text-[0.66rem] leading-relaxed text-[#002b52] shadow-sm">
+                    ${escapeHtml(text)}
+                </div>
+            `;
         } else {
-            div.className = 'flex items-start animate-fade-in';
+            div.className = 'flex flex-col items-start max-w-[90%]';
             if (isTyping) div.setAttribute('data-typing', 'true');
             div.innerHTML = `
-                <div class="chat-bubble-bot w-full p-2.5 rounded-[22px] text-[11px] leading-[1.35] shadow-sm">
+                <div class="chat-bubble-bot border border-[#7FB3D5]/20 rounded-t-lg rounded-br-lg rounded-bl-none p-3 relative overflow-hidden shadow-sm max-w-full bg-[#E8F1F8] text-[0.72rem] leading-relaxed">
                     ${escapeHtml(text)}
                 </div>
             `;
         }
 
         chatLog.appendChild(div);
-        chatLog.scrollTop = chatLog.scrollHeight;
+        requestAnimationFrame(() => {
+            chatLog.scrollTop = chatLog.scrollHeight;
+        });
     }
 
     function removeTypingBubble() {
