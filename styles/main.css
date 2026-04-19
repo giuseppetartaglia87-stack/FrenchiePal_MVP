@@ -1,5 +1,5 @@
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     background:
         radial-gradient(circle at top left, rgba(186, 230, 253, 0.42), transparent 30%),
         radial-gradient(circle at bottom right, rgba(125, 211, 252, 0.32), transparent 28%),
@@ -234,13 +234,538 @@ body {
 }
 
 .phone-frame-inline-shell {
-    background:
-        linear-gradient(180deg, rgba(236, 245, 255, 1), rgba(210, 227, 246, 1));
+    background: #fbf9f4;
     box-shadow:
         0 34px 90px rgba(2, 6, 23, 0.62),
         0 0 0 1px rgba(226, 240, 255, 0.9),
         0 0 0 14px rgba(191, 219, 254, 0.12),
         0 0 0 26px rgba(203, 213, 225, 0.08);
+}
+
+.phone-frame-inline-shell .phone-screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Manrope', sans-serif;
+}
+
+.phone-frame-inline-shell .phone-screen > header,
+.phone-frame-inline-shell .phone-screen > main,
+.phone-frame-inline-shell .phone-screen > .phone-chat-input-bar {
+    width: 100%;
+}
+
+.phone-frame-inline-shell .phone-screen > header {
+    height: 4.25rem;
+    padding: 1.45rem 1.15rem 0.5rem !important;
+    flex-shrink: 0;
+}
+
+.phone-frame-inline-shell .phone-screen > header .w-12 {
+    width: 2.45rem !important;
+    height: 2.45rem !important;
+}
+
+.phone-frame-inline-shell .phone-screen > header .text-xl {
+    font-size: 1.05rem !important;
+}
+
+.phone-frame-inline-shell .phone-screen > main {
+    min-height: 0;
+    height: calc(100% - 8.95rem);
+    padding-bottom: 1rem !important;
+}
+
+.phone-frame-inline-shell .phone-screen > footer {
+    position: absolute !important;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4.7rem;
+    min-height: 4.7rem;
+    padding: 0.62rem 0.72rem 0.72rem !important;
+    overflow: hidden;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    gap: 0.38rem;
+}
+
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab {
+    width: 100% !important;
+    min-width: 0;
+    max-width: none;
+    height: 2.45rem;
+    padding: 0.28rem 0.48rem !important;
+    border: 1px solid rgba(127, 179, 213, 0.7);
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(49, 51, 46, 0.6);
+    cursor: pointer;
+    transform: none;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.34),
+        0 8px 18px rgba(49, 51, 46, 0.06);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+}
+
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab::before {
+    display: none;
+}
+
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab .material-symbols-outlined {
+    font-size: 1rem !important;
+    line-height: 1 !important;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24 !important;
+}
+
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab span:last-child {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 0.48rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.13em !important;
+    margin-top: 0.18rem !important;
+    text-transform: uppercase !important;
+}
+
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab.active {
+    color: #ffffff;
+    border-color: rgba(127, 179, 213, 0.95);
+    background: linear-gradient(135deg, rgba(127, 179, 213, 0.95), rgba(93, 146, 181, 0.95));
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.38),
+        0 10px 24px rgba(93, 146, 181, 0.18);
+    transform: none;
+}
+
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab.active span:last-child {
+    font-weight: 700 !important;
+}
+
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab:hover,
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab:focus-visible {
+    transform: translateY(-1px);
+}
+
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab.active:hover,
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab.active:focus-visible {
+    transform: translateY(-1px);
+}
+
+.phone-frame-inline-shell button,
+.phone-frame-inline-shell input,
+.phone-frame-inline-shell .phone-chat-input-bar > div > div {
+    border-color: rgba(127, 179, 213, 0.72) !important;
+}
+
+.phone-frame-inline-shell button {
+    border-width: 1px !important;
+    border-style: solid !important;
+}
+
+.phone-frame-inline-shell button.bg-\[\#0060ad\],
+.phone-frame-inline-shell button.bg-\[\#7FB3D5\],
+.phone-frame-inline-shell .phone-footer-tab.active {
+    border-color: rgba(127, 179, 213, 0.95) !important;
+}
+
+.phone-frame-inline-shell #screen-chat > main {
+    height: calc(100% - 14.75rem);
+    padding: 0.05rem 0.7rem 0.25rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+}
+
+.phone-frame-inline-shell #screen-chat .phone-chat-input-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 4.8rem;
+    max-width: none !important;
+    padding: 0 0.75rem 0.25rem !important;
+    transform-origin: bottom center;
+    z-index: 28 !important;
+}
+
+.phone-frame-inline-shell #screen-diary > main,
+.phone-frame-inline-shell #screen-dashboard > main,
+.phone-frame-inline-shell #screen-chat > main {
+    max-width: none !important;
+    width: 100% !important;
+}
+
+.phone-frame-inline-shell #screen-chat .max-w-md,
+.phone-frame-inline-shell #screen-chat .max-w-2xl,
+.phone-frame-inline-shell #screen-diary .max-w-2xl,
+.phone-frame-inline-shell #screen-dashboard .max-w-md {
+    max-width: none !important;
+}
+
+.phone-frame-inline-shell #screen-diary > main,
+.phone-frame-inline-shell #screen-dashboard > main {
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+    padding-top: 0.28rem !important;
+}
+
+.phone-frame-inline-shell #screen-dashboard > main {
+    padding-top: 0.05rem !important;
+}
+
+.phone-frame-inline-shell #screen-diary h3,
+.phone-frame-inline-shell #screen-dashboard h3,
+.phone-frame-inline-shell #screen-chat h3 {
+    font-size: 1.18rem !important;
+    line-height: 1.05 !important;
+    margin-bottom: 0 !important;
+    letter-spacing: -0.025em !important;
+}
+
+.phone-frame-inline-shell #screen-chat h3 {
+    margin-top: 0 !important;
+    flex: 0 0 auto !important;
+}
+
+.phone-frame-inline-shell #screen-diary h4,
+.phone-frame-inline-shell #screen-dashboard h4 {
+    font-size: 0.66rem !important;
+    margin-bottom: 0.18rem !important;
+}
+
+.phone-frame-inline-shell #screen-diary .mb-4,
+.phone-frame-inline-shell #screen-dashboard .mb-8 {
+    margin-bottom: 0.25rem !important;
+}
+
+.phone-frame-inline-shell #screen-diary .py-3,
+.phone-frame-inline-shell #screen-dashboard .py-2 {
+    padding-top: 0.2rem !important;
+    padding-bottom: 0.2rem !important;
+}
+
+.phone-frame-inline-shell #screen-diary .text-lg,
+.phone-frame-inline-shell #screen-dashboard .text-base {
+    font-size: 0.58rem !important;
+}
+
+.phone-frame-inline-shell #screen-diary .space-y-3,
+.phone-frame-inline-shell #screen-dashboard .space-y-6 {
+    gap: 0.28rem !important;
+}
+
+.phone-frame-inline-shell #screen-diary .p-3,
+.phone-frame-inline-shell #screen-dashboard .px-6.py-4 {
+    padding: 0.32rem !important;
+    border-radius: 0.72rem !important;
+}
+
+.phone-frame-inline-shell #screen-diary .min-w-\[64px\] {
+    min-width: 1.85rem !important;
+}
+
+.phone-frame-inline-shell #screen-diary .text-xl,
+.phone-frame-inline-shell #screen-dashboard .text-xl {
+    font-size: 0.74rem !important;
+    line-height: 1.1 !important;
+}
+
+.phone-frame-inline-shell #screen-diary .text-sm,
+.phone-frame-inline-shell #screen-dashboard .text-sm {
+    font-size: 0.56rem !important;
+    line-height: 1.18 !important;
+}
+
+.phone-frame-inline-shell #screen-diary .text-\[10px\] {
+    font-size: 0.42rem !important;
+}
+
+.phone-frame-inline-shell #screen-diary .material-symbols-outlined {
+    font-size: 1rem !important;
+}
+
+.phone-frame-inline-shell #screen-dashboard .material-symbols-outlined {
+    font-size: 1rem !important;
+}
+
+.phone-frame-inline-shell #screen-dashboard .font-semibold {
+    font-size: 0.56rem !important;
+    line-height: 1.18 !important;
+}
+
+.phone-frame-inline-shell #screen-diary .w-px.h-4 {
+    height: 0.65rem !important;
+}
+
+.phone-frame-inline-shell #screen-dashboard .w-14 {
+    width: 1.85rem !important;
+    height: 1.85rem !important;
+}
+
+.phone-frame-inline-shell #screen-dashboard .text-3xl {
+    font-size: 1rem !important;
+}
+
+.phone-frame-inline-shell #screen-dashboard .space-y-1 {
+    gap: 0.15rem !important;
+}
+
+.phone-frame-inline-shell #screen-dashboard p.mt-2 {
+    margin-top: 0.18rem !important;
+}
+
+.phone-frame-inline-shell #screen-chat main > div {
+    min-height: 0 !important;
+    height: 100% !important;
+    flex: 1 1 auto !important;
+    gap: 0.6rem !important;
+    padding-bottom: 0 !important;
+}
+
+.phone-frame-inline-shell #screen-chat #phone-chat-log {
+    min-height: 0 !important;
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding-right: 0.08rem !important;
+    padding-bottom: 0.75rem !important;
+    gap: 0.62rem !important;
+    scrollbar-width: none;
+}
+
+.phone-frame-inline-shell #screen-chat #phone-chat-log::-webkit-scrollbar {
+    display: none;
+}
+
+.phone-frame-inline-shell #screen-chat #phone-chat-log .chat-bubble-bot {
+    padding: 0.65rem !important;
+    border-radius: 1rem !important;
+    border-bottom-left-radius: 0 !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+}
+
+.phone-frame-inline-shell #screen-chat #phone-chat-log p,
+.phone-frame-inline-shell #screen-chat #phone-chat-log .chat-bubble-user,
+.phone-frame-inline-shell #screen-chat #phone-chat-log .chat-bubble-bot {
+    font-size: 0.68rem !important;
+    line-height: 1.3 !important;
+}
+
+.phone-frame-inline-shell #screen-chat #chat-suggested-questions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.4rem !important;
+    margin-top: 0.18rem !important;
+}
+
+.phone-frame-inline-shell #screen-chat #chat-suggested-questions button {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    gap: 0.65rem !important;
+    padding: 0.42rem 0.58rem !important;
+    border-radius: 999px !important;
+    font-size: 0.58rem !important;
+    line-height: 1.2 !important;
+}
+
+.phone-frame-inline-shell #screen-chat .chat-bubble-user,
+.phone-frame-inline-shell #screen-chat #phone-chat-log .bg-\[\#68abff\] {
+    border-radius: 999px !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+}
+
+.phone-frame-inline-shell #screen-chat #chat-suggested-questions .material-symbols-outlined {
+    font-size: 0.95rem !important;
+}
+
+.phone-frame-inline-shell #screen-chat .phone-chat-input-bar > div > div {
+    padding: 0.28rem 0.35rem 0.28rem 0.75rem !important;
+    box-shadow: 0 12px 26px rgba(49, 51, 46, 0.12) !important;
+    border: 1px solid rgba(127, 179, 213, 0.72) !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+}
+
+.phone-frame-inline-shell #screen-chat #phone-chat-input {
+    min-width: 0;
+    padding-top: 0.35rem !important;
+    padding-bottom: 0.35rem !important;
+    padding-left: 0 !important;
+    font-size: 0.66rem !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+.phone-frame-inline-shell #screen-chat #phone-chat-input:focus,
+.phone-frame-inline-shell #screen-chat #phone-chat-input:focus-visible {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+.phone-frame-inline-shell #screen-chat .phone-chat-input-bar button {
+    width: 2rem !important;
+    height: 2rem !important;
+}
+
+.phone-frame-inline-shell #screen-home > main {
+    overflow: hidden !important;
+    padding: 0.42rem 0.72rem 0.28rem !important;
+}
+
+.phone-frame-inline-shell #screen-home > main > section {
+    margin-top: 0 !important;
+}
+
+.phone-frame-inline-shell #screen-home > main > section + section {
+    margin-top: 0.68rem !important;
+}
+
+.phone-frame-inline-shell #screen-home > main > section:first-child {
+    gap: 0.55rem !important;
+    padding: 0.32rem !important;
+}
+
+.phone-frame-inline-shell #screen-home > main > section:first-child .w-20 {
+    width: 2.65rem !important;
+    height: 2.65rem !important;
+}
+
+.phone-frame-inline-shell #screen-home > main > section:first-child h3 {
+    font-size: 1.22rem !important;
+    line-height: 1.02 !important;
+}
+
+.phone-frame-inline-shell #screen-home > main > section:first-child p {
+    font-size: 0.58rem !important;
+    line-height: 1.25 !important;
+}
+
+.phone-frame-inline-shell #screen-home > main > section:first-child .text-\[96px\] {
+    font-size: 5.1rem !important;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 {
+    row-gap: 0.72rem !important;
+    column-gap: 0.48rem !important;
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .h-28 {
+    min-width: 0;
+    height: 4.45rem !important;
+    padding: 0.55rem !important;
+    border-radius: 1rem !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .h-28 .text-4xl {
+    font-size: 1.28rem !important;
+    line-height: 1 !important;
+    margin-top: 0.45rem !important;
+    margin-bottom: 0.2rem !important;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .h-28 > div {
+    height: 100%;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .h-28 > div > div {
+    min-width: 0;
+    width: calc(100% - 1.75rem);
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .h-28 .text-\[42px\] {
+    position: absolute;
+    top: 0.52rem;
+    right: 0.55rem;
+    font-size: 1.2rem !important;
+    line-height: 1 !important;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .h-28 span.text-\[10px\],
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .h-28 .text-\[10px\] {
+    font-size: 0.48rem !important;
+    line-height: 1.1 !important;
+    white-space: nowrap;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .h-28 span.text-\[10px\] {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .h-28 .text-sm,
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .h-28 .text-lg {
+    font-size: 0.58rem !important;
+    line-height: 1 !important;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .col-span-2 {
+    min-width: 0;
+    overflow: hidden;
+    padding: 0.56rem !important;
+    border-radius: 1rem !important;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .col-span-2 .flex.gap-4 {
+    gap: 0.75rem !important;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .col-span-2 .flex-1 {
+    min-width: 0;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .col-span-2 .mb-3 {
+    margin-bottom: 0.28rem !important;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .col-span-2 .text-base {
+    font-size: 0.64rem !important;
+    line-height: 1.15 !important;
+}
+
+.phone-frame-inline-shell #screen-home .grid.grid-cols-2 > .col-span-2 .text-xs {
+    font-size: 0.5rem !important;
+    line-height: 1.15 !important;
+}
+
+.phone-frame-inline-shell #screen-home > main > section:last-child {
+    overflow: hidden;
+    padding: 0.38rem 0.48rem !important;
+    border-radius: 1.2rem !important;
+}
+
+.phone-frame-inline-shell #screen-home > main > section:last-child .w-12 {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+}
+
+.phone-frame-inline-shell #screen-home > main > section:last-child h3 {
+    font-size: 0.58rem !important;
+    margin-bottom: 0.15rem !important;
+}
+
+.phone-frame-inline-shell #screen-home > main > section:last-child p {
+    font-size: 0.54rem !important;
+    line-height: 1.18 !important;
 }
 
 .phone-screen-home {
@@ -350,12 +875,14 @@ body {
 }
 
 .phone-topbar button,
+.phone-app-header button,
 .overlay-close-btn,
 [data-alert-scenario] {
     cursor: pointer;
 }
 
 .phone-topbar button,
+.phone-app-header button,
 .overlay-close-btn,
 [data-alert-scenario],
 #screen-chat .border.border-sky-400,
@@ -365,6 +892,8 @@ body {
 
 .phone-topbar button:hover,
 .phone-topbar button:focus-visible,
+.phone-app-header button:hover,
+.phone-app-header button:focus-visible,
 .overlay-close-btn:hover,
 .overlay-close-btn:focus-visible,
 [data-alert-scenario]:hover,
@@ -438,6 +967,7 @@ body {
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen {
+        --phone-app-scale: 0.88;
         display: flex !important;
         position: fixed !important;
         inset: 0 !important;
@@ -451,7 +981,7 @@ body {
         border-width: 8px !important;
         z-index: 120 !important;
         max-width: none !important;
-        background: linear-gradient(180deg, rgba(236, 245, 255, 1), rgba(210, 227, 246, 1)) !important;
+        background: #fbf9f4 !important;
         box-shadow:
             0 34px 90px rgba(2, 6, 23, 0.34),
             0 0 0 1px rgba(226, 240, 255, 0.9),
@@ -482,177 +1012,8 @@ body {
         box-shadow: 0 14px 34px rgba(96, 165, 250, 0.18);
     }
 
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-screen-home,
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-screen-shell,
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .chat-shell {
-        background:
-            radial-gradient(circle at top left, rgba(96, 165, 250, 0.18), transparent 30%),
-            radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.14), transparent 28%),
-            linear-gradient(180deg, #f3f9ff 0%, #deedf9 100%) !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home > .flex-1 {
-        padding-top: 4.6rem !important;
-        padding-left: 1.1rem !important;
-        padding-right: 1.1rem !important;
-        padding-bottom: 1.35rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home span.text-\[10px\] {
-        font-size: 0.78rem !important;
-        letter-spacing: 0.12em !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home h3 {
-        font-size: 1.9rem !important;
-        line-height: 1.05 !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home p.text-\[0\.96rem\] {
-        font-size: 1.15rem !important;
-        line-height: 1.2 !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home p.text-\[0\.82rem\] {
-        font-size: 0.98rem !important;
-        line-height: 1.45 !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home .demo-option {
-        padding: 1rem !important;
-        border-radius: 1.15rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home .demo-option .w-12 {
-        width: 3.5rem !important;
-        height: 3.5rem !important;
-        font-size: 1.25rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home .demo-option .text-\[0\.98rem\] {
-        font-size: 1.14rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-home .demo-option p {
-        font-size: 0.95rem !important;
-        line-height: 1.45 !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-topbar {
-        padding-top: 4.35rem !important;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-        background: rgba(248, 252, 255, 0.9) !important;
-        border-bottom-color: rgba(191, 219, 254, 0.95) !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-dashboard .flex-1,
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-chat .flex-1 {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-        padding-bottom: 1rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-topbar button,
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .demo-tab-btn {
-        min-height: 2.8rem !important;
-        font-size: 0.8rem !important;
-        letter-spacing: 0.08em !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #phone-status-text {
-        font-size: 2rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #alert-title {
-        font-size: 1.22rem !important;
-        line-height: 1.2 !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #alert-icon-container {
-        width: 5.4rem !important;
-        height: 5.4rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #alert-icon {
-        font-size: 2.2rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .metric-card {
-        padding: 0.65rem 0.4rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .metric-card .text-\[8px\] {
-        font-size: 0.68rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #val-heart,
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #val-temp,
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #val-act {
-        font-size: 1.08rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .alert-panel .alert-tag {
-        font-size: 0.78rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #alert-desc p {
-        font-size: 0.98rem !important;
-        line-height: 1.45 !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen [data-alert-scenario] {
-        min-height: 2.95rem !important;
-        font-size: 0.84rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #phone-chat-log {
-        padding-top: 1rem !important;
-        padding-bottom: 1rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #chat-suggested-questions {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 0.6rem !important;
-        padding-top: 0.2rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #chat-suggested-questions button {
-        display: flex !important;
-        width: 100% !important;
-        align-items: flex-start !important;
-        font-size: 0.86rem !important;
-        line-height: 1.4 !important;
-        padding: 0.8rem 0.95rem !important;
-        border-radius: 1.1rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .chat-bubble-bot,
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .chat-bubble-user {
-        font-size: 0.97rem !important;
-        line-height: 1.5 !important;
-        padding: 0.95rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-chat .border-t.border-sky-100\/90 {
-        padding-bottom: 0.85rem !important;
-        background: rgba(248, 252, 255, 0.94) !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #phone-chat-input {
-        font-size: 1rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-chat .border.border-sky-400 {
-        min-height: 3.4rem !important;
-        padding-top: 0.55rem !important;
-        padding-bottom: 0.55rem !important;
-    }
-
-    .phone-frame-inline-shell.phone-frame-mobile-fullscreen #screen-chat .h-9.w-9 {
-        width: 2.9rem !important;
-        height: 2.9rem !important;
+    .phone-frame-inline-shell.phone-frame-mobile-fullscreen .phone-screen > header {
+        padding-top: 3.15rem !important;
     }
 }
 
@@ -665,3 +1026,6 @@ body {
         display: none;
     }
 }
+
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab span:last-child,
+.phone-frame-inline-shell #screen-home > footer .ph
