@@ -381,6 +381,9 @@ body {
 .phone-frame-inline-shell #screen-chat > main {
     height: calc(100% - 13.05rem);
     padding: 0.05rem 0.7rem 0.45rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
 }
 
 .phone-frame-inline-shell #screen-chat .phone-chat-input-bar {
@@ -519,21 +522,36 @@ body {
 }
 
 .phone-frame-inline-shell #screen-chat main > div {
+    min-height: 0 !important;
+    height: 100% !important;
+    flex: 1 1 auto !important;
     gap: 0.6rem !important;
     padding-bottom: 0 !important;
 }
 
 .phone-frame-inline-shell #screen-chat #phone-chat-log {
+    min-height: 0 !important;
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding-right: 0.08rem !important;
+    padding-bottom: 0.4rem !important;
     gap: 0.62rem !important;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(127, 179, 213, 0.55) transparent;
 }
 
 .phone-frame-inline-shell #screen-chat #phone-chat-log .chat-bubble-bot {
     padding: 0.65rem !important;
     border-radius: 1rem !important;
     border-bottom-left-radius: 0 !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
 }
 
-.phone-frame-inline-shell #screen-chat #phone-chat-log p {
+.phone-frame-inline-shell #screen-chat #phone-chat-log p,
+.phone-frame-inline-shell #screen-chat #phone-chat-log .chat-bubble-user,
+.phone-frame-inline-shell #screen-chat #phone-chat-log .chat-bubble-bot {
     font-size: 0.68rem !important;
     line-height: 1.3 !important;
 }
@@ -558,6 +576,8 @@ body {
 .phone-frame-inline-shell #screen-chat .chat-bubble-user,
 .phone-frame-inline-shell #screen-chat #phone-chat-log .bg-\[\#68abff\] {
     border-radius: 999px !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
 }
 
 .phone-frame-inline-shell #screen-chat #chat-suggested-questions .material-symbols-outlined {
