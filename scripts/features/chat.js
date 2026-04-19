@@ -68,7 +68,9 @@ window.FrenchiePal.createChatController = function createChatController({
         }
 
         chatLog.appendChild(div);
-        chatLog.scrollTop = chatLog.scrollHeight;
+        requestAnimationFrame(() => {
+            chatLog.scrollTop = chatLog.scrollHeight;
+        });
     }
 
     function removeTypingBubble() {
