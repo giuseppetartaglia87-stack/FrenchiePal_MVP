@@ -379,8 +379,8 @@ body {
 }
 
 .phone-frame-inline-shell #screen-chat > main {
-    height: calc(100% - 13.05rem);
-    padding: 0.05rem 0.7rem 0.45rem !important;
+    height: calc(100% - 14.75rem);
+    padding: 0.05rem 0.7rem 0.25rem !important;
     display: flex !important;
     flex-direction: column !important;
     overflow: hidden !important;
@@ -390,10 +390,11 @@ body {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 4.65rem;
+    bottom: 4.8rem;
     max-width: none !important;
-    padding: 0 0.75rem 0.35rem !important;
+    padding: 0 0.75rem 0.25rem !important;
     transform-origin: bottom center;
+    z-index: 28 !important;
 }
 
 .phone-frame-inline-shell #screen-diary > main,
@@ -432,6 +433,7 @@ body {
 
 .phone-frame-inline-shell #screen-chat h3 {
     margin-top: 0 !important;
+    flex: 0 0 auto !important;
 }
 
 .phone-frame-inline-shell #screen-diary h4,
@@ -535,10 +537,13 @@ body {
     overflow-y: auto !important;
     overflow-x: hidden !important;
     padding-right: 0.08rem !important;
-    padding-bottom: 0.4rem !important;
+    padding-bottom: 0.75rem !important;
     gap: 0.62rem !important;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(127, 179, 213, 0.55) transparent;
+    scrollbar-width: none;
+}
+
+.phone-frame-inline-shell #screen-chat #phone-chat-log::-webkit-scrollbar {
+    display: none;
 }
 
 .phone-frame-inline-shell #screen-chat #phone-chat-log .chat-bubble-bot {
@@ -587,6 +592,8 @@ body {
 .phone-frame-inline-shell #screen-chat .phone-chat-input-bar > div > div {
     padding: 0.28rem 0.35rem 0.28rem 0.75rem !important;
     box-shadow: 0 12px 26px rgba(49, 51, 46, 0.12) !important;
+    border: 1px solid rgba(127, 179, 213, 0.72) !important;
+    background: rgba(255, 255, 255, 0.96) !important;
 }
 
 .phone-frame-inline-shell #screen-chat #phone-chat-input {
@@ -595,6 +602,17 @@ body {
     padding-bottom: 0.35rem !important;
     padding-left: 0 !important;
     font-size: 0.66rem !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+.phone-frame-inline-shell #screen-chat #phone-chat-input:focus,
+.phone-frame-inline-shell #screen-chat #phone-chat-input:focus-visible {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
 }
 
 .phone-frame-inline-shell #screen-chat .phone-chat-input-bar button {
@@ -1010,15 +1028,4 @@ body {
 }
 
 .phone-frame-inline-shell .phone-screen > footer .phone-footer-tab span:last-child,
-.phone-frame-inline-shell #screen-home > footer .phone-footer-tab span:last-child,
-.phone-frame-inline-shell #screen-diary > footer .phone-footer-tab span:last-child,
-.phone-frame-inline-shell #screen-dashboard > footer .phone-footer-tab span:last-child,
-.phone-frame-inline-shell #screen-chat > footer .phone-footer-tab span:last-child {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-    font-size: 0.36rem !important;
-    font-weight: 700 !important;
-    line-height: 1 !important;
-    letter-spacing: 0.13em !important;
-    margin-top: 0.18rem !important;
-    text-transform: uppercase !important;
-}
+.phone-frame-inline-shell #screen-home > footer .ph
