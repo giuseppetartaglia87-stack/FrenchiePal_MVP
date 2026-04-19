@@ -510,6 +510,144 @@ body {
     font-size: 0.82rem !important;
 }
 
+body,
+body * {
+    font-family: 'Nunito', sans-serif !important;
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.fa,
+.fa-solid,
+.fa-regular,
+.fa-brands,
+.fas,
+.far,
+.fab {
+    font-family: "Font Awesome 6 Free" !important;
+}
+
+.phone-frame-inline-shell #screen-home > header,
+.phone-frame-inline-shell #screen-diary > header,
+.phone-frame-inline-shell #screen-dashboard > header,
+.phone-frame-inline-shell #screen-chat > header {
+    position: relative !important;
+    height: 4.25rem !important;
+    min-height: 4.25rem !important;
+    padding: 0 !important;
+    background: rgba(251, 249, 244, 0.8) !important;
+}
+
+.phone-frame-inline-shell #screen-home > header > .flex,
+.phone-frame-inline-shell #screen-diary > header > .flex,
+.phone-frame-inline-shell #screen-dashboard > header > .flex,
+.phone-frame-inline-shell #screen-chat > header > .flex {
+    position: absolute !important;
+    left: 1.15rem !important;
+    bottom: 0.5rem !important;
+    width: 2.45rem !important;
+    height: 2.45rem !important;
+    display: block !important;
+}
+
+.phone-frame-inline-shell #screen-home > header .w-12,
+.phone-frame-inline-shell #screen-diary > header .w-12,
+.phone-frame-inline-shell #screen-dashboard > header .w-12,
+.phone-frame-inline-shell #screen-chat > header .w-12 {
+    width: 2.45rem !important;
+    height: 2.45rem !important;
+    border-width: 2px !important;
+    border-color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+.phone-frame-inline-shell #screen-home > header > .absolute,
+.phone-frame-inline-shell #screen-diary > header > .absolute,
+.phone-frame-inline-shell #screen-dashboard > header > .absolute,
+.phone-frame-inline-shell #screen-chat > header > .absolute {
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 1.15rem !important;
+    transform: translateX(-50%) !important;
+    width: max-content !important;
+}
+
+.phone-frame-inline-shell #screen-home > header > .absolute .text-xl,
+.phone-frame-inline-shell #screen-diary > header > .absolute .text-xl,
+.phone-frame-inline-shell #screen-dashboard > header > .absolute .text-xl,
+.phone-frame-inline-shell #screen-chat > header > .absolute .text-xl {
+    display: block !important;
+    font-size: 1.05rem !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.025em !important;
+    white-space: nowrap !important;
+}
+
+.phone-frame-inline-shell #screen-home > header,
+.phone-frame-inline-shell #screen-diary > header,
+.phone-frame-inline-shell #screen-dashboard > header,
+.phone-frame-inline-shell #screen-chat > header {
+    height: 4.25rem !important;
+    min-height: 4.25rem !important;
+    padding: 1.45rem 1.15rem 0.5rem !important;
+    background: rgba(251, 249, 244, 0.8) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-shrink: 0 !important;
+}
+
+.phone-frame-inline-shell #screen-home > header .w-12,
+.phone-frame-inline-shell #screen-diary > header .w-12,
+.phone-frame-inline-shell #screen-dashboard > header .w-12,
+.phone-frame-inline-shell #screen-chat > header .w-12 {
+    width: 2.45rem !important;
+    height: 2.45rem !important;
+    border-width: 2px !important;
+    border-color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+.phone-frame-inline-shell #screen-home > header .absolute,
+.phone-frame-inline-shell #screen-diary > header .absolute,
+.phone-frame-inline-shell #screen-dashboard > header .absolute,
+.phone-frame-inline-shell #screen-chat > header .absolute {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+.phone-frame-inline-shell #screen-home > header .text-xl,
+.phone-frame-inline-shell #screen-diary > header .text-xl,
+.phone-frame-inline-shell #screen-dashboard > header .text-xl,
+.phone-frame-inline-shell #screen-chat > header .text-xl {
+    font-size: 1.05rem !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.025em !important;
+}
+
+body,
+body * {
+    font-family: 'Nunito', sans-serif !important;
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.fa,
+.fa-solid,
+.fa-regular,
+.fa-brands,
+.fas,
+.far,
+.fab {
+    font-family: "Font Awesome 6 Free" !important;
+}
+
 .phone-frame-inline-shell #screen-diary .min-w-\[64px\] {
     min-width: 1.85rem !important;
 }
@@ -1233,4 +1371,80 @@ body {
 
 .phone-frame-inline-shell #screen-diary .p-3.flex.items-center .material-symbols-outlined {
     font-size: 0.82rem !important;
+}
+
+body,
+body * {
+    font-family: 'Nunito', sans-serif !important;
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.fa,
+.fa-solid,
+.fa-regular,
+.fa-brands,
+.fas,
+.far,
+.fab {
+    font-family: "Font Awesome 6 Free" !important;
+}
+
+.phone-frame-inline-shell #screen-home > header,
+.phone-frame-inline-shell #screen-diary > header,
+.phone-frame-inline-shell #screen-dashboard > header,
+.phone-frame-inline-shell #screen-chat > header {
+    position: relative !important;
+    height: 4.25rem !important;
+    min-height: 4.25rem !important;
+    padding: 0 !important;
+    background: rgba(251, 249, 244, 0.8) !important;
+}
+
+.phone-frame-inline-shell #screen-home > header > .flex,
+.phone-frame-inline-shell #screen-diary > header > .flex,
+.phone-frame-inline-shell #screen-dashboard > header > .flex,
+.phone-frame-inline-shell #screen-chat > header > .flex {
+    position: absolute !important;
+    left: 1.15rem !important;
+    bottom: 0.5rem !important;
+    width: 2.45rem !important;
+    height: 2.45rem !important;
+    display: block !important;
+}
+
+.phone-frame-inline-shell #screen-home > header .w-12,
+.phone-frame-inline-shell #screen-diary > header .w-12,
+.phone-frame-inline-shell #screen-dashboard > header .w-12,
+.phone-frame-inline-shell #screen-chat > header .w-12 {
+    width: 2.45rem !important;
+    height: 2.45rem !important;
+    border-width: 2px !important;
+    border-color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+.phone-frame-inline-shell #screen-home > header > .absolute,
+.phone-frame-inline-shell #screen-diary > header > .absolute,
+.phone-frame-inline-shell #screen-dashboard > header > .absolute,
+.phone-frame-inline-shell #screen-chat > header > .absolute {
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 1.15rem !important;
+    transform: translateX(-50%) !important;
+    width: max-content !important;
+}
+
+.phone-frame-inline-shell #screen-home > header > .absolute .text-xl,
+.phone-frame-inline-shell #screen-diary > header > .absolute .text-xl,
+.phone-frame-inline-shell #screen-dashboard > header > .absolute .text-xl,
+.phone-frame-inline-shell #screen-chat > header > .absolute .text-xl {
+    display: block !important;
+    font-size: 1.05rem !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.025em !important;
+    white-space: nowrap !important;
 }
