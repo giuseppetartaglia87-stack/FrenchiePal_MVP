@@ -19,26 +19,44 @@ window.FrenchiePal.createChatController = function createChatController({
     const chatLog = document.getElementById('phone-chat-log');
     const suggestedQuestions = document.getElementById('chat-suggested-questions');
 
+    let firstMessageTracked = false;
+
     function getChatSessionContext() {
         return window.FrenchiePal.getChatSessionContext();
+    }
+
+    function ensureFirstMessageTracked(source) {
+        if (firstMessageTracked) return;
+        firstMessageTracked = true;
+
+        trackEvent('assistant_first_message', {
+            sourceSection: 'assistant',
+            metadata: {
+                source
+            }
+        });
     }
 
     function buildFallbackReply(message) {
         const msg = String(message || '').toLowerCase();
 
         if (msg.includes('caldo') || msg.includes('respiro') || msg.includes('affanno')) {
-            return 'Se vedi caldo o affanno, fai pausa, ombra e riduci il movimento. Se vuoi, puoi anche confrontare questo caso con lo scenario Respiro nella demo alert.';
+            return 'Se vedi caldo o affanno, fai pausa, ombra e riduci il movimento. Controlla anche se Enea recupera bene dopo pochi minuti.';
         }
 
         if (msg.includes('salti') || msg.includes('scale') || msg.includes('schiena') || msg.includes('ernia')) {
-            return 'Per la schiena, nei momenti delicati conviene limitare salti, scale e cambi di quota. Se vuoi, apri anche lo scenario Schiena per vedere come FrenchiePal lo segnalerebbe.';
+            return 'Per la schiena, nei momenti delicati conviene limitare salti, scale e cambi di quota. Meglio ridurre il carico prima che diventi eccessivo.';
         }
 
         if (msg.includes('pelle') || msg.includes('prurito') || msg.includes('gratta') || msg.includes('pieghe')) {
-            return 'Se noti piu grattamento del solito, controlla pieghe, rossori e umidita nelle zone sensibili. Puoi anche provare lo scenario Pelle per vedere l alert dedicato.';
+            return 'Se noti piu grattamento del solito, controlla pieghe, rossori e umidita nelle zone sensibili. Mantieni la zona pulita e asciutta.';
         }
 
-        return 'Questa e una risposta demo locale: posso darti consigli base su routine, respiro, schiena e pelle del Frenchie. Prova a scrivermi per esempio "puo fare le scale?" oppure "che faccio se ha caldo?".';
+        if (msg.includes('mangiato') || msg.includes('cena') || msg.includes('pasto')) {
+            return 'Meglio non forzarlo con una cena più pesante del normale. Tieni il pasto regolare, semplice e osserva appetito ed energia nelle prossime ore.';
+        }
+
+        return 'Questa e una risposta demo locale: posso darti consigli base su routine, respiro, schiena e pelle del Frenchie.';
     }
 
     function hideSuggestedQuestions() {
@@ -84,6 +102,16 @@ window.FrenchiePal.createChatController = function createChatController({
         hideSuggestedQuestions();
         trackChatOpenOnce(source === 'phone_suggested' ? 'suggested_question' : source);
         demoController.ensureDemoVisibility('chat');
+
+        trackEvent('assistant_message_send', {
+            sourceSection: 'assistant',
+            metadata: {
+                source,
+                ...metadata
+            }
+        });
+
+        ensureFirstMessageTracked(source);
 
         const chatSession = getChatSessionContext();
         addChatBubble(userMsg, 'user');
@@ -145,7 +173,8 @@ window.FrenchiePal.createChatController = function createChatController({
         });
 
         await sendChatMessage(question, 'phone_suggested', {
-            suggested: true
+            suggested: true,
+            question
         });
     }
 

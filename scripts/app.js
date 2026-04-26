@@ -22,19 +22,30 @@ window.FrenchiePal = window.FrenchiePal || {};
     });
 
     const waitlistController = window.FrenchiePal.createWaitlistController({
-        sessionContext
+        sessionContext,
+        trackEvent
     });
 
     demoController.init();
     chatController.init();
+    waitlistController.init();
 
     window.openDemoExperience = demoController.openDemoExperience;
     window.toggleMobileChat = demoController.toggleMobileChat;
     window.returnToDemoHome = demoController.returnToDemoHome;
     window.switchTab = demoController.switchTab;
-    window.triggerAlert = demoController.triggerAlert;
-    window.setAlertScenario = demoController.setAlertScenario;
-    window.resetAlerts = demoController.resetAlerts;
+
+    // Mantengo queste export solo se nel markup o in altri file ci sono ancora riferimenti legacy.
+    if (typeof demoController.triggerAlert === 'function') {
+        window.triggerAlert = demoController.triggerAlert;
+    }
+    if (typeof demoController.setAlertScenario === 'function') {
+        window.setAlertScenario = demoController.setAlertScenario;
+    }
+    if (typeof demoController.resetAlerts === 'function') {
+        window.resetAlerts = demoController.resetAlerts;
+    }
+
     window.triggerChat = chatController.triggerChat;
     window.sendSuggestedQuestion = chatController.sendSuggestedQuestion;
     window.submitLeadForm = waitlistController.submitLeadForm;

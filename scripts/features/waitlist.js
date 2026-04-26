@@ -1,13 +1,36 @@
 window.FrenchiePal = window.FrenchiePal || {};
 
 window.FrenchiePal.createWaitlistController = function createWaitlistController({
-    sessionContext
+    sessionContext,
+    trackEvent
 }) {
+    let waitlistStartedTracked = false;
+
+    function trackWaitlistStart(source = 'form_focus') {
+        if (waitlistStartedTracked) return;
+        waitlistStartedTracked = true;
+
+        trackEvent('waitlist_form_start', {
+            sourceSection: 'waitlist',
+            metadata: {
+                source
+            }
+        });
+    }
+
     async function submitLeadForm() {
         const email = document.getElementById('email-input')?.value || '';
         const dogAge = document.getElementById('dog-age-input')?.value || '';
         const priority = document.getElementById('priority-input')?.value || '';
         const success = document.getElementById('form-success');
+
+        trackEvent('waitlist_submit', {
+            sourceSection: 'waitlist',
+            metadata: {
+                dog_age: dogAge,
+                priority
+            }
+        });
 
         try {
             const res = await fetch('/api/waitlist', {
@@ -31,6 +54,15 @@ window.FrenchiePal.createWaitlistController = function createWaitlistController(
                 return;
             }
 
+            trackEvent('lead_captured', {
+                sourceSection: 'waitlist',
+                metadata: {
+                    lead_source: 'form',
+                    dog_age: dogAge,
+                    priority
+                }
+            });
+
             window.FrenchiePal.markSessionLeadCaptured();
             success.classList.remove('hidden');
             success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -43,7 +75,18 @@ window.FrenchiePal.createWaitlistController = function createWaitlistController(
         }
     }
 
+    function init() {
+        ['email-input', 'dog-age-input', 'priority-input'].forEach((id) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            el.addEventListener('focus', () => trackWaitlistStart('focus'), { once: true });
+            el.addEventListener('change', () => trackWaitlistStart('change'), { once: true });
+        });
+    }
+
     return {
-        submitLeadForm
+        submitLeadForm,
+        init
     };
 };
