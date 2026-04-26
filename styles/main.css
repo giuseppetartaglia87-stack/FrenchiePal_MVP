@@ -1448,3 +1448,6 @@ body * {
     letter-spacing: -0.025em !important;
     white-space: nowrap !important;
 }
+
+.phone-frame-inline-shell .phone-screen > footer .phone-footer-tab span:last-child,
+.phone-frame-inline-shell #screen-home > footer .ph
