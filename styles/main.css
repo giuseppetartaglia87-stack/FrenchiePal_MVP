@@ -113,6 +113,41 @@ body {
         font-size: 0.64rem;
         border-radius: 0.76rem;
     }
+
+    .hero-title {
+        font-size: 2.95rem !important;
+        line-height: 0.98;
+    }
+
+    .hero-subtitle,
+    .hero-demo-copy {
+        font-size: 1.12rem !important;
+        line-height: 1.5;
+    }
+
+    .section-title {
+        font-size: 2.45rem;
+        line-height: 1.12;
+    }
+
+    .hero-waitlist-btn,
+    .waitlist-submit-btn {
+        font-size: 1.04rem !important;
+    }
+
+    .text-slate-600.text-lg,
+    .text-lg.text-slate-600 {
+        font-size: 1.1rem !important;
+        line-height: 1.62;
+    }
+
+    .text-slate-600.leading-relaxed.text-sm,
+    .text-slate-500.leading-relaxed,
+    .text-slate-600.text-sm,
+    .text-slate-500.text-base {
+        font-size: 0.98rem !important;
+        line-height: 1.58;
+    }
 }
 
 .gradient-text {
