@@ -99,15 +99,19 @@ body {
     }
 
     .mobile-nav-scroll {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-        padding-bottom: 0.55rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-bottom: 0.45rem;
+    }
+
+    .mobile-nav-scroll > div {
+        gap: 0.35rem;
     }
 
     .mobile-nav-link {
-        padding: 0.34rem 0.56rem;
-        font-size: 0.66rem;
-        border-radius: 0.82rem;
+        padding: 0.3rem 0.48rem;
+        font-size: 0.64rem;
+        border-radius: 0.76rem;
     }
 }
 
