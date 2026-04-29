@@ -6,7 +6,7 @@ window.FrenchiePal.createDemoController = function createDemoController({
 }) {
     const phoneFrame = document.getElementById('phone-frame');
     const screenHome = document.getElementById('screen-home');
-    const screenDiary = document.getElementById('screen-diary');
+    const screenHealth = document.getElementById('screen-health');
     const screenDash = document.getElementById('screen-dashboard');
     const screenChat = document.getElementById('screen-chat');
     const demoTabButtons = document.querySelectorAll('[data-demo-tab]');
@@ -23,9 +23,9 @@ window.FrenchiePal.createDemoController = function createDemoController({
             screen: screenHome,
             analyticsTab: 'home'
         },
-        diary: {
-            screen: screenDiary,
-            analyticsTab: 'diary'
+        health: {
+            screen: screenHealth,
+            analyticsTab: 'health'
         },
         dash: {
             screen: screenDash,
@@ -53,8 +53,15 @@ window.FrenchiePal.createDemoController = function createDemoController({
         }
     }
 
+    function normalizeTab(tab) {
+        if (tab === 'alerts') return 'dash';
+        if (tab === 'diary') return 'health';
+        return tab;
+    }
+
     function trackDemoTabView(tab, source = 'click') {
-        const config = TAB_CONFIG[tab];
+        const normalizedTab = normalizeTab(tab);
+        const config = TAB_CONFIG[normalizedTab];
         if (!config) return;
 
         trackEvent('demo_tab_view', {
@@ -67,7 +74,7 @@ window.FrenchiePal.createDemoController = function createDemoController({
     }
 
     function setActiveScreen(screen) {
-        const nextScreen = screen === 'alerts' ? 'dash' : screen;
+        const nextScreen = normalizeTab(screen);
 
         Object.values(TAB_CONFIG).forEach(({ screen: panel }) => {
             if (panel) panel.classList.remove('active');
@@ -149,19 +156,20 @@ window.FrenchiePal.createDemoController = function createDemoController({
     }
 
     function openDemoExperience(screen, location) {
-        ensureDemoVisibility(screen);
+        const normalizedScreen = normalizeTab(screen);
+        ensureDemoVisibility(normalizedScreen);
 
         if (!initialHomeTracked) {
             initialHomeTracked = true;
             trackDemoTabView('home', location || 'demo_open');
         }
 
-        if (screen === 'chat') {
+        if (normalizedScreen === 'chat') {
             trackChatOpenOnce(location || 'launcher_chat');
         }
 
-        if (screen && TAB_CONFIG[screen]) {
-            trackDemoTabView(screen, location || 'open_demo_experience');
+        if (normalizedScreen && TAB_CONFIG[normalizedScreen]) {
+            trackDemoTabView(normalizedScreen, location || 'open_demo_experience');
         }
     }
 
@@ -171,10 +179,11 @@ window.FrenchiePal.createDemoController = function createDemoController({
     }
 
     function switchTab(tab) {
-        ensureDemoVisibility(tab);
-        trackDemoTabView(tab, 'tab_click');
+        const normalizedTab = normalizeTab(tab);
+        ensureDemoVisibility(normalizedTab);
+        trackDemoTabView(normalizedTab, 'tab_click');
 
-        if (tab === 'chat') {
+        if (normalizedTab === 'chat') {
             trackChatOpenOnce('phone_tab');
         }
     }
