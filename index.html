@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrenchiePal | Longevity per il tuo Frenchie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="antialiased">
+
+    <nav class="fixed top-0 w-full z-50 glass-nav shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 h-14 md:h-20 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer shrink-0" onclick="window.scrollTo(0,0)">
+                <span class="text-3xl">&#128062;</span>
+                <span class="text-xl font-bold text-slate-900 tracking-tight">FrenchiePal</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#app-areas" class="nav-link">Le 4 aree</a>
+                <a href="#howitworks" class="nav-link">Come funziona</a>
+                <a href="#solution" class="nav-link">Soluzione</a>
+                <a href="#perche-frenchiepal" class="nav-link">La nostra storia</a>
+                <a href="#privacy" class="nav-link">Privacy e info</a>
+            </div>
+        </div>
+        <div class="md:hidden mobile-nav-scroll px-4 pb-3">
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar text-[12px] font-semibold">
+                <a href="#home" class="mobile-nav-link">Home</a>
+                <a href="#app-areas" class="mobile-nav-link">Le 4 aree</a>
+                <a href="#howitworks" class="mobile-nav-link">Come funziona</a>
+                <a href="#solution" class="mobile-nav-link">Soluzione</a>
+                <a href="#perche-frenchiepal" class="mobile-nav-link">La nostra storia</a>
+                <a href="#privacy" class="mobile-nav-link">Privacy e info</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="pt-36 md:pt-28 pb-20 px-6 min-h-[95vh] flex items-start justify-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
+            <div class="absolute top-20 left-1/4 w-96 h-96 bg-sky-400/18 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-20 right-1/4 w-96 h-96 bg-cyan-300/16 rounded-full blur-[120px]"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-300/10 rounded-full blur-[130px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto w-full z-10 lg:grid lg:grid-cols-[minmax(0,1.08fr)_340px] lg:gap-14 lg:items-start">
+            <div class="order-1 text-center lg:text-left">
+                <h1 class="hero-title text-[2.7rem] md:text-[4.7rem] mb-5">
+                    <span class="md:whitespace-nowrap">Capisci prima. Agisci meglio.</span> <br>
+                    <span class="text-cyan-600">Proteggi la salute del tuo Frenchie, ogni giorno.</span>
+                </h1>
+
+                <p class="hero-subtitle lg:hidden text-[1.07rem] font-bold text-sky-700 mb-4 max-w-3xl mx-auto">
+                    FrenchiePal unisce collare intelligente, sezione Salute e assistente AI per aiutarti a leggere meglio i segnali del tuo cane e capire cosa fare.
+                </p>
+
+                <p class="hero-subtitle hidden lg:block text-[1.18rem] md:text-[1.56rem] font-bold text-sky-700 mb-4 max-w-4xl mx-auto lg:mx-0">
+                    FrenchiePal unisce collare intelligente, sezione Salute e assistente AI per aiutarti a leggere meglio i segnali del tuo cane e capire cosa fare.
+                </p>
+
+                <p class="text-[1.07rem] md:text-[1.56rem] text-slate-600 font-bold mb-5 max-w-3xl mx-auto lg:mx-0">
+                    Non si limita a registrare dati: li mette in contesto per aiutarti ad accorgerti prima dei cambiamenti che contano.
+                </p>
+
+                <p class="hero-demo-copy hidden lg:block text-[1.08rem] md:text-[1.58rem] font-semibold mb-5 max-w-4xl mx-auto lg:mx-0 whitespace-nowrap">
+                    Esplora le 4 aree della demo e poni le tue domande all&rsquo;assistente &#128073;
+                </p>
+
+                <div class="hidden lg:flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-stretch mb-3">
+                    <a href="#waitlist" onclick="trackEvent('cta_click', { location: 'hero_primary' })" class="hero-waitlist-btn inline-flex items-center justify-center px-8 py-4 rounded-full text-white font-bold text-lg shadow-xl">
+                        Richiedi l'accesso in anteprima
+                    </a>
+                </div>
+            </div>
+
+            <div class="order-2 relative mt-7 lg:mt-0 flex flex-col items-center lg:items-end lg:-mt-6">
+                <p class="lg:hidden text-[0.98rem] sm:text-[1.05rem] leading-snug font-semibold text-sky-700 mb-4 text-center max-w-[19rem]">
+                    Esplora le 4 aree della demo e poni le tue domande all&rsquo;assistente &#128071;
+                </p>
+
+                <div id="phone-frame" class="phone-frame-inline-shell relative w-[292px] sm:w-[304px] lg:w-[286px] h-[606px] sm:h-[628px] lg:h-[592px] rounded-[40px] border-[8px] border-slate-900 shadow-2xl overflow-hidden flex-col transition-all duration-300">
+                    <button type="button" onclick="toggleMobileChat(true)" aria-label="Apri la demo a schermo intero" class="phone-preview-trigger focus-ring lg:hidden"></button>
+                    <button id="phone-overlay-close" type="button" onclick="toggleMobileChat(false)" aria-label="Chiudi anteprima" class="overlay-close-btn focus-ring">
+                        <i class="fas fa-xmark"></i>
+                    </button>
+                    <div class="phone-notch absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-950 rounded-b-xl z-20"></div>
+
+                    <div id="screen-home" class="phone-screen active h-full flex-col bg-[#fbf9f4] text-[#31332e]">
+                        <header class="flex justify-between items-center px-6 py-4 bg-[#fbf9f4]/80 backdrop-blur-3xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+                                    <img alt="Enea, bulldog francese" class="w-full h-full object-cover" src="enea.jpg">
+                                </div>
+                            </div>
+                            <div class="absolute left-1/2 -translate-x-1/2">
+                                <span class="text-xl font-extrabold tracking-tight font-['Plus_Jakarta_Sans']">FrenchiePal</span>
+                            </div>
+                        </header>
+                        <main class="pt-4 px-6 space-y-4 flex-1 overflow-y-auto">
+                            <section class="relative flex items-center gap-5 p-5">
+                                <div class="shrink-0">
+                                    <div class="w-20 h-20 rounded-full overflow-hidden">
+                                        <img alt="Enea, bulldog francese" class="w-full h-full object-cover" src="enea.jpg">
+                                    </div>
+                                </div>
+                                <div class="relative z-10">
+                                    <h3 class="text-3xl font-extrabold leading-tight font-['Plus_Jakarta_Sans']">Stato di Enea:<br><span class="text-green-600">nella norma</span></h3>
+                                    <p class="text-green-600 text-sm font-bold uppercase tracking-wider mt-0.5">COLLARE CONNESSO</p>
+                                </div>
+                                <div class="absolute right-2 top-2 w-24 h-24 opacity-5 pointer-events-none">
+                                    <span class="material-symbols-outlined text-[96px] text-[#7FB3D5]" style='font-variation-settings: "FILL" 1;'>pets</span>
+                                </div>
+                            </section>
+                            <section class="grid grid-cols-2 gap-4 mt-2">
+                                <div class="flex flex-col justify-between p-3 h-28 bg-white rounded-[1.5rem]">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <span class="text-[#5e6059]/70 font-bold uppercase tracking-wider font-['Plus_Jakarta_Sans'] text-[10px]">ATTIVIT&Agrave;</span>
+                                            <div class="text-4xl font-extrabold mt-0.5 font-['Plus_Jakarta_Sans'] tracking-tighter">10<span class="text-sm font-bold ml-0.5">min</span></div>
+                                            <div class="text-[10px] font-bold text-green-600/70 uppercase tracking-tight">Nella norma</div>
+                                        </div>
+                                        <span class="material-symbols-outlined text-amber-500/80 text-[42px]" style='font-variation-settings: "FILL" 1;'>bolt</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-between p-3 h-28 bg-white rounded-[1.5rem]">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <span class="text-[#5e6059]/70 font-bold uppercase tracking-wider font-['Plus_Jakarta_Sans'] text-[10px]">Temperatura</span>
+                                            <div class="text-4xl font-extrabold mt-0.5 font-['Plus_Jakarta_Sans'] tracking-tighter">22<span class="text-lg font-bold ml-0.5">&deg;</span></div>
+                                            <div class="text-[10px] font-bold text-green-600/70 uppercase tracking-tight">NELLA NORMA</div>
+                                        </div>
+                                        <span class="material-symbols-outlined text-orange-400/80 text-[42px]" style='font-variation-settings: "FILL" 1;'>device_thermostat</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-between p-3 h-28 bg-white rounded-[1.5rem]">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <span class="text-[#5e6059]/70 font-bold uppercase tracking-wider font-['Plus_Jakarta_Sans'] text-[10px]">Respirazione</span>
+                                            <div class="text-4xl font-extrabold mt-0.5 font-['Plus_Jakarta_Sans'] tracking-tighter">16<span class="text-sm font-bold ml-0.5">rpm</span></div>
+                                            <div class="text-[10px] font-bold text-green-600/70 uppercase tracking-tight">Nella norma</div>
+                                        </div>
+                                        <span class="material-symbols-outlined text-[#7FB3D5]/80 text-[42px]">air</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-between p-3 h-28 bg-white rounded-[1.5rem]">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <span class="text-[#5e6059]/70 font-bold uppercase tracking-wider font-['Plus_Jakarta_Sans'] text-[10px]">ENERGIA</span>
+                                            <div class="text-4xl font-extrabold mt-0.5 font-['Plus_Jakarta_Sans'] tracking-tighter">80<span class="text-lg font-bold ml-0.5">%</span></div>
+                                            <div class="text-[10px] font-bold uppercase tracking-tight text-green-600/70">Molto buono</div>
+                                        </div>
+                                        <span class="material-symbols-outlined text-[#7FB3D5]/80 text-[42px]" style='font-variation-settings: "FILL" 1;'>battery_charging_80</span>
+                                    </div>
+                                </div>
+                                <div class="col-span-2 p-5 flex flex-col justify-between text-left bg-white rounded-[1.5rem]">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-[#5e6059] font-bold uppercase tracking-wider font-['Plus_Jakarta_Sans'] text-xs">Oggi e prossime attivit&agrave;</span>
+                                        </div>
+                                        <span class="material-symbols-outlined text-[#7FB3D5]" style='font-variation-settings: "FILL" 1;'>event_upcoming</span>
+                                    </div>
+                                    <div class="home-activity-list space-y-3">
+                                        <div class="home-activity-item flex items-center gap-3 rounded-[1.1rem] bg-[#fbf9f4] px-4 py-3">
+                                            <div class="w-10 h-10 rounded-full bg-[#E8F1F8] text-[#7FB3D5] flex items-center justify-center shrink-0">
+                                                <span class="material-symbols-outlined text-lg" style='font-variation-settings: "FILL" 1;'>restaurant</span>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="text-base font-extrabold font-['Plus_Jakarta_Sans']">Pappa mattina</div>
+                                                <div class="text-xs font-medium text-[#5e6059]">06:00 &bull; Completata</div>
+                                            </div>
+                                        </div>
+                                        <div class="home-activity-item flex items-center gap-3 rounded-[1.1rem] bg-[#fbf9f4] px-4 py-3">
+                                            <div class="w-10 h-10 rounded-full bg-[#EEF5EA] text-green-600 flex items-center justify-center shrink-0">
+                                                <span class="material-symbols-outlined text-lg" style='font-variation-settings: "FILL" 1;'>directions_walk</span>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="text-base font-extrabold font-['Plus_Jakarta_Sans']">Passeggiata</div>
+                                                <div class="text-xs font-medium text-[#5e6059]">07:00 &bull; Prossima</div>
+                                            </div>
+                                        </div>
+                                        <div class="home-activity-item flex items-center gap-3 rounded-[1.1rem] bg-[#fbf9f4] px-4 py-3">
+                                            <div class="w-10 h-10 rounded-full bg-[#FFF3E8] text-amber-600 flex items-center justify-center shrink-0">
+                                                <span class="material-symbols-outlined text-lg" style='font-variation-settings: "FILL" 1;'>vaccines</span>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="text-base font-extrabold font-['Plus_Jakarta_Sans']">Richiamo vaccinale</div>
+                                                <div class="text-xs font-medium text-[#5e6059]">19/06 &bull; Tra 5 giorni</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="p-6 relative overflow-hidden bg-[#E3F2FD]/50 rounded-[1.5rem]">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 text-[#7FB3D5] flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-[#7FB3D5]" style='font-variation-settings: "FILL" 1;'>smart_toy</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-bold text-[#7FB3D5] font-['Plus_Jakarta_Sans'] mb-1 uppercase tracking-tight">Consiglio Assistente</h3>
+                                        <p class="leading-relaxed text-sm">Fa caldo oggi! Assicurati che Enea abbia acqua fresca e evita passeggiate nelle ore di punta.</p>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                        <footer class="sticky bottom-0 left-0 w-full h-24 bg-[#fbf9f4]/95 backdrop-blur-2xl flex justify-around items-center px-4 pb-4 z-20 rounded-t-lg shadow-[0_-8px_32px_rgba(49,51,46,0.08)]">
+                            <button type="button" onclick="switchTab('home')" data-demo-tab="home" class="footer-glass-button phone-footer-tab active">
+                                <span class="material-symbols-outlined text-xl">home</span>
+                                <span class="text-[10px] font-extrabold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">HOME</span>
+                            </button>
+                            <button type="button" onclick="switchTab('health')" data-demo-tab="health" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">health_and_safety</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">SALUTE</span>
+                            </button>
+                            <button type="button" onclick="switchTab('dash')" data-demo-tab="dash" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">notifications</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">ALERT</span>
+                            </button>
+                            <button type="button" onclick="switchTab('chat')" data-demo-tab="chat" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">smart_toy</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">ASSISTENTE</span>
+                            </button>
+                        </footer>
+                    </div>
+
+                    <div id="screen-health" class="phone-screen h-full flex-col bg-[#fbf9f4] text-[#31332e]">
+                        <header class="flex justify-between items-center px-6 py-4 bg-[#fbf9f4]/80 backdrop-blur-3xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+                                    <img alt="Enea, bulldog francese" class="w-full h-full object-cover" src="enea.jpg">
+                                </div>
+                            </div>
+                            <div class="absolute left-1/2 -translate-x-1/2">
+                                <span class="text-xl font-extrabold tracking-tight font-['Plus_Jakarta_Sans']">FrenchiePal</span>
+                            </div>
+                        </header>
+                        <main class="px-6 max-w-md mx-auto w-full pt-5 flex-1 overflow-y-auto">
+                            <div class="mb-5">
+                                <h3 class="text-4xl font-extrabold tracking-tight mb-2 font-['Plus_Jakarta_Sans']">Salute</h3>
+                                <p class="text-sm text-[#5e6059] leading-relaxed">Routine quotidiana e storia sanitaria di Enea, in un unico posto.</p>
+                            </div>
+                            <div class="space-y-4 pb-6">
+                                <button type="button" class="health-hub-card w-full text-left bg-white rounded-[1.5rem] p-5 shadow-sm">
+                                    <div class="flex items-start justify-between gap-4">
+                                        <div class="flex items-start gap-4">
+                                            <div class="w-12 h-12 rounded-full bg-[#E8F1F8] text-[#7FB3D5] flex items-center justify-center shrink-0">
+                                                <span class="material-symbols-outlined text-[26px]" style='font-variation-settings: "FILL" 1;'>event_note</span>
+                                            </div>
+                                            <div>
+                                                <h4 class="text-xl font-extrabold leading-tight font-['Plus_Jakarta_Sans']">Diario quotidiano</h4>
+                                            </div>
+                                        </div>
+                                        <span class="material-symbols-outlined text-[#7FB3D5] text-xl shrink-0">chevron_right</span>
+                                    </div>
+                                    <div class="health-card-preview mt-4 rounded-[1.2rem] bg-[#fbf9f4] px-4 py-3">
+                                        <div class="health-preview-row">
+                                            <span class="material-symbols-outlined text-[#7FB3D5]">restaurant</span>
+                                            <span>Alimentazione</span>
+                                        </div>
+                                        <div class="health-preview-row">
+                                            <span class="material-symbols-outlined text-[#7FB3D5]">directions_walk</span>
+                                            <span>Uscite</span>
+                                        </div>
+                                        <div class="health-preview-row">
+                                            <span class="material-symbols-outlined text-[#7FB3D5]">edit_note</span>
+                                            <span>Nota del giorno</span>
+                                        </div>
+                                    </div>
+                                </button>
+                                <button type="button" class="health-hub-card w-full text-left bg-white rounded-[1.5rem] p-5 shadow-sm">
+                                    <div class="flex items-start justify-between gap-4">
+                                        <div class="flex items-start gap-4">
+                                            <div class="w-12 h-12 rounded-full bg-[#E8F1F8] text-[#7FB3D5] flex items-center justify-center shrink-0">
+                                                <span class="material-symbols-outlined text-[26px]" style='font-variation-settings: "FILL" 1;'>folder_open</span>
+                                            </div>
+                                            <div>
+                                                <h4 class="text-xl font-extrabold leading-tight font-['Plus_Jakarta_Sans']">Fascicolo sanitario</h4>
+                                            </div>
+                                        </div>
+                                        <span class="material-symbols-outlined text-[#7FB3D5] text-xl shrink-0">chevron_right</span>
+                                    </div>
+                                    <div class="health-card-preview mt-4 rounded-[1.2rem] bg-[#fbf9f4] px-4 py-3">
+                                        <div class="health-preview-row">
+                                            <span class="material-symbols-outlined text-[#7FB3D5]">vaccines</span>
+                                            <span>Libretto vaccinale</span>
+                                        </div>
+                                        <div class="health-preview-row">
+                                            <span class="material-symbols-outlined text-[#7FB3D5]">health_and_safety</span>
+                                            <span>Patologie note</span>
+                                        </div>
+                                        <div class="health-preview-row">
+                                            <span class="material-symbols-outlined text-[#7FB3D5]">medication</span>
+                                            <span>Terapie</span>
+                                        </div>
+                                        <div class="health-preview-row">
+                                            <span class="material-symbols-outlined text-[#7FB3D5]">description</span>
+                                            <span>Visite e referti</span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </main>
+                        <footer class="sticky bottom-0 left-0 w-full h-24 bg-[#fbf9f4]/95 backdrop-blur-2xl flex justify-around items-center px-4 pb-4 z-20 rounded-t-lg shadow-[0_-8px_32px_rgba(49,51,46,0.08)]">
+                            <button type="button" onclick="switchTab('home')" data-demo-tab="home" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">home</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">HOME</span>
+                            </button>
+                            <button type="button" onclick="switchTab('health')" data-demo-tab="health" class="footer-glass-button phone-footer-tab active">
+                                <span class="material-symbols-outlined text-xl">health_and_safety</span>
+                                <span class="text-[10px] font-extrabold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">SALUTE</span>
+                            </button>
+                            <button type="button" onclick="switchTab('dash')" data-demo-tab="dash" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">notifications</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">ALERT</span>
+                            </button>
+                            <button type="button" onclick="switchTab('chat')" data-demo-tab="chat" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">smart_toy</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">ASSISTENTE</span>
+                            </button>
+                        </footer>
+                    </div>
+
+                    <div id="screen-dashboard" class="phone-screen h-full flex-col bg-[#fbf9f4] text-[#31332e]">
+                        <header class="flex justify-between items-center px-6 py-4 bg-[#fbf9f4]/80 backdrop-blur-3xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+                                    <img alt="Enea, bulldog francese" class="w-full h-full object-cover" src="enea.jpg">
+                                </div>
+                            </div>
+                            <div class="absolute left-1/2 -translate-x-1/2">
+                                <span class="text-xl font-extrabold tracking-tight font-['Plus_Jakarta_Sans']">FrenchiePal</span>
+                            </div>
+                        </header>
+                        <main class="px-6 max-w-md mx-auto w-full mt-5 flex-1 overflow-y-auto">
+                            <div class="mb-8">
+                                <h3 class="text-4xl font-extrabold mb-2 tracking-tight font-['Plus_Jakarta_Sans']">Alert</h3>
+                                <div class="inline-flex items-center gap-2 px-1 py-2 text-black">
+                                    <span class="font-['Plus_Jakarta_Sans'] font-bold text-base">Ieri: 13/06/2026</span>
+                                    <span class="material-symbols-outlined text-base text-[#7FB3D5]">edit</span>
+                                </div>
+                            </div>
+                            <div class="space-y-6">
+                                <div class="relative flex flex-col px-6 py-4 bg-white rounded-[1.5rem]">
+                                    <div class="flex gap-4 items-start">
+                                        <div class="flex-shrink-0 w-14 h-14 rounded-full border-2 border-[#EF4444] bg-[#EF4444]/10 text-[#a83836] flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-3xl">orthopedics</span>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <h4 class="text-xl font-bold font-['Plus_Jakarta_Sans']">Attivit&agrave; elevata</h4>
+                                            <p class="text-[#5e6059] font-semibold text-sm">La schiena potrebbe andare sotto stress</p>
+                                            <p class="text-[#5e6059]/80 text-sm mt-2">Riduci l'attivit&agrave; intensa, salti e scale</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="relative flex flex-col px-6 py-4 bg-white rounded-[1.5rem]">
+                                    <div class="flex gap-4 items-start">
+                                        <div class="flex-shrink-0 w-14 h-14 rounded-full border-2 border-orange-400 bg-orange-400/10 text-orange-500 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-3xl">air</span>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <h4 class="text-xl font-bold font-['Plus_Jakarta_Sans']">Respirazione elevata</h4>
+                                            <p class="text-[#5e6059] font-semibold text-sm">La frequenza respiratoria &egrave; pi&ugrave; alta del normale</p>
+                                            <p class="text-[#5e6059]/80 text-sm mt-2">Fai riposare Enea al fresco e fornisci acqua</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="relative flex flex-col px-6 py-4 bg-white rounded-[1.5rem]">
+                                    <div class="flex gap-4 items-start">
+                                        <div class="flex-shrink-0 w-14 h-14 rounded-full border-2 border-pink-400 bg-pink-400/10 text-pink-500 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-3xl">pets</span>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <h4 class="text-xl font-bold font-['Plus_Jakarta_Sans']">Grattamento in aumento</h4>
+                                            <p class="text-[#5e6059] font-semibold text-sm">Il grattamento &egrave; pi&ugrave; alto del normale</p>
+                                            <p class="text-[#5e6059]/80 text-sm mt-2">Controlla le pieghe e rossori</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                        <footer class="sticky bottom-0 left-0 w-full h-24 bg-[#fbf9f4]/95 backdrop-blur-2xl flex justify-around items-center px-4 pb-4 z-20 rounded-t-lg shadow-[0_-8px_32px_rgba(49,51,46,0.08)]">
+                            <button type="button" onclick="switchTab('home')" data-demo-tab="home" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">home</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">HOME</span>
+                            </button>
+                            <button type="button" onclick="switchTab('health')" data-demo-tab="health" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">health_and_safety</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">SALUTE</span>
+                            </button>
+                            <button type="button" onclick="switchTab('dash')" data-demo-tab="dash" class="footer-glass-button phone-footer-tab active">
+                                <span class="material-symbols-outlined text-xl">notifications</span>
+                                <span class="text-[10px] font-extrabold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">ALERT</span>
+                            </button>
+                            <button type="button" onclick="switchTab('chat')" data-demo-tab="chat" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">smart_toy</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">ASSISTENTE</span>
+                            </button>
+                        </footer>
+                    </div>
+
+                    <div id="screen-chat" class="phone-screen h-full flex-col bg-[#fbf9f4] text-[#31332e]">
+                        <header class="flex justify-between items-center px-6 py-4 bg-[#fbf9f4]/80 backdrop-blur-3xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+                                    <img alt="Enea, bulldog francese" class="w-full h-full object-cover" src="enea.jpg">
+                                </div>
+                            </div>
+                            <div class="absolute left-1/2 -translate-x-1/2">
+                                <span class="text-xl font-extrabold tracking-tight font-['Plus_Jakarta_Sans']">FrenchiePal</span>
+                            </div>
+                        </header>
+                        <main class="px-6 max-w-md mx-auto w-full mt-5 flex-1 overflow-y-auto">
+                            <div class="flex flex-col pb-6 gap-4">
+                                <h3 class="text-4xl font-extrabold tracking-tight mb-2 font-['Plus_Jakarta_Sans']">Assistente</h3>
+                                <div id="phone-chat-log" class="flex flex-col gap-6 chat-log">
+                                    <div class="flex flex-col items-start max-w-[90%]">
+                                        <div class="chat-bubble-bot border border-[#7FB3D5]/20 rounded-t-lg rounded-br-lg rounded-bl-none p-6 relative overflow-hidden shadow-sm max-w-full bg-[#E8F1F8]">
+                                            <p class="leading-relaxed text-sm">
+                                                Ciao! Posso aiutarti usando i dati recenti e la routine di Enea. Su cosa hai bisogno di aiuto oggi?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div id="chat-suggested-questions" class="flex flex-wrap gap-2 mt-4">
+                                        <button type="button" onclick="sendSuggestedQuestion('Oggi fa caldo: posso portarlo al parco?')" class="flex items-center gap-3 px-5 py-3 bg-white border border-[#7FB3D5]/20 rounded-2xl text-sm font-semibold text-[#5e6059] shadow-sm active:scale-95 transition-all">
+                                            <span class="material-symbols-outlined text-[#7FB3D5]">wb_sunny</span>
+                                            <span>Oggi fa caldo: posso portarlo al parco?</span>
+                                        </button>
+                                        <button type="button" onclick="sendSuggestedQuestion('Ha mangiato meno del solito: come mi regolo stasera?')" class="flex items-center gap-3 px-5 py-3 bg-white border border-[#7FB3D5]/20 rounded-2xl text-sm font-semibold text-[#5e6059] shadow-sm active:scale-95 transition-all">
+                                            <span class="material-symbols-outlined text-[#7FB3D5]">restaurant</span>
+                                            <span>Ha mangiato meno del solito: come mi regolo stasera?</span>
+                                        </button>
+                                        <button type="button" onclick="sendSuggestedQuestion('Si gratta più del normale: devo controllare le pieghe?')" class="flex items-center gap-3 px-5 py-3 bg-white border border-[#7FB3D5]/20 rounded-2xl text-sm font-semibold text-[#5e6059] shadow-sm active:scale-95 transition-all">
+                                            <span class="material-symbols-outlined text-[#7FB3D5]">pets</span>
+                                            <span>Si gratta più del normale: devo controllare le pieghe?</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                        <div class="phone-chat-input-bar px-6 z-10 pb-3 max-w-md mx-auto w-full">
+                            <div>
+                                <div class="bg-white/90 backdrop-blur-xl rounded-full pl-6 pr-2 py-2 flex items-center gap-2 shadow-xl border border-white/20">
+                                    <input id="phone-chat-input" class="flex-1 bg-transparent border-0 outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 focus-visible:border-0 focus-visible:outline-none focus-visible:ring-0 text-[#31332e] placeholder:text-[#5e6059]/50 py-2 text-lg pl-2 items-center" style="border:0 !important;outline:0 !important;box-shadow:none !important;" placeholder="Chiedi qualcosa su Enea..." type="text"/>
+                                    <button type="button" onclick="triggerChat('phone')" class="w-12 h-12 bg-[#7FB3D5] text-white rounded-full flex items-center justify-center shadow-lg hover:brightness-95 transition-all active:scale-95 shrink-0">
+                                        <span class="material-symbols-outlined">send</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="sticky bottom-0 left-0 w-full h-24 bg-[#fbf9f4]/95 backdrop-blur-2xl flex justify-around items-center px-4 pb-4 z-20 rounded-t-lg shadow-[0_-8px_32px_rgba(49,51,46,0.08)]">
+                            <button type="button" onclick="switchTab('home')" data-demo-tab="home" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">home</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">HOME</span>
+                            </button>
+                            <button type="button" onclick="switchTab('health')" data-demo-tab="health" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">health_and_safety</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">SALUTE</span>
+                            </button>
+                            <button type="button" onclick="switchTab('dash')" data-demo-tab="dash" class="footer-glass-button phone-footer-tab">
+                                <span class="material-symbols-outlined text-xl">notifications</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">ALERT</span>
+                            </button>
+                            <button type="button" onclick="switchTab('chat')" data-demo-tab="chat" class="footer-glass-button phone-footer-tab active">
+                                <span class="material-symbols-outlined text-xl">smart_toy</span>
+                                <span class="text-[10px] font-extrabold uppercase tracking-widest font-['Plus_Jakarta_Sans'] mt-0.5">ASSISTENTE</span>
+                            </button>
+                        </footer>
+                    </div>
+                </div>
+
+                <a href="#waitlist" onclick="trackEvent('cta_click', { location: 'hero_mobile_secondary' })" class="hero-waitlist-btn lg:hidden mt-5 inline-flex items-center justify-center px-8 py-4 rounded-full text-white font-bold text-lg shadow-xl">
+                    Richiedi l'accesso in anteprima
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="app-areas" class="py-20 px-6 bg-gradient-to-b from-[#f7fbff] via-sky-50/90 to-cyan-100/70">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <h2 class="section-title">Un&rsquo;app semplice, organizzata in 4 aree chiave.</h2>
+                <p class="text-slate-600 text-lg">Le 4 aree dell&rsquo;app lavorano insieme per darti un quadro pi&ugrave; chiaro del tuo cane, mettere i segnali in contesto e aiutarti ad agire meglio quando qualcosa cambia.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card rounded-3xl p-8 text-center">
+                    <div class="w-14 h-14 bg-sky-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-sky-500">
+                        <span class="material-symbols-outlined text-3xl">home</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Home</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">Ti mostra in un colpo d&rsquo;occhio come sta il tuo Frenchie, tra stato generale, parametri e prossime attivit&agrave;.</p>
+                </div>
+                <div class="glass-card rounded-3xl p-8 text-center">
+                    <div class="w-14 h-14 bg-sky-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-sky-500">
+                        <span class="material-symbols-outlined text-3xl">health_and_safety</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Salute</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">Organizza in un unico posto le abitudini quotidiane e la storia sanitaria del tuo cane.</p>
+                </div>
+                <div class="glass-card rounded-3xl p-8 text-center">
+                    <div class="w-14 h-14 bg-sky-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-sky-500">
+                        <span class="material-symbols-outlined text-3xl">notifications</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Alert</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">Ti segnala quando qualcosa merita pi&ugrave; attenzione, su temi delicati come schiena, respiro e pelle.</p>
+                </div>
+                <div class="glass-card rounded-3xl p-8 text-center">
+                    <div class="w-14 h-14 bg-sky-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-sky-500">
+                        <span class="material-symbols-outlined text-3xl">smart_toy</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Assistente</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">Non &egrave; un assistente generico: &egrave; specializzato sui Bulldog Francesi e offre risposte pi&ugrave; mirate, basate su fonti affidabili e indicazioni di riferimento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="howitworks" class="py-20 px-6 bg-gradient-to-b from-sky-200/90 via-sky-100/90 to-cyan-100/80">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <h2 class="section-title">Dal segnale all&rsquo;azione giusta, in 3 step.</h2>
+                <p class="text-slate-600 text-lg">Dietro Home, Salute, Alert e Assistente c&rsquo;e un sistema che monitora, interpreta e ti aiuta a proteggere meglio il tuo Frenchie.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="relative glass-card rounded-3xl p-8">
+                    <div class="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-6 z-10 relative">1</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Monitora</h3>
+                    <p class="text-slate-600 leading-relaxed px-4">Raccoglie i segnali che contano davvero per il benessere del tuo Frenchie, a partire da attivit&agrave;, temperatura, respirazione e altri indicatori utili.</p>
+                </div>
+                <div class="relative glass-card rounded-3xl p-8">
+                    <div class="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-6 z-10 relative">2</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Interpreta</h3>
+                    <p class="text-slate-600 leading-relaxed px-4">Li mette in contesto usando la sezione Salute del tuo cane, dove abitudini quotidiane e storia sanitaria restano organizzate in un unico posto.</p>
+                </div>
+                <div class="relative glass-card rounded-3xl p-8">
+                    <div class="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-6 z-10 relative">3</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Proteggi</h3>
+                    <p class="text-slate-600 leading-relaxed px-4">Trasforma tutto questo in alert e consigli pratici per aiutarti ad accorgerti prima dei cambiamenti e gestire meglio la quotidianit&agrave;.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution" class="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-cyan-200/85 via-sky-100/85 to-blue-100/80">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sky-400/10 rounded-full blur-[150px] -z-10"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 max-w-4xl mx-auto">
+                <h2 class="section-title">
+                    Un unico sistema per la <span class="gradient-text">longevity a 360&deg;</span>.
+                </h2>
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    Dai punti pi&ugrave; delicati allo storico salute del tuo cane, FrenchiePal raccoglie i segnali utili dal collare e li collega a un contesto ordinato, trasformandoli in alert intelligenti e supporto pratico.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-red-500 text-center flex flex-col group">
+                    <div class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center text-red-400 text-3xl mb-6 mx-auto transition-transform duration-300 group-hover:scale-110"><i class="fas fa-bone"></i></div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-4">Schiena (IVDD)</h3>
+                    <div class="mb-5 flex-1">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block mb-2">Il Rischio</span>
+                        <p class="text-slate-600 text-sm leading-relaxed">Salti, scale e movimenti ripetuti accumulano carico invisibile sulla colonna senza che tu te ne accorga subito.</p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-700/50">
+                        <span class="text-[10px] text-sky-300 font-bold uppercase tracking-wider block mb-2">La Soluzione</span>
+                        <p class="text-slate-600 text-sm leading-relaxed">Il collare legge l'intensit&agrave; dell'attivit&agrave; e ti invia alert quando la giornata diventa troppo intensa per lui.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-teal-500 text-center flex flex-col group">
+                    <div class="w-16 h-16 bg-cyan-300/10 rounded-2xl flex items-center justify-center text-cyan-200 text-3xl mb-6 mx-auto transition-transform duration-300 group-hover:scale-110"><i class="fas fa-lungs"></i></div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-4">Respiro (BAOS)</h3>
+                    <div class="mb-5 flex-1">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block mb-2">Il Rischio</span>
+                        <p class="text-slate-600 text-sm leading-relaxed">Caldo, umidita e sforzo eccessivo possono trasformare un'uscita in una situazione di rapido affanno.</p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-700/50">
+                        <span class="text-[10px] text-sky-300 font-bold uppercase tracking-wider block mb-2">La Soluzione</span>
+                        <p class="text-slate-600 text-sm leading-relaxed">Combina contesto meteo e segnali respiratori per avvisarti quando e il momento di rallentare o fare pause.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-pink-500 text-center flex flex-col group">
+                    <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-400 text-3xl mb-6 mx-auto transition-transform duration-300 group-hover:scale-110"><i class="fas fa-paw"></i></div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-4">Pelle & Allergie</h3>
+                    <div class="mb-5 flex-1">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block mb-2">Il Rischio</span>
+                        <p class="text-slate-600 text-sm leading-relaxed">Prurito ignorato e umidita nelle pieghe portano velocemente a rossori e flare cutanei ostinati.</p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-700/50">
+                        <span class="text-[10px] text-sky-300 font-bold uppercase tracking-wider block mb-2">La Soluzione</span>
+                        <p class="text-slate-600 text-sm leading-relaxed">Monitora i trend di grattamento per permetterti di intervenire con pulizia e cure prima che diventi un problema.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-purple-500 text-center flex flex-col group">
+                    <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400 text-3xl mb-6 mx-auto transition-transform duration-300 group-hover:scale-110"><span class="material-symbols-outlined text-[2rem]">health_and_safety</span></div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-4">Storico salute</h3>
+                    <div class="mb-5 flex-1">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block mb-2">Il Rischio</span>
+                        <p class="text-slate-600 text-sm leading-relaxed">Senza una memoria ordinata di visite, terapie e cambiamenti quotidiani, segnali importanti rischiano di perdersi nel tempo.</p>
+                    </div>
+                    <div class="pt-5 border-t border-slate-700/50">
+                        <span class="text-[10px] text-sky-300 font-bold uppercase tracking-wider block mb-2">La Soluzione</span>
+                        <p class="text-slate-600 text-sm leading-relaxed">FrenchiePal tiene insieme abitudini e storia sanitaria del tuo cane, cos&igrave; alert e assistente hanno pi&ugrave; contesto e diventano pi&ugrave; utili.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="perche-frenchiepal" class="py-24 px-6 bg-gradient-to-b from-blue-200/85 via-sky-100/85 to-cyan-100/80 border-y border-sky-200/70">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="section-title mt-2">FrenchiePal nasce da problemi reali, non dalla teoria.</h2>
+            </div>
+
+            <div class="glass-card p-8 md:p-12 rounded-[2rem] relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-sky-400/10 rounded-full blur-[80px] -z-10"></div>
+
+                <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                    Nasce dall&rsquo;aver affrontato davvero due ernie, gastrite e tante piccole difficolt&agrave; quotidiane con un Bulldog Francese.
+                </p>
+
+                <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                    Lo stiamo costruendo partendo da quello che succede ogni giorno a chi vive con questa razza: caldo, salti, pelle, respiro, routine e segnali facili da sottovalutare.
+                </p>
+
+                <p class="text-lg text-slate-600 leading-relaxed mb-8">
+                    Per questo vogliamo creare uno strumento semplice, concreto e pensato davvero per chi vive con un Frenchie.
+                </p>
+
+                <div class="border-l-4 border-sky-400 pl-6 py-2">
+                    <p class="text-xl text-slate-900 font-medium italic">
+                        "I Bulldog Francesi hanno bisogni speciali. E anche chi li ama avrebbe bisogno di strumenti specifici."
+                    </p>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <span class="text-4xl">&#128054;&#10084;&#65039;</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="waitlist" class="py-24 px-6 relative bg-gradient-to-b from-sky-200/85 via-cyan-100/85 to-sky-100/80">
+        <div class="max-w-4xl mx-auto text-center glass-card p-10 md:p-16 rounded-[3rem] border border-sky-100 shadow-2xl">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6">Resta in contatto con FrenchiePal</h2>
+            <p class="text-slate-600 text-lg mb-4 max-w-2xl mx-auto">
+                Se vuoi seguire l'evoluzione di FrenchiePal e sapere quando sara disponibile, lasciaci i tuoi dati. Ti aggiorneremo sui prossimi passi del progetto.
+            </p>
+            <p class="text-slate-500 text-base mb-10 max-w-2xl mx-auto">
+                Dicci quale area vorresti risolvere per prima: ci aiuter&agrave; a costruire FrenchiePal nel modo giusto.
+            </p>
+
+            <form class="max-w-2xl mx-auto relative z-20 text-left" onsubmit="event.preventDefault(); submitLeadForm();">
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <input id="email-input" type="email" aria-label="Email per la waitlist" placeholder="La tua email" required class="bg-white border border-sky-100 rounded-2xl px-5 py-4 text-slate-900 focus:outline-none focus:border-sky-400 placeholder-slate-400 shadow-inner">
+                    <select id="dog-age-input" aria-label="Eta del Frenchie" class="bg-white border border-sky-100 rounded-2xl px-5 py-4 text-slate-900 focus:outline-none focus:border-sky-400 shadow-inner">
+                        <option value="">Eta del tuo Frenchie</option>
+                        <option>Cucciolo</option>
+                        <option>1-3 anni</option>
+                        <option>4-6 anni</option>
+                        <option>7+ anni</option>
+                        <option>Non ho ancora un Frenchie</option>
+                    </select>
+                </div>
+                <select id="priority-input" aria-label="Problema prioritario da risolvere" class="w-full bg-white border border-sky-100 rounded-2xl px-5 py-4 text-slate-900 focus:outline-none focus:border-sky-400 shadow-inner mb-5">
+                    <option value="">Quale problema vorresti risolvere per primo?</option>
+                    <option>Schiena / salti / scale</option>
+                    <option>Respiro / caldo / affanno</option>
+                    <option>Pelle / grattamento / pieghe</option>
+                    <option>Supporto assistente per la gestione quotidiana</option>
+                </select>
+                <div class="text-center mt-2">
+                    <button type="submit" class="btn-primary waitlist-submit-btn w-full md:w-auto px-8 py-4 rounded-full font-bold text-white shadow-lg mx-auto block">
+                        Invia
+                    </button>
+                </div>
+            </form>
+            <p class="text-slate-500 text-sm mt-6">Nessuno spam, solo aggiornamenti sul progetto e sulle prossime novita.</p>
+            <p id="form-success" class="hidden text-sky-300 font-semibold mt-6" aria-live="polite">Grazie! La tua richiesta e stata registrata.</p>
+        </div>
+    </section>
+
+    <section id="privacy" class="py-20 px-6 bg-gradient-to-b from-cyan-200/80 via-sky-100/85 to-blue-100/75 border-t border-sky-200/70">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
+            <div class="glass-card rounded-3xl p-8">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-4">Privacy & Data Use</h2>
+
+                <p class="text-slate-600 leading-relaxed mb-4">
+                    FrenchiePal adotta un approccio privacy-first. Raccogliamo come dato personale l'<strong>email</strong>, quando scegli di lasciarcela per restare aggiornato sul servizio.
+                </p>
+
+                <p class="text-slate-500 leading-relaxed mb-4">
+                    La piattaforma e progettata per trattare l'email separatamente dai log di conversazione: i contenuti della chat vengono salvati in forma sanitizzata, mentre l'email viene gestita come dato di contatto separato.
+                </p>
+
+                <p class="text-slate-500 leading-relaxed mb-4">
+                    I dati di utilizzo e di interazione con il prodotto sono associati a sessioni anonime e utilizzati per analisi e miglioramento del servizio.
+                </p>
+
+                <p class="text-slate-500 leading-relaxed mb-4">
+                    I log di utilizzo e conversazione vengono anonimizzati, ridotti o cancellati dopo 12 mesi. I dati di contatto lasciati volontariamente per ricevere aggiornamenti sul servizio possono essere conservati pi&ugrave; a lungo, fino a richiesta di cancellazione.
+                </p>
+
+                <div class="space-y-2 text-sm text-slate-500">
+                    <p><strong class="text-slate-700">Titolare del trattamento:</strong> FrenchiePal</p>
+                    <p><strong class="text-slate-700">Contatto privacy:</strong> <a href="mailto:info.frenchiepal@gmail.com" class="text-sky-600 hover:text-sky-500 transition">info.frenchiepal@gmail.com</a></p>
+                    <p><strong class="text-slate-700">Dati personali raccolti:</strong> email</p>
+                    <p><strong class="text-slate-700">Dati tecnici/di utilizzo:</strong> eventi di sessione anonimi, interazioni con demo e chat</p>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-8">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-4">Medical Disclaimer</h2>
+
+                <p class="text-slate-600 leading-relaxed mb-4">
+                    FrenchiePal non sostituisce il veterinario n&eacute; gli altri professionisti di riferimento del tuo cane, come educatori, addestratori o allevatori. Le informazioni fornite hanno finalit&agrave; informative e di supporto alla gestione quotidiana del tuo Frenchie.
+                </p>
+
+                <p class="text-slate-500 leading-relaxed mb-4">
+                    Per diagnosi, terapie, emergenze o situazioni delicate &egrave; sempre necessario rivolgersi a un veterinario.
+                </p>
+
+                <div class="rounded-2xl bg-white/80 border border-sky-100 p-4">
+                    <p class="text-sm text-slate-600">
+                        Usiamo partner tecnologici selezionati per il funzionamento del servizio, inclusi Supabase per database e logging e OpenAI per l'elaborazione Assistente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-slate-500 text-sm border-t border-sky-100">
+        <p>&copy; 2026 FrenchiePal Startup. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script src="scripts/lib/session.js" defer></script>
+    <script src="scripts/lib/analytics.js" defer></script>
+    <script src="scripts/features/nav.js" defer></script>
+    <script src="scripts/features/demo.js" defer></script>
+    <script src="scripts/features/chat.js" defer></script>
+    <script src="scripts/features/waitlist.js" defer></script>
+    <script src="scripts/app.js" defer></script>
+</body>
+</html>
