@@ -274,6 +274,8 @@ body {
 }
 
 .phone-frame-inline-shell {
+    aspect-ratio: 430 / 932;
+    height: auto !important;
     background: #fbf9f4;
     box-shadow:
         0 34px 90px rgba(2, 6, 23, 0.62),
@@ -310,6 +312,7 @@ body {
         calc(1.15rem * var(--phone-ui-scale))
         calc(0.5rem * var(--phone-ui-scale));
     background: rgba(251, 249, 244, 0.8);
+    border-bottom: 1px solid rgba(191, 219, 254, 0.34);
 }
 
 .phone-frame-inline-shell .phone-screen > header > .flex {
@@ -344,6 +347,16 @@ body {
     font-weight: 800;
     letter-spacing: -0.025em;
     white-space: nowrap;
+}
+
+.phone-frame-inline-shell #screen-home > header .text-xl,
+.phone-frame-inline-shell #screen-health > header .text-xl,
+.phone-frame-inline-shell #screen-dashboard > header .text-xl,
+.phone-frame-inline-shell #screen-chat > header .text-xl {
+    font-size: calc(1.05rem * var(--phone-ui-scale));
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.025em;
 }
 
 .phone-frame-inline-shell .phone-screen > main {
@@ -1164,17 +1177,18 @@ body {
     }
 
     .phone-frame-inline-shell.phone-frame-mobile-fullscreen {
-        --phone-header-safe-top: calc(env(safe-area-inset-top) + 0.35rem);
+        --phone-header-safe-top: calc(env(safe-area-inset-top) + 0.15rem);
+        --phone-ui-scale: 1.08;
         display: flex;
         position: fixed;
         inset: 0;
         margin: 0;
         width: 100vw;
         height: 100dvh;
-        max-width: none;
-        max-height: none;
+        max-width: 100vw;
+        max-height: 100dvh;
         aspect-ratio: auto;
-        border-radius: 0.9rem;
+        border-radius: 0;
         border-width: 0;
         z-index: 120;
         background: #fbf9f4;
