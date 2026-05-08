@@ -55,7 +55,6 @@ window.FrenchiePal.createDemoController = function createDemoController({
 
     function normalizeTab(tab) {
         if (tab === 'alerts') return 'dash';
-        if (tab === 'diary') return 'health';
         return tab;
     }
 
