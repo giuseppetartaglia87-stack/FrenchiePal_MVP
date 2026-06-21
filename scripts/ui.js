@@ -56,9 +56,9 @@
           fab.innerHTML='<span class="material-symbols-outlined">volunteer_activism</span><span class="fp-fab-lbl">Chiedi all\u2019assist.</span>';
           fab.addEventListener('click',function(){ if(typeof window.openAssistant==='function') window.openAssistant(key); });
           canvas.appendChild(fab);
-          var sc=scr.querySelector('.fp-scroll');
+          var sc=scr.querySelector('.fp-scroll') || scr.querySelector('.places-sheet');
           if(sc){
-            sc.style.paddingBottom='82px';
+            if(sc.classList.contains('fp-scroll')) sc.style.paddingBottom='82px';
             sc.addEventListener('scroll',function(){
               if(sc.scrollTop>8) fab.classList.add('fp-fab--mini'); else fab.classList.remove('fp-fab--mini');
             },{passive:true});
